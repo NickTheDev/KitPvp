@@ -1,0 +1,37 @@
+// Kitpvp project configuration.
+group 'net.nikdev'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+// Kitpvp dependency sources.
+repositories {
+    // Central.
+    mavenCentral()
+
+    // Spigot.
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+
+}
+
+// Kitpvp custom configurations.
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+
+// Kitpvp dependencies.
+dependencies {
+    // Testing.
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // Bukkit.
+    provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
+
+    // Storage
+    compile group: 'org.dizitart', name: 'nitrite', version: '2.0.1'
+}

@@ -1,0 +1,23 @@
+                               LICENSE AGREEMENT
+   ALL CONTENT PROVIDED IN THIS PACKAGE IS THE SOLE PROPERTY OF THE DEVELOPER
+AND HEREBY IS TO BE USED IN ACCORDANCE WITH THE DEVELOPER'S TERMS AND CONDITIONS.
+
+                                  Definitions
+
+1. The "package" (Kitpvp) refers to the content provided in the transaction between
+the developer and buyer.
+
+2. The "developer" (NickTheDev) refers to the individual who created this package,
+and has granted thebuyer access to use the package but still owns the package
+completely.
+
+3. The "buyer" (Firstart) refers to the individual who has purchased the package
+from the developer.
+
+                                  Conditions
+
+1. The package may be used by the buyer on any server of the their choice that is
+owned by the buyer.
+
+2. The buyer may not edit, or redistribute the underlying source code provided in
+the package.
