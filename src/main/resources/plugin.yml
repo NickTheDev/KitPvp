@@ -1,0 +1,6 @@
+# KitPvp plugins settings.
+name: KitPvp
+main: net.nikdev.kitpvp.KitPvp
+version: 1.0-SNAPSHOT
+author: NickTheDev
+website: http://nikdev.net/

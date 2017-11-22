@@ -4,11 +4,11 @@ AND HEREBY IS TO BE USED IN ACCORDANCE WITH THE DEVELOPER'S TERMS AND CONDITIONS
 
                                   Definitions
 
-1. The "package" (Kitpvp) refers to the content provided in the transaction between
+1. The "package" (KitPvp) refers to the content provided in the transaction between
 the developer and buyer.
 
 2. The "developer" (NickTheDev) refers to the individual who created this package,
-and has granted thebuyer access to use the package but still owns the package
+and has granted the buyer access to use the package but still owns the package
 completely.
 
 3. The "buyer" (Firstart) refers to the individual who has purchased the package

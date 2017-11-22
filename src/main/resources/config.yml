@@ -1,0 +1,6 @@
+# NoSQL Nitrite database properties. Do not edit!
+datastore:
+  # Data store user.
+  user: "root"
+  #Data store password.
+  password: "6R%8mwE$P34fdc%$"

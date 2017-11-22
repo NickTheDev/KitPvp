@@ -1,4 +1,4 @@
-// Kitpvp project configuration.
+// KitPvp project configuration.
 group 'net.nikdev'
 version '1.0-SNAPSHOT'
 
@@ -6,7 +6,7 @@ apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
-// Kitpvp dependency sources.
+// KitPvp dependency sources.
 repositories {
     // Central.
     mavenCentral()
@@ -18,13 +18,27 @@ repositories {
 
 }
 
-// Kitpvp custom configurations.
+// KitPvp provided dependency.
 configurations {
     provided
     compile.extendsFrom provided
 }
 
-// Kitpvp dependencies.
+// KitPvp build configuration.
+jar {
+    // Add License.
+    from 'LICENSE.txt'
+
+    // Manage provided dependencies.
+    from {
+        (configurations.runtime - configurations.provided).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
+}
+
+// KitPvp dependencies.
 dependencies {
     // Testing.
     testCompile group: 'junit', name: 'junit', version: '4.12'
