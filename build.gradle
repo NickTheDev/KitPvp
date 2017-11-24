@@ -45,7 +45,4 @@ dependencies {
 
     // Bukkit.
     provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
-
-    // Storage
-    compile group: 'org.dizitart', name: 'nitrite', version: '2.0.1'
 }

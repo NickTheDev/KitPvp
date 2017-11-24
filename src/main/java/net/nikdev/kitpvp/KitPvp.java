@@ -1,15 +1,17 @@
 package net.nikdev.kitpvp;
 
+import net.nikdev.kitpvp.command.CommandManager;
 import net.nikdev.kitpvp.lang.LangConfig;
+import net.nikdev.kitpvp.listeners.AsyncPlayerPreLogin;
+import net.nikdev.kitpvp.listeners.PlayerQuit;
 import net.nikdev.kitpvp.location.LocationConfig;
 import net.nikdev.kitpvp.stats.DataStore;
-import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.user.UserManager;
 import net.nikdev.kitpvp.util.StoreException;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Collection;
+import java.util.Arrays;
 
 /**
  * Main plugin implementation for KitPvp.
@@ -20,6 +22,7 @@ import java.util.Collection;
 public class KitPvp extends JavaPlugin {
 
     private static KitPvp kitpvp;
+    private boolean failed;
 
     private DataStore store;
     private LocationConfig locations;
@@ -43,19 +46,26 @@ public class KitPvp extends JavaPlugin {
             e.printStackTrace();
 
             Bukkit.getPluginManager().disablePlugin(this);
+            failed = true;
+
             return;
         }
 
         userManager = new UserManager();
+
+        getCommand("kitpvp").setExecutor(new CommandManager());
+        Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
     @Override
     public void onDisable() {
-        if(getLocations() != null && getStore() != null) {
-            getLocations().save();
-            getStore().close();
+        if(failed) {
+            return;
         }
 
+        getUserManager().saveAll();
+        getLocations().save();
+        getStore().close();
     }
 
     /**
@@ -101,15 +111,6 @@ public class KitPvp extends JavaPlugin {
      */
     public UserManager getUserManager() {
         return userManager;
-    }
-
-    /**
-     * Shorthand for UserManager#getOnline.
-     *
-     * @return All online users.
-     */
-    public Collection<User> getOnline() {
-        return getUserManager().getOnline();
     }
 
 }

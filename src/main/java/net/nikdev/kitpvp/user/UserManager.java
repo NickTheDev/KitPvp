@@ -2,7 +2,6 @@ package net.nikdev.kitpvp.user;
 
 import com.google.common.collect.ImmutableList;
 import net.nikdev.kitpvp.KitPvp;
-import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -48,19 +47,17 @@ public class UserManager {
     }
 
     /**
-     * Creates a new user object from the specified Bukkit counterpart.
+     * Creates a new user object from the specified Bukkit counterpart. This should only be called asynchronously.
      *
-     * @param player Bukkit version of the user to load.
-     * @return Loaded user.
+     * @param id Id of the user.
+     * @param name Name of the user.
      */
-    public User create(Player player) {User user = new User(player.getUniqueId(), player.getName(), KitPvp.get().getStore().load(player.getUniqueId()));
-        online.add(user);
-
-        return user;
+    public void load(UUID id, String name) {
+        online.add(new User(id, name, KitPvp.get().getStore().load(id)));
     }
 
     /**
-     * Saves the user's statistics and then removes the user from the online collection.
+     * Saves the user's statistics synchronously and then removes the user from the online collection.
      *
      * @param user User to save.
      */
@@ -68,6 +65,13 @@ public class UserManager {
         KitPvp.get().getStore().update(user.getStats());
 
         online.remove(user);
+    }
+
+    /**
+     * Saves all users synchronously, as this will only be called when the plugin is disabling.
+     */
+    public void saveAll() {
+        new ArrayList<>(getOnline()).forEach(this::save);
     }
 
 }

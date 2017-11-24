@@ -1,0 +1,28 @@
+# Prefix of the plugin which can be referenced by every message by the placeholder %PREFIX%.
+prefix: "&8&l[&e&lKitPvp&8&l]"
+
+# Messages pertaining to command related responses.
+command:
+  # Message sent to a command sender when they do not specify any arguments.
+  no-args: "&c&l(!) You must specify an argument, do /kitpvp help for a list of commands."
+
+  # Message sent to a player when they use the wand argument.
+  wand-given: "&a&l(!) Location wand given."
+
+  # Message sent when a command sender uses the help argument.
+  help: "&a&l(!) Commands:"
+
+  # Message sent for each argument when a command sender uses the help argument.
+  help-template: "&9 &a&l/&f&l%NAME% &a&l- &f&l%HELP%"
+
+  # Message sent to a command sender when they specify and unknown argument.
+  unknown-arg: "&c&l(!) Unknown argument, please do /kitpvp help for a list of commands."
+
+  # Message sent to the console when it tries to use a player only command.
+  not-player: "&c&l(!) You must be a player to use this command."
+
+  # Message sent to a command sender when they do not have a permission.
+  no-permission: "&c&l(!) You do not have permission to use this command."
+
+  # Message sent to a command sender when an error occurs executing a command.
+  arg-error: "&c&l(!) An error occurred executing this command."

@@ -11,14 +11,29 @@ import net.nikdev.kitpvp.KitPvp;
 public enum ConfigKeys {
 
     /**
-     * Data Store user key.
+     * Database address.
      */
-    USER_KEY("datastore.user"),
+    DATABASE_ADDRESS("database.address"),
 
     /**
-     * Data Store password key.
+     * Database port.
      */
-    AUTH_KEY("datastore.password");
+    DATABASE_PORT("database.port"),
+
+    /**
+     * Database name.
+     */
+    DATABASE_NAME("database.name"),
+
+    /**
+     * Database user.
+     */
+    DATABASE_USER("database.user"),
+
+    /**
+     * Database password.
+     */
+    DATABASE_PASSWORD("database.password");
 
     private final String key;
 
@@ -44,6 +59,16 @@ public enum ConfigKeys {
      */
     public static String get(ConfigKeys key) {
         return KitPvp.get().getConfig().getString(key.toString(), "");
+    }
+
+    /**
+     * Gets the integer from {@link KitPvp}'s config which is mapped to the specified key.
+     *
+     * @param key Key associated with the value.
+     * @return Value from the config.
+     */
+    public static int getInt(ConfigKeys key) {
+        return KitPvp.get().getConfig().getInt(key.toString(), 0);
     }
 
 }

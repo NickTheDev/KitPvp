@@ -1,21 +1,11 @@
 package net.nikdev.kitpvp.stats;
 
-import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.lang.ConfigKeys;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.StoreException;
-import org.dizitart.no2.Nitrite;
-import org.dizitart.no2.exceptions.NitriteIOException;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.UUID;
-
-import static net.nikdev.kitpvp.lang.ConfigKeys.USER_KEY;
-import static net.nikdev.kitpvp.lang.ConfigKeys.AUTH_KEY;
-import static org.dizitart.no2.objects.filters.ObjectFilters.eq;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * Represents the store where {@link Statistics} are contained.
@@ -25,64 +15,64 @@ import static org.dizitart.no2.objects.filters.ObjectFilters.eq;
  */
 public class DataStore {
 
-    private final Nitrite backend;
+    private final DataBackend backend = new DataBackend();
 
     /**
      * Creates a new stats store with the specified nitrite backend.
      */
     public DataStore() throws StoreException {
         try {
-            Path directory = new File(KitPvp.get().getDataFolder(), "stats").toPath();
+            backend.connect();
+            backend.createTable("stats", "  (uuid VARCHAR(36) NOT NULL UNIQUE," + "   tokens INTEGER DEFAULT 0," + "   kits TEXT NOT NULL)");
 
-            if(Files.notExists(directory)) {
-                Files.createDirectories(directory);
-            }
-
-            backend = Nitrite.builder().compressed().filePath(KitPvp.get().getDataFolder() + "/stats/users.nitrite")
-                    .openOrCreate(ConfigKeys.get(USER_KEY), ConfigKeys.get(AUTH_KEY));
-
-        } catch(NitriteIOException | IOException e) {
-            throw new StoreException("Unable to open Nitrite data store.", e);
+        } catch (Exception e) {
+            throw new StoreException("An error occurred opening the data store.", e);
         }
 
     }
 
     /**
      * Gets the statistic store registered to the specified unique id. If there is no store registered, one will be created.
+     * Should only be called asynchronously.
      *
      * @param id Id of the store.
      * @return Loaded statistic store or new one registered to the id.
      */
     public Statistics load(UUID id) {
-        Statistics stats = backend.getRepository(Statistics.class).find(eq("id", id.toString())).firstOrDefault();
+        Statistics stats = null;
+        Optional<ResultSet> result = backend.query("SELECT * FROM `stats` WHERE `uuid` = '" + id + "'");
 
-        if(stats == null) {
-            stats = new Statistics(id);
-            backend.getRepository(Statistics.class).insert(stats);
+        if(result.isPresent() && backend.next(result.get())) {
+            try {
+                stats = new Statistics(id, result.get().getInt("tokens"), Arrays.asList(result.get().getString("kits").split(",")));
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            backend.update("INSERT INTO `stats` (`uuid`, `tokens`, `kits`) VALUES ('" + id + "', default, 'pvp')");
         }
 
-        return stats;
+        result.ifPresent(backend::close);
+        return stats != null ? stats : new Statistics(id, 0, Collections.singletonList("pvp"));
     }
 
     /**
      * Updates the specified statistic store with new values. This will only be called when a {@link User} leaves the server
-     * or the server shuts down.
+     * or the server shuts down
      *
      * @param stats Statistic store to update.
      */
     public void update(Statistics stats) {
-        backend.getRepository(Statistics.class).update(stats);
+        backend.update("UPDATE `stats` SET " + stats.toString() + " WHERE `uuid` = '" + stats.getId() + "'");
     }
 
     /**
      * Closes this data store.
      */
     public void close() {
-        if(!backend.isClosed()) {
-            backend.commit();
-            backend.close();
-        }
-
+        backend.close();
     }
 
 }

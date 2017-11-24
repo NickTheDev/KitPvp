@@ -2,12 +2,7 @@ package net.nikdev.kitpvp.stats;
 
 import com.google.common.collect.ImmutableList;
 import net.nikdev.kitpvp.user.User;
-import org.dizitart.no2.Document;
-import org.dizitart.no2.mapper.Mappable;
-import org.dizitart.no2.mapper.NitriteMapper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,25 +12,23 @@ import java.util.UUID;
  * @author NickTheDev
  * @since 1.0
  */
-public final class Statistics implements Mappable {
+public final class Statistics {
 
-    private UUID id;
+    private final UUID id;
     private int tokens;
-
-    private final List<String> kits = new ArrayList<>();
-
-    /**
-     * Implemented to be compatible as a {@link Mappable}.
-     */
-    public Statistics() {}
+    private final List<String> kits;
 
     /**
-     * Creates a new statistic store with the specified unique id.
+     * Creates a new statistic store with the specified information.
      *
      * @param id Id of this statistic store.
+     * @param tokens Tokens of this statistic store.
+     * @param kits Kits of this statistic store.
      */
-    Statistics(UUID id) {
+    Statistics(UUID id, int tokens, List<String> kits) {
         this.id = id;
+        this.tokens = tokens;
+        this.kits = kits;
     }
 
     /**
@@ -63,6 +56,11 @@ public final class Statistics implements Mappable {
      */
     public List<String> getKits() {
         return ImmutableList.copyOf(kits);
+    }
+
+    @Override
+    public String toString() {
+        return "`tokens` = " + getTokens() + ", `kits` = '" + String.join(",", getKits()) + "'";
     }
 
     /**
@@ -94,24 +92,6 @@ public final class Statistics implements Mappable {
             kits.add(kit);
         }
 
-    }
-
-    @Override
-    public Document write(NitriteMapper mapper) {
-        Document document = new Document();
-
-        document.put("id", getId().toString());
-        document.put("tokens", getTokens());
-        document.put("kits", String.join(":", getKits()));
-
-        return document;
-    }
-
-    @Override
-    public void read(NitriteMapper mapper, Document document) {
-        id = UUID.fromString(document.get("id", String.class));
-        tokens = document.get("tokens", Integer.class);
-        kits.addAll(Arrays.asList(document.get("kits", String.class).split(":")));
     }
 
 }

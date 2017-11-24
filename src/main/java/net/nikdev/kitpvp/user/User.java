@@ -1,10 +1,13 @@
 package net.nikdev.kitpvp.user;
 
+import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.stats.Statistics;
 import net.nikdev.kitpvp.util.Cache;
+import net.nikdev.kitpvp.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -77,6 +80,35 @@ public final class User {
      */
     public Player toPlayer() {
         return Bukkit.getPlayer(getId());
+    }
+
+    /**
+     * Gives this user the specified item.
+     *
+     * @param item Item to give.
+     */
+    public void give(ItemBuilder item) {
+        toPlayer().getInventory().addItem(item.build());
+    }
+
+    /**
+     * Shorthand for UserManager#get().
+     *
+     * @param name Name of the user.
+     * @return User with the specified name or Optional.empty().
+     */
+    public static Optional<User> get(String name) {
+        return KitPvp.get().getUserManager().get(name);
+    }
+
+    /**
+     * Shorthand for UserManager#get().
+     *
+     * @param id Unique id of the user.
+     * @return User with the specified id or Optional.empty().
+     */
+    public static Optional<User> get(UUID id) {
+        return KitPvp.get().getUserManager().get(id);
     }
 
 }

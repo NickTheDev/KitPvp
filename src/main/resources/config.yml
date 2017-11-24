@@ -1,6 +1,16 @@
-# NoSQL Nitrite database properties. Do not edit!
-datastore:
-  # Data store user.
+# MySql connection options.
+database:
+  # Database address.
+  address: "127.0.0.1"
+
+  # Database port.
+  port: 3306
+
+  # Database name.
+  name: "kitpvp"
+
+  # Database user.
   user: "root"
-  #Data store password.
-  password: "6R%8mwE$P34fdc%$"
+
+  # Database password.
+  password: "godgod"

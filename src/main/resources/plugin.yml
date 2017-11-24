@@ -4,3 +4,13 @@ main: net.nikdev.kitpvp.KitPvp
 version: 1.0-SNAPSHOT
 author: NickTheDev
 website: http://nikdev.net/
+commands:
+  kitpvp:
+    aliases: [kp, kits]
+    description: KitPvp's base command.
+permissions:
+  kitpvp.*:
+    children:
+      kitpvp.wand: true
+  kitpvp.wand:
+    description: Allows a player to use /kitpvp wand.

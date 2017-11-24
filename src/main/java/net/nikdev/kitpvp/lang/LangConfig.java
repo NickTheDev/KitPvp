@@ -1,11 +1,9 @@
 package net.nikdev.kitpvp.lang;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.location.Cuboid;
 import net.nikdev.kitpvp.util.StoreException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.configuration.serialization.ConfigurationSerialization;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +18,6 @@ import java.nio.file.Path;
  */
 public final class LangConfig {
 
-    private final Path path = new File(KitPvp.get().getDataFolder(), "lang.yml").toPath();
     private final FileConfiguration config;
 
     /**
@@ -30,8 +27,10 @@ public final class LangConfig {
      */
     public LangConfig() throws StoreException {
         try {
+            Path path = new File(KitPvp.get().getDataFolder(), "lang.yml").toPath();
+
             if(Files.notExists(path)) {
-                Files.createFile(path);
+                Files.copy(getClass().getResourceAsStream("/lang.yml"), path);
             }
 
             config = YamlConfiguration.loadConfiguration(path.toFile());
