@@ -1,8 +1,8 @@
 package net.nikdev.kitpvp.command;
 
+import net.nikdev.kitpvp.command.defaults.SetLocations;
 import net.nikdev.kitpvp.command.defaults.Wand;
 import net.nikdev.kitpvp.lang.LangKeys;
-import net.nikdev.kitpvp.util.Chat;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -101,7 +101,7 @@ public class CommandManager implements CommandExecutor {
      * Registers all default arguments.
      */
     private void registerAll() {
-        Arrays.asList(new Help(), new Wand()).forEach(this::register);
+        Arrays.asList(new Help(), new Wand(), new SetLocations()).forEach(this::register);
     }
 
     /**
@@ -117,7 +117,7 @@ public class CommandManager implements CommandExecutor {
         public void execute(CommandSender sender, String[] args) throws CommandException {
             LangKeys.sendTo(sender, HELP);
 
-            arguments.keySet().forEach(info -> sender.sendMessage(Chat.color(LangKeys.get(HELP_TEMPLATE).replaceAll("%NAME%", info.name()).replaceAll("%HELP%", info.help()))));
+            arguments.keySet().forEach(info -> LangKeys.sendTo(sender, HELP_TEMPLATE, Placeholder.of("name", info.name()), Placeholder.of("help", info.help())));
         }
 
     }

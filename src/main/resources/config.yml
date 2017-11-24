@@ -1,3 +1,9 @@
+#
+#                <-- KitPvp Config -->
+#            Leave no values null and make
+#              sure all values are valid.
+#
+
 # MySql connection options.
 database:
   # Database address.

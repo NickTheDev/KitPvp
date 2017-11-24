@@ -1,18 +1,27 @@
+#
+#           <-- KitPvp Language Config -->
+#     As standard with all plugins use '&' for
+#     color codes and set the value to "" if the
+#        message shouldn't be sent to players.
+#
+
 # Prefix of the plugin which can be referenced by every message by the placeholder %PREFIX%.
-prefix: "&8&l[&e&lKitPvp&8&l]"
+prefix: ""
+
+# Messages pertaining to server events like player joining, etc.
+server:
+  # Message sent to all players when a player joins the server. Placeholders are %NAME%.
+  player-join: "&e&l-> &a&l%NAME% &f&l has joined KitPvp."
 
 # Messages pertaining to command related responses.
 command:
   # Message sent to a command sender when they do not specify any arguments.
   no-args: "&c&l(!) You must specify an argument, do /kitpvp help for a list of commands."
 
-  # Message sent to a player when they use the wand argument.
-  wand-given: "&a&l(!) Location wand given."
-
   # Message sent when a command sender uses the help argument.
   help: "&a&l(!) Commands:"
 
-  # Message sent for each argument when a command sender uses the help argument.
+  # Message sent for each argument when a command sender uses the help argument. Placeholders are %NAME% and %HELP%.
   help-template: "&9 &a&l/&f&l%NAME% &a&l- &f&l%HELP%"
 
   # Message sent to a command sender when they specify and unknown argument.
@@ -26,3 +35,26 @@ command:
 
   # Message sent to a command sender when an error occurs executing a command.
   arg-error: "&c&l(!) An error occurred executing this command."
+
+# Messages pertaining to responses to the Location Wand usage.
+wand:
+  # Message sent to a player when they use the wand argument.
+  wand-given: "&a&l(!) Location wand given."
+
+  # Message sent to a player when they right click the Location Wand and set the first corner of the spawn region.
+  first-location-set: "&a&l(!) First corner of the spawn region set, please set the other and use /kitpvp setlocations to save them."
+
+  # Message sent to a player when they left click the Location Wand and set the second corner of the spawn region.
+  second-location-set: "&a&l(!) Second corner of the spawn region set, please set the other and use /kitpvp setlocations to save them."
+
+  # Message sent to a player when they attempt to use the setlocations argument without first using the Location Wand.
+  must-set-locations: "&c&l(!) You must set the first and second spawn region corners using the Location Wand."
+
+  # Message sent to a player when they successfully use the setlocations argument.
+  locations-set: "&a&l(!) Spawn regions set to your Location Wand coordinates, spawn set to your current location."
+
+  # Message sent to a player when they use the setlocations argument but the spawn is outside of the region.
+  spawn-outside-error: "&c&l(!) Your current location (the to-be spawn) must be inside the selected spawn region."
+
+  # Message sent to a player when they join the server but the spawn hasn't been set.
+  spawn-not-set: "&c&l(!) You have not been teleported to spawn because one has not been set."

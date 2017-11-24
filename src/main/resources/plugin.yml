@@ -12,5 +12,11 @@ permissions:
   kitpvp.*:
     children:
       kitpvp.wand: true
+      kitpvp.setlocations: true
+      kitpvp.edit-terrain: true
   kitpvp.wand:
     description: Allows a player to use /kitpvp wand.
+  kitpvp.setlocations:
+    description: Allows a player to use /kitpvp setlocations.
+  kitpvp.edit-terrain:
+    description: Allows a player to break and place blocks.

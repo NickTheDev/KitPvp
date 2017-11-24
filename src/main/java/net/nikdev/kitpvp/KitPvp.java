@@ -2,8 +2,7 @@ package net.nikdev.kitpvp;
 
 import net.nikdev.kitpvp.command.CommandManager;
 import net.nikdev.kitpvp.lang.LangConfig;
-import net.nikdev.kitpvp.listeners.AsyncPlayerPreLogin;
-import net.nikdev.kitpvp.listeners.PlayerQuit;
+import net.nikdev.kitpvp.listeners.*;
 import net.nikdev.kitpvp.location.LocationConfig;
 import net.nikdev.kitpvp.stats.DataStore;
 import net.nikdev.kitpvp.user.UserManager;
@@ -54,7 +53,6 @@ public class KitPvp extends JavaPlugin {
         userManager = new UserManager();
 
         getCommand("kitpvp").setExecutor(new CommandManager());
-        Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
     @Override
@@ -111,6 +109,14 @@ public class KitPvp extends JavaPlugin {
      */
     public UserManager getUserManager() {
         return userManager;
+    }
+
+    /**
+     * Registers KitPvp's listeners.
+     */
+    private void registerListeners() {
+        Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit(), new PlayerInteract(), new PlayerJoin(), new BlockBreak(), new BlockPlace(),
+                new FoodLevelChange(), new EntityDamage(), new WeatherChange()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
 }

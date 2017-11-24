@@ -5,6 +5,7 @@ import net.nikdev.kitpvp.stats.Statistics;
 import net.nikdev.kitpvp.util.Cache;
 import net.nikdev.kitpvp.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.Optional;
@@ -89,6 +90,18 @@ public final class User {
      */
     public void give(ItemBuilder item) {
         toPlayer().getInventory().addItem(item.build());
+    }
+
+    /**
+     * Utility for "cleaning" this user and resetting all settings.
+     */
+    public void clean() {
+        toPlayer().getInventory().clear();
+        toPlayer().setHealth(20);
+        toPlayer().setFoodLevel(20);
+        toPlayer().setLevel(0);
+        toPlayer().setExp(0F);
+        toPlayer().setGameMode(GameMode.SURVIVAL);
     }
 
     /**
