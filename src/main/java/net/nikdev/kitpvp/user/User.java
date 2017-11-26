@@ -1,12 +1,14 @@
 package net.nikdev.kitpvp.user;
 
 import net.nikdev.kitpvp.KitPvp;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.stats.Statistics;
 import net.nikdev.kitpvp.util.Cache;
 import net.nikdev.kitpvp.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -75,6 +77,15 @@ public final class User {
     }
 
     /**
+     * Shorthand for getting this user's current kit.
+     *
+     * @return This user's kit.
+     */
+    public Optional<Kit> getKit() {
+        return getCache().get("kit");
+    }
+
+    /**
      * Gets the Bukkit representation of this user.
      *
      * @return Bukkit's player for this user.
@@ -84,7 +95,7 @@ public final class User {
     }
 
     /**
-     * Gives this user the specified item.
+     * Gives this user the specified item in the next available slot.
      *
      * @param item Item to give.
      */
@@ -93,7 +104,35 @@ public final class User {
     }
 
     /**
-     * Utility for "cleaning" this user and resetting all settings.
+     * Gives this user the specified item in the specified inventory slot.
+     *
+     * @param item Item to give.
+     * @param slot Slot of the item.
+     */
+    public void give(ItemBuilder item, int slot) {
+        toPlayer().getInventory().setItem(slot, item.build());
+    }
+
+    /**
+     * Sets the armor of this user to the specified optional items.
+     *
+     * @param armor Armor of this user.
+     */
+    public void setArmor(ItemBuilder... armor) {
+        if(armor.length > 0 && armor.length < 5) {
+            ItemStack[] items = new ItemStack[4];
+
+            for(int i = 0; i < armor.length; i++) {
+                items[i] = armor[i].build();
+            }
+
+            toPlayer().getInventory().setArmorContents(items);
+        }
+
+    }
+
+    /**
+     * Utility for "cleaning" this user and resetting all of their data and effects.
      */
     public void clean() {
         toPlayer().getInventory().clear();
@@ -102,6 +141,9 @@ public final class User {
         toPlayer().setLevel(0);
         toPlayer().setExp(0F);
         toPlayer().setGameMode(GameMode.SURVIVAL);
+        toPlayer().getActivePotionEffects().forEach(potion -> toPlayer().removePotionEffect(potion.getType()));
+        toPlayer().setAllowFlight(false);
+        toPlayer().setFlying(false);
     }
 
     /**

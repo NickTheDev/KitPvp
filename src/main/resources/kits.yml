@@ -1,0 +1,212 @@
+#
+#                      <-- KitPvp Kit Config -->
+#     A mark down for all the kits in the plugin, the items and
+#    abilities given in each kit are defined by its action class.
+#         Kit ids must be lowercase with no spaces or symbols.
+#      Kit icon materials must be in Bukkit format (goo.gl/rXYhh5).
+#  If kits pvp, archer, fisherman, tank, or medic are removed or have
+#      their prices changed from 0 the plugin will throw errors
+#       because the plugin depends on them for default values.
+#
+
+# KitPvp kit declarations.
+kits:
+  # Default pvp kit.
+  pvp:
+    # Kit id.
+    id: "pvp"
+
+    # Kit name.
+    name: "Pvp"
+
+    # Kit description.
+    description: "Just your average pvp kit!"
+
+    # Kit icon.
+    icon: "DIAMOND_SWORD"
+
+    # Kit cost.
+    cost: 0
+
+    # Kit action class.
+    action: "Pvp"
+
+  # Default archer kit.
+  archer:
+    # Kit id.
+    id: "archer"
+
+    # Kit name.
+    name: "Archer"
+
+    # Kit description.
+    description: "Start with a bow and speed!"
+
+    # Kit icon.
+    icon: "BOW"
+
+    # Kit cost.
+    cost: 0
+
+    # Kit action class.
+    action: "Archer"
+
+  # Default fisherman kit.
+  fisherman:
+    # Kit id.
+    id: "fisherman"
+
+    # Kit name.
+    name: "Fisherman"
+
+    # Kit description.
+    description: "Hook players using your fishing rod then reel them in!"
+
+    # Kit icon.
+    icon: "FISHING_ROD"
+
+    # Kit cost.
+    cost: 0
+
+    # Kit action class.
+    action: "Fisherman"
+
+  # Default tank kit.
+  tank:
+    # Kit id.
+    id: "tank"
+
+    # Kit name.
+    name: "Tank"
+
+    # Kit description.
+    description: "Consuming Damage from those who dare pvp you!"
+
+    # Kit icon.
+    icon: "DIAMOND_CHESTPLATE"
+
+    # Kit cost.
+    cost: 0
+
+    # Kit action class.
+    action: "Tank"
+
+  # Default medic kit.
+  medic:
+    # Kit id.
+    id: "medic"
+
+    # Kit name.
+    name: "Medic"
+
+    # Kit description.
+    description: "Heal yourself and others with your medkit!"
+
+    # Kit icon.
+    icon: "REDSTONE"
+
+    # Kit cost.
+    cost: 0
+
+    # Kit action class.
+    action: "Medic"
+
+  # Purchasable pyro kit.
+  pyro:
+    # Kit id.
+    id: "pyro"
+
+    # Kit name.
+    name: "Pyro"
+
+    # Kit description.
+    description: "Have a passion for burning things? Good thing you have a fire cannon."
+
+    # Kit icon.
+    icon: "FIREWORK_CHARGE"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Pyro"
+
+  # Purchasable assassin kit.
+  assassin:
+    # Kit id.
+    id: "assassin"
+
+    # Kit name.
+    name: "Assassin"
+
+    # Kit description.
+    description: "Turn invisible for 5 seconds, become unseen by foes."
+
+    # Kit icon.
+    icon: "SULPHUR"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Assassin"
+
+  # Purchasable dragon born kit.
+  dragonborn:
+    # Kit id.
+    id: "dragon-born"
+
+    # Kit name.
+    name: "Dragon Born"
+
+    # Kit description.
+    description: "Become the Dragon Born, Use the Shout Fus Ro Dah to push back your foes!"
+
+    # Kit icon.
+    icon: "DRAGON_EGG"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "DragonBorn"
+
+  # Purchasable shark kit.
+  shark:
+    # Kit id.
+    id: "shark"
+
+    # Kit name.
+    name: "Shark"
+
+    # Kit description.
+    description: "Swim with the fishies!"
+
+    # Kit icon.
+    icon: "RAW_FISH"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Shark"
+
+  # Purchasable crossbow kit.
+  crossbow:
+    # Kit id.
+    id: "crossbow"
+
+    # Kit name.
+    name: "Crossbow"
+
+    # Kit description.
+    description: "Fire Arrows that explode on impact!"
+
+    # Kit icon.
+    icon: "ARROW"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Crossbow"

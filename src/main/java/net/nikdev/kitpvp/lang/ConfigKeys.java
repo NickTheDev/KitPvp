@@ -33,7 +33,17 @@ public enum ConfigKeys {
     /**
      * Database password.
      */
-    DATABASE_PASSWORD("database.password");
+    DATABASE_PASSWORD("database.password"),
+
+    /**
+     * Whether or not rain is allowed on the server.
+     */
+    ALLOW_RAIN("world.allow-rain"),
+
+    /**
+     * Whether or not hunger is allowed on the server.
+     */
+    ALLOW_HUNGER("world.allow-hunger");
 
     private final String key;
 
@@ -69,6 +79,16 @@ public enum ConfigKeys {
      */
     public static int getInt(ConfigKeys key) {
         return KitPvp.get().getConfig().getInt(key.toString(), 0);
+    }
+
+    /**
+     * Gets the boolean from {@link KitPvp}'s config which is mapped to the specified key.
+     *
+     * @param key Key associated with the value.
+     * @return Value from the config.
+     */
+    public static boolean getBool(ConfigKeys key) {
+        return KitPvp.get().getConfig().getBoolean(key.toString(), false);
     }
 
 }

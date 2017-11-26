@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 1.0
  */
 @SerializableAs("Cuboid")
-public final class Cuboid implements Cloneable, ConfigurationSerializable {
+public final class Cuboid implements ConfigurationSerializable {
 
     private final int x1, y1, z1, x2, y2, z2;
     private final String world;
@@ -68,12 +68,12 @@ public final class Cuboid implements Cloneable, ConfigurationSerializable {
     }
 
     /**
-     * Gets is the specified location is inside this cuboid.
+     * Gets is the specified location is isInside this cuboid.
      *
      * @param location Location to check.
-     * @return If the location is inside this cuboid.
+     * @return If the location is isInside this cuboid.
      */
-    public boolean inside(Location location) {
+    public boolean isInside(Location location) {
         return location.getWorld().getName().equals(world) && bounds(location.getBlockX(), x1, x2) &&
                 bounds(location.getBlockY(), y1, y2) && bounds(location.getBlockZ(), z1, z2);
     }

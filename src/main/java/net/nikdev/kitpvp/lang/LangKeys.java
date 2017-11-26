@@ -19,6 +19,11 @@ public enum LangKeys {
     PLAYER_JOIN("server.player-join"),
 
     /**
+     * Message sent to a player when they attempt to leave spawn without selecting a kit.
+     */
+    NO_KIT_SELECTED("server.no-kit-selected"),
+
+    /**
      * Message sent when a command sender doesn't specify any arguments.
      */
     NO_ARGS("command.no-args"),
@@ -86,7 +91,27 @@ public enum LangKeys {
     /**
      * Message sent to a player when they join the server but the spawn hasn't been set.
      */
-    SPAWN_NOT_SET("wand.spawn-not-set");
+    SPAWN_NOT_SET("wand.spawn-not-set"),
+
+    /**
+     * Message sent to a player when they attempt to use a kit ability without waiting for its cooldown to reset.
+     */
+    COOLDOWN("kit.cooldown"),
+
+    /**
+     * Message sent to a player when they have been hooked by someone with the fisherman kit. Placeholders are %NAME%.
+     */
+    FISHERMAN_HOOKED("kits.fisherman.hooked"),
+
+    /**
+     * Message sent to a player with the medic kit when they heal themselves.
+     */
+    MEDIC_PERSONAL_HEAL("kits.medic.personal-heal"),
+
+    /**
+     * Message sent to a player with the medic kit when they heal others around them in a 5 block radius.
+     */
+    MEDIC_GROUP_HEAL("kits.medic.group-heal");
 
     private static final Placeholder prefix = Placeholder.of("prefix", KitPvp.get().getLang().get("prefix"));
     private final String key;

@@ -18,7 +18,7 @@ import static net.nikdev.kitpvp.lang.LangKeys.WAND_GIVEN;
  * @since 1.0
  */
 @ArgInfo(name = "wand", help = "Gives a player the location wand.", permission = "kitpvp.wand", userOnly = true)
-public final class Wand implements Argument {
+public class Wand implements Argument {
 
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {

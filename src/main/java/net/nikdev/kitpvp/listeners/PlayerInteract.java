@@ -44,4 +44,19 @@ public class PlayerInteract implements Listener {
 
     }
 
+    /**
+     * Listens for the specified event and handles kit interaction.
+     *
+     * @param event Event instance.
+     */
+    @EventHandler
+    public void kitInteract(PlayerInteractEvent event) {
+        User user = User.get(event.getPlayer().getUniqueId()).get();
+
+        if(event.getItem() != null && user.getKit().isPresent()) {
+            user.getKit().get().getAction().interact(user, event.getItem(), event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK));
+        }
+
+    }
+
 }

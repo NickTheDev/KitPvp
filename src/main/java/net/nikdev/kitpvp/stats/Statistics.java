@@ -1,6 +1,5 @@
 package net.nikdev.kitpvp.stats;
 
-import com.google.common.collect.ImmutableList;
 import net.nikdev.kitpvp.user.User;
 
 import java.util.List;
@@ -55,7 +54,7 @@ public final class Statistics {
      * @return Kits statistic.
      */
     public List<String> getKits() {
-        return ImmutableList.copyOf(kits);
+        return kits;
     }
 
     @Override
@@ -79,19 +78,6 @@ public final class Statistics {
      */
     public void removeTokens(int amount) {
         tokens -= amount;
-    }
-
-    /**
-     * Adds the specified kit to the kits statistic if it doesn't already
-     * contain the kit.
-     *
-     * @param kit Kit to add.
-     */
-    public void addKit(String kit) {
-        if(!getKits().contains(kit)) {
-            kits.add(kit);
-        }
-
     }
 
 }

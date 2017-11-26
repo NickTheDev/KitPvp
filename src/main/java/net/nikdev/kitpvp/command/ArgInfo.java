@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation that describes an argument.
+ * Annotation that describes an {@link Argument}.
  *
  * @author NickTheDev
  * @since 1.0

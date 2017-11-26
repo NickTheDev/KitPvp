@@ -6,15 +6,18 @@ import net.nikdev.kitpvp.util.StoreException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
- * Represents the store where {@link Statistics} are contained.
+ * Represents the store where {@link Statistics} are contained. The default backend is a MySQL store.
  *
  * @author NickTheDev
  * @since 1.0
  */
 public class DataStore {
 
+    private static final Executor executor = Executors.newCachedThreadPool();
     private final DataBackend backend = new DataBackend();
 
     /**
@@ -33,7 +36,7 @@ public class DataStore {
 
     /**
      * Gets the statistic store registered to the specified unique id. If there is no store registered, one will be created.
-     * Should only be called asynchronously.
+     * This method is not ran isInside the executor service because it will only be called by an asynchronous event.
      *
      * @param id Id of the store.
      * @return Loaded statistic store or new one registered to the id.
@@ -44,7 +47,7 @@ public class DataStore {
 
         if(result.isPresent() && backend.next(result.get())) {
             try {
-                stats = new Statistics(id, result.get().getInt("tokens"), Arrays.asList(result.get().getString("kits").split(",")));
+                stats = new Statistics(id, result.get().getInt("tokens"), new ArrayList<>(Arrays.asList(result.get().getString("kits").split(","))));
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -65,7 +68,7 @@ public class DataStore {
      * @param stats Statistic store to update.
      */
     public void update(Statistics stats) {
-        backend.update("UPDATE `stats` SET " + stats.toString() + " WHERE `uuid` = '" + stats.getId() + "'");
+        executor.execute(() -> backend.update("UPDATE `stats` SET " + stats.toString() + " WHERE `uuid` = '" + stats.getId() + "'"));
     }
 
     /**

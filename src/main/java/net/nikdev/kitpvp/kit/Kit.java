@@ -3,15 +3,18 @@ package net.nikdev.kitpvp.kit;
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.Material;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents {@link User} kits, which are the backbone of KitPvp.
  *
  * @author NickTheDev
  * @since 1.0
  */
-public enum Kit {
+public final class Kit {
 
-    ;
+    private static List<Kit> kits = new ArrayList<>();
 
     private final String id, name, description;
 
@@ -89,6 +92,15 @@ public enum Kit {
      */
     public KitAction getAction() {
         return action;
+    }
+
+    /**
+     * Gets all loaded kits.
+     *
+     * @return Loaded kits.
+     */
+    public static List<Kit> getKits() {
+        return kits;
     }
 
 }

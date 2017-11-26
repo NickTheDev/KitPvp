@@ -1,7 +1,7 @@
 package net.nikdev.kitpvp.util;
 
 /**
- * Represents an error that occurs interacting with the any type of file storage.
+ * Represents an error that occurs interacting with the any type of data storage.
  *
  * @author NickTheDev
  * @since 1.0

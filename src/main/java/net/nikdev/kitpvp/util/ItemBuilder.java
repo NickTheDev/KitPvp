@@ -1,16 +1,17 @@
 package net.nikdev.kitpvp.util;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.material.MaterialData;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Functional builder implementation with a {@link ItemStack} result type.
+ * Builder pattern implementation with a {@link ItemStack} result type.
  *
  * @author NickTheDev
  * @since 1.0
@@ -24,7 +25,7 @@ public final class ItemBuilder {
      *
      * @param item Item to be used in this builder.
      */
-    ItemBuilder(ItemStack item) {
+    private ItemBuilder(ItemStack item) {
         this.item = item;
     }
 
@@ -100,14 +101,32 @@ public final class ItemBuilder {
     public ItemBuilder lore(Collection<String> lore) {
         ItemMeta meta = item.getItemMeta();
 
-        meta.setLore(new ArrayList<>(Chat.color(lore)));
+        meta.setLore(Chat.color(lore));
         item.setItemMeta(meta);
 
         return this;
     }
 
     /**
-     * Gets the item stack built representation of this builder.
+     * Sets the armor color of the item in this builder to the specified color.
+     *
+     * @param color Color of the item in this builder.
+     * @return This builder.
+     */
+    public ItemBuilder armorColor(Color color) {
+        try {
+            LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+
+            meta.setColor(color);
+            item.setItemMeta(meta);
+
+        } catch(ClassCastException ignored) {}
+
+        return this;
+    }
+
+    /**
+     * Gets the underlying item stack of this builder.
      *
      * @return Built item stack.
      */
@@ -121,7 +140,7 @@ public final class ItemBuilder {
      * @return New empty item builder.
      */
     public static ItemBuilder builder() {
-        return new ItemBuilder(new ItemStack(Material.AIR));
+        return builder(Material.AIR);
     }
 
     /**

@@ -20,3 +20,11 @@ database:
 
   # Database password.
   password: "godgod"
+
+# Options related to world and natural player behaviour.
+world:
+  # Whether or not rain is allowed on the server.
+  allow-rain: false
+
+  # Whether or not hunger is allowed on the server.
+  allow-hunger: false

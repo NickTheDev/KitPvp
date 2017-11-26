@@ -21,7 +21,7 @@ import static net.nikdev.kitpvp.lang.LangKeys.SPAWN_OUTSIDE_ERROR;
  * @since 1.0
  */
 @ArgInfo(name = "setlocations", help = "Sets the spawn and spawn region.", permission = "kitpvp.setlocations", userOnly = true)
-public final class SetLocations implements Argument {
+public class SetLocations implements Argument {
 
     @Override
     public void execute(CommandSender sender, String[] args) throws CommandException {
@@ -35,7 +35,7 @@ public final class SetLocations implements Argument {
 
         Cuboid region = new Cuboid((Location) user.getCache().get("first-location").get(), (Location) user.getCache().get("second-location").get());
 
-        if(!region.inside(user.toPlayer().getLocation())) {
+        if(!region.isInside(user.toPlayer().getLocation())) {
             LangKeys.sendTo(user, SPAWN_OUTSIDE_ERROR);
 
             return;

@@ -33,7 +33,7 @@ public class CommandManager implements CommandExecutor {
     }
 
     /**
-     * Gets the argument mapped to the specified name.
+     * Gets the argument info with the specified name.
      *
      * @param name Name of the argument.
      * @return Argument with the specified name.
@@ -56,22 +56,22 @@ public class CommandManager implements CommandExecutor {
             return false;
         }
 
-        ArgInfo argument = getArgument(args[0]).get();
+        ArgInfo info = getArgument(args[0]).get();
 
-        if(!argument.permission().equals("") && !sender.hasPermission(argument.permission())) {
+        if(!info.permission().equals("") && !sender.hasPermission(info.permission())) {
             LangKeys.sendTo(sender, NO_PERMISSION);
 
             return false;
         }
 
-        if(argument.userOnly() && !(sender instanceof Player)) {
+        if(info.userOnly() && !(sender instanceof Player)) {
             LangKeys.sendTo(sender, NOT_PLAYER);
 
             return false;
         }
 
         try {
-            arguments.get(argument).execute(sender, args);
+            arguments.get(info).execute(sender, args);
 
         } catch (CommandException e) {
             LangKeys.sendTo(sender, ARG_ERROR);

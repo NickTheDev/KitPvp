@@ -1,6 +1,5 @@
 package net.nikdev.kitpvp.user;
 
-import com.google.common.collect.ImmutableList;
 import net.nikdev.kitpvp.KitPvp;
 
 import java.util.*;
@@ -21,7 +20,7 @@ public class UserManager {
      * @return Online users.
      */
     public Collection<User> getOnline() {
-        return ImmutableList.copyOf(online);
+        return online;
     }
 
     /**
@@ -47,7 +46,8 @@ public class UserManager {
     }
 
     /**
-     * Creates a new user object from the specified Bukkit counterpart. This should only be called asynchronously.
+     * Creates a new user object from the specified Bukkit counterpart. This will only be called by an asynchronous event
+     * and therefore does not need to handle running async tasks.
      *
      * @param id Id of the user.
      * @param name Name of the user.
@@ -57,18 +57,18 @@ public class UserManager {
     }
 
     /**
-     * Saves the user's statistics synchronously and then removes the user from the online collection.
+     * Saves the user's statistics asynchronously and removes the user from the online cache.
      *
      * @param user User to save.
      */
     public void save(User user) {
-        KitPvp.get().getStore().update(user.getStats());
-
         online.remove(user);
+
+        KitPvp.get().getStore().update(user.getStats());
     }
 
     /**
-     * Saves all users synchronously, as this will only be called when the plugin is disabling.
+     * Saves all users asynchronously after making a copy of the users to prevent a concurrent modification error.
      */
     public void saveAll() {
         new ArrayList<>(getOnline()).forEach(this::save);

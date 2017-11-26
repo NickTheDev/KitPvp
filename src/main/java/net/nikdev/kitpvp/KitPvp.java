@@ -1,6 +1,7 @@
 package net.nikdev.kitpvp;
 
 import net.nikdev.kitpvp.command.CommandManager;
+import net.nikdev.kitpvp.kit.KitConfig;
 import net.nikdev.kitpvp.lang.LangConfig;
 import net.nikdev.kitpvp.listeners.*;
 import net.nikdev.kitpvp.location.LocationConfig;
@@ -26,6 +27,7 @@ public class KitPvp extends JavaPlugin {
     private DataStore store;
     private LocationConfig locations;
     private LangConfig lang;
+    private KitConfig kits;
 
     private UserManager userManager;
 
@@ -38,6 +40,7 @@ public class KitPvp extends JavaPlugin {
         try {
             locations = new LocationConfig();
             lang = new LangConfig();
+            kits = new KitConfig();
             store = new DataStore();
 
         } catch (StoreException e) {
@@ -52,6 +55,8 @@ public class KitPvp extends JavaPlugin {
 
         userManager = new UserManager();
 
+        getKits().readKits();
+        registerListeners();
         getCommand("kitpvp").setExecutor(new CommandManager());
     }
 
@@ -103,6 +108,15 @@ public class KitPvp extends JavaPlugin {
     }
 
     /**
+     * Gets the kit config of KitPvp.
+     *
+     * @return KitPvp's kit config.
+     */
+    public KitConfig getKits() {
+        return kits;
+    }
+
+    /**
      * Gets the user manager of KitPvp.
      *
      * @return KitPvp's user manager.
@@ -116,7 +130,8 @@ public class KitPvp extends JavaPlugin {
      */
     private void registerListeners() {
         Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit(), new PlayerInteract(), new PlayerJoin(), new BlockBreak(), new BlockPlace(),
-                new FoodLevelChange(), new EntityDamage(), new WeatherChange()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
+                new FoodLevelChange(), new EntityDamage(), new WeatherChange(), new PlayerFish(), new PlayerMove(), new ProjectileHit())
+                .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
 }

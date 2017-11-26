@@ -13,6 +13,9 @@ server:
   # Message sent to all players when a player joins the server. Placeholders are %NAME%.
   player-join: "&e&l-> &a&l%NAME% &f&l has joined KitPvp."
 
+  # Message sent to a player when they attempt to leave spawn without selecting a kit.
+  no-kit-selected: "&c&l(!) You must select a kit before leaving spawn."
+
 # Messages pertaining to command related responses.
 command:
   # Message sent to a command sender when they do not specify any arguments.
@@ -58,3 +61,21 @@ wand:
 
   # Message sent to a player when they join the server but the spawn hasn't been set.
   spawn-not-set: "&c&l(!) You have not been teleported to spawn because one has not been set."
+
+# Messages pertaining to kit responses.
+kits:
+  # Message sent to a player when they attempt to use a kit ability without waiting for its cooldown to reset.
+  cooldown:
+
+  # Messages sent by the fisherman kit.
+  fisherman:
+    # Message sent to a player when they have been hooked by someone with the fisherman kit. Placeholders are %NAME%.
+    hooked: "&e&l(!) You've been hooked by &a&l%NAME%&e&l!"
+
+  # Messages sent by the medic kit.
+  medic:
+    # Message sent to a player with the medic kit when they heal themselves.
+    personal-heal: "&e&l(!) You have healed yourself."
+
+    # Message sent to a player with the medic kit when they heal others around them in a 5 block radius.
+    group-heal: "&e&l(!) You have healed players in a 5 block radius."

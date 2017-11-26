@@ -26,7 +26,7 @@ public class EntityDamage implements Listener {
     public void entityDamage(EntityDamageEvent event) {
         Optional<Cuboid> region = KitPvp.get().getLocations().getRegion();
 
-        if(event.getEntityType().equals(EntityType.PLAYER) && region.isPresent() && region.get().inside(event.getEntity().getLocation())) {
+        if(event.getEntityType().equals(EntityType.PLAYER) && region.isPresent() && region.get().isInside(event.getEntity().getLocation())) {
             event.setCancelled(true);
         }
 

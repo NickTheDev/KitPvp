@@ -25,12 +25,11 @@ public final class Cache {
     }
 
     /**
-     * Gets the value associated with the specified key if it is present. Otherwise,
-     * Optional.empty() will be returned.
+     * Gets the value associated with the specified key if it is present. Otherwise, Optional.empty() will be returned.
      *
      * @param key Key associated with the value.
      * @param <T> Type of value.
-     * @return Value associated with the key or Optional.empty().
+     * @return Value associated with the key.
      */
     @SuppressWarnings("unchecked")
     public <T> Optional<T> get(String key) {
@@ -38,8 +37,7 @@ public final class Cache {
             try {
                 return Optional.of((T) data.get(key));
 
-            } catch (ClassCastException ignored) {
-            }
+            } catch (ClassCastException ignored) {}
 
         }
 
