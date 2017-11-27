@@ -34,18 +34,17 @@ public class PlayerMove implements Listener {
 
         Optional<Cuboid> region = KitPvp.get().getLocations().getRegion();
 
-        if(!region.isPresent() || user.getKit().isPresent()) {
+        if(!region.isPresent()) {
             return;
         }
 
-        if(region.get().isInside(event.getFrom()) && !region.get().isInside(event.getTo())) {
+        if(! user.getKit().isPresent() && region.get().isInside(event.getFrom()) && !region.get().isInside(event.getTo())) {
             event.setCancelled(true);
 
             LangKeys.sendTo(user, NO_KIT_SELECTED);
-        } else if(region.get().isInside(event.getTo()) && !region.get().isInside(event.getFrom())) {
+        } else if(user.getKit().isPresent() && region.get().isInside(event.getTo()) && !region.get().isInside(event.getFrom())) {
             event.setCancelled(true);
         }
-
     }
 
     /**

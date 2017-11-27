@@ -2,7 +2,7 @@ package net.nikdev.kitpvp.listeners;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.location.Cuboid;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -26,7 +26,7 @@ public class EntityDamage implements Listener {
     public void entityDamage(EntityDamageEvent event) {
         Optional<Cuboid> region = KitPvp.get().getLocations().getRegion();
 
-        if(event.getEntityType().equals(EntityType.PLAYER) && region.isPresent() && region.get().isInside(event.getEntity().getLocation())) {
+        if(event.getEntity() instanceof Player && region.isPresent() && region.get().isInside(event.getEntity().getLocation())) {
             event.setCancelled(true);
         }
 

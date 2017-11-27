@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Collections;
+
 import static net.nikdev.kitpvp.lang.LangKeys.COOLDOWN;
 
 /**
@@ -29,7 +31,7 @@ public class Pyro implements KitAction {
                 ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.CHAINMAIL_BOOTS));
 
         user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.FIRE_ASPECT, 2));
-        user.give(ItemBuilder.builder(Material.IRON_HOE).name("&e&lFire Cannon"));
+        user.give(ItemBuilder.builder(Material.IRON_HOE).name("&e&lFire Cannon").lore(Collections.singleton("&f&lClick to activate.")));s
 
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 3));
 

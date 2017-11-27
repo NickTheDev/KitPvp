@@ -210,3 +210,104 @@ kits:
 
     # Kit action class.
     action: "Crossbow"
+
+  # Purchasable eagle kit.
+  eagle:
+    # Kit id.
+    id: "eagle"
+
+    # Kit name.
+    name: "Eagle"
+
+    # Kit description.
+    description: "Soar through the sky!"
+
+    # Kit icon.
+    icon: "FEATHER"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Eagle"
+
+  # Purchasable mario kit.
+  mario:
+    # Kit id.
+    id: "mario"
+
+    # Kit name.
+    name: "Mario"
+
+    # Kit description.
+    description: "Gain a boost with jumping Mama! Hoo-Hah-Hoo! Yahoo!"
+
+    # Kit icon.
+    icon: "BROWN_MUSHROOM"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Mario"
+
+
+  # Purchasable link kit.
+  link:
+    # Kit id.
+    id: "link"
+
+    # Kit name.
+    name: "Link"
+
+    # Kit description.
+    description: "It's dangerous to go alone! Take this!"
+
+    # Kit icon.
+    icon: "IRON_SWORD"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Link"
+
+  # Purchasable bowser kit.
+  bowser:
+    # Kit id.
+    id: "bowser"
+
+    # Kit name.
+    name: "Bowser"
+
+    # Kit description.
+    description: "Bwahahaha!"
+
+    # Kit icon.
+    icon: "BLAZE_POWDER"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "Bowser"
+
+  # Purchasable donkey kong kit.
+  donkeykong:
+    # Kit id.
+    id: "donkey-kong"
+
+    # Kit name.
+    name: "Donkey Kong"
+
+    # Kit description.
+    description: "Throw Your enemies around!"
+
+    # Kit icon.
+    icon: "GOLD_BLOCK"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit action class.
+    action: "DonkeyKong"

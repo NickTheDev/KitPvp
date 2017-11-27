@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Collections;
+
 import static net.nikdev.kitpvp.lang.LangKeys.COOLDOWN;
 import static net.nikdev.kitpvp.lang.LangKeys.MEDIC_GROUP_HEAL;
 import static net.nikdev.kitpvp.lang.LangKeys.MEDIC_PERSONAL_HEAL;
@@ -31,7 +33,7 @@ public class Medic implements KitAction {
                 ItemBuilder.builder(Material.IRON_CHESTPLATE), ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.LEATHER_BOOTS).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).enchant(Enchantment.DURABILITY, 3));
 
         user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 1));
-        user.give(ItemBuilder.builder(Material.REDSTONE).name("&e&lMedkit"));
+        user.give(ItemBuilder.builder(Material.REDSTONE).name("&e&lMedkit").lore(Collections.singleton("&f&lRight click to activate personal heal, left click to heal nearby players.")));
 
         fillSoup(user);
     }

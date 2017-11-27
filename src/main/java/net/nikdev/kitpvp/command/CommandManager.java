@@ -58,7 +58,7 @@ public class CommandManager implements CommandExecutor {
 
         ArgInfo info = getArgument(args[0]).get();
 
-        if(!info.permission().equals("") && !sender.hasPermission(info.permission())) {
+        if(!info.permission().isEmpty() && !sender.hasPermission(info.permission())) {
             LangKeys.sendTo(sender, NO_PERMISSION);
 
             return false;

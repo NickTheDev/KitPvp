@@ -2,7 +2,7 @@ package net.nikdev.kitpvp.listeners;
 
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,7 +23,7 @@ public class ProjectileHit implements Listener {
      */
     @EventHandler
     public void arrowHit(ProjectileHitEvent event) {
-        if(event.getEntityType().equals(EntityType.ARROW) && event.getEntity().getShooter() instanceof Player) {
+        if(event.getEntity() instanceof Arrow && event.getEntity().getShooter() instanceof Player) {
             User user = User.get(((Player) event.getEntity().getShooter()).getUniqueId()).get();
 
             if(user.getKit().isPresent() && user.getKit().get().getId().equals("crossbow")) {

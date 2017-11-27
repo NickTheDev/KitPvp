@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Collections;
+
 import static net.nikdev.kitpvp.lang.LangKeys.COOLDOWN;
 
 /**
@@ -25,7 +27,7 @@ public class Assassin implements KitAction {
     @Override
     public void give(User user) {
         user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 3));
-        user.give(ItemBuilder.builder(Material.SULPHUR).name("&e&lTurn Invisible"));
+        user.give(ItemBuilder.builder(Material.SULPHUR).name("&e&lTurn Invisible").lore(Collections.singleton("&f&lClick to activate.")));
 
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 3));
 

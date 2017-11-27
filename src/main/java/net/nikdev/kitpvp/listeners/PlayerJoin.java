@@ -3,7 +3,6 @@ package net.nikdev.kitpvp.listeners;
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.lang.LangKeys;
 import net.nikdev.kitpvp.user.User;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +29,9 @@ public class PlayerJoin implements Listener {
     public void playerJoin(PlayerJoinEvent event) {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
-        Bukkit.broadcastMessage(LangKeys.get(PLAYER_JOIN, Placeholder.of("name", user.getName())));
+        if(!LangKeys.get(PLAYER_JOIN).isEmpty()) {
+            event.setJoinMessage(LangKeys.get(PLAYER_JOIN, Placeholder.of("name", user.getName())));
+        }
 
         Optional<Location> spawn = KitPvp.get().getLocations().getSpawn();
 

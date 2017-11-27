@@ -11,7 +11,10 @@ prefix: ""
 # Messages pertaining to server events like player joining, etc.
 server:
   # Message sent to all players when a player joins the server. Placeholders are %NAME%.
-  player-join: "&e&l-> &a&l%NAME% &f&l has joined KitPvp."
+  player-join: "&e&l-> &a&l%NAME% &f&lhas joined KitPvp."
+
+  # Message sent to all players when a player quits the server. Placeholders are %NAME%.
+  player-quit: ""
 
   # Message sent to a player when they attempt to leave spawn without selecting a kit.
   no-kit-selected: "&c&l(!) You must select a kit before leaving spawn."
@@ -79,3 +82,8 @@ kits:
 
     # Message sent to a player with the medic kit when they heal others around them in a 5 block radius.
     group-heal: "&e&l(!) You have healed players in a 5 block radius."
+
+  # Messages sent by the donkey kong kit.
+  donkeykong:
+    # Message sent to a player with the donkey kong kit when they pickup another player. Placeholders are %NAME%.
+    pickup: "&e&l(!) You picked up &a&l%NAME%&e&l, left click again to throw them!"

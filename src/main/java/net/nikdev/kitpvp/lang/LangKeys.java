@@ -19,6 +19,11 @@ public enum LangKeys {
     PLAYER_JOIN("server.player-join"),
 
     /**
+     * Message sent to all players when a player quits the server. Placeholders are %NAME%.
+     */
+    PLAYER_QUIT("server.player-quit"),
+
+    /**
      * Message sent to a player when they attempt to leave spawn without selecting a kit.
      */
     NO_KIT_SELECTED("server.no-kit-selected"),
@@ -111,7 +116,12 @@ public enum LangKeys {
     /**
      * Message sent to a player with the medic kit when they heal others around them in a 5 block radius.
      */
-    MEDIC_GROUP_HEAL("kits.medic.group-heal");
+    MEDIC_GROUP_HEAL("kits.medic.group-heal"),
+
+    /**
+     * Message sent to a player with the donkey kong kit when they pickup another player. Placeholders are %NAME%.
+     */
+    DONKEY_KONG_PICKUP("kits.donkeykong.pickup");
 
     private static final Placeholder prefix = Placeholder.of("prefix", KitPvp.get().getLang().get("prefix"));
     private final String key;
