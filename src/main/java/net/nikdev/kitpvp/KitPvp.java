@@ -1,11 +1,16 @@
 package net.nikdev.kitpvp;
 
 import net.nikdev.kitpvp.command.CommandManager;
-import net.nikdev.kitpvp.kit.KitConfig;
-import net.nikdev.kitpvp.lang.LangConfig;
-import net.nikdev.kitpvp.listeners.*;
-import net.nikdev.kitpvp.location.LocationConfig;
-import net.nikdev.kitpvp.stats.DataStore;
+import net.nikdev.kitpvp.config.KitConfig;
+import net.nikdev.kitpvp.config.LangConfig;
+import net.nikdev.kitpvp.config.LocationConfig;
+import net.nikdev.kitpvp.listeners.entity.EntityDamage;
+import net.nikdev.kitpvp.listeners.entity.ProjectileHit;
+import net.nikdev.kitpvp.listeners.player.*;
+import net.nikdev.kitpvp.listeners.world.BlockBreak;
+import net.nikdev.kitpvp.listeners.world.BlockPlace;
+import net.nikdev.kitpvp.listeners.world.WeatherChange;
+import net.nikdev.kitpvp.user.stats.DataStore;
 import net.nikdev.kitpvp.user.UserManager;
 import net.nikdev.kitpvp.util.StoreException;
 import org.bukkit.Bukkit;
@@ -131,7 +136,7 @@ public class KitPvp extends JavaPlugin {
     private void registerListeners() {
         Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit(), new PlayerInteract(), new PlayerJoin(), new BlockBreak(), new BlockPlace(),
                 new FoodLevelChange(), new EntityDamage(), new WeatherChange(), new PlayerFish(), new PlayerMove(), new ProjectileHit(),
-                new PlayerInteractEntity()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
+                new PlayerInteractEntity(), new InventoryClose()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
 }

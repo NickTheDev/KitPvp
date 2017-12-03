@@ -13,13 +13,13 @@ database:
   port: 3306
 
   # Database name.
-  name: "kitpvp"
+  name: kitpvp
 
   # Database user.
-  user: "root"
+  user: root
 
   # Database password.
-  password: "godgod"
+  password: godgod
 
 # Options related to world and natural player behaviour.
 world:

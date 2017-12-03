@@ -3,13 +3,12 @@ package net.nikdev.kitpvp.command.defaults;
 import net.nikdev.kitpvp.command.ArgInfo;
 import net.nikdev.kitpvp.command.Argument;
 import net.nikdev.kitpvp.command.CommandException;
-import net.nikdev.kitpvp.lang.LangKeys;
+import net.nikdev.kitpvp.config.lang.Keys;
+import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.util.ItemBuilder;
+import net.nikdev.kitpvp.menu.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-
-import static net.nikdev.kitpvp.lang.LangKeys.WAND_GIVEN;
 
 /**
  * Argument that gives a {@link User} the location wand.
@@ -24,7 +23,7 @@ public class Wand implements Argument {
     public void execute(CommandSender sender, String[] args) throws CommandException {
         User.get(sender.getName()).get().give(ItemBuilder.builder(Material.WOOD_HOE).name("&e&lKitPvp Location Wand"));
 
-        LangKeys.sendTo(sender, WAND_GIVEN);
+        Lang.sendTo(sender, Keys.WAND_GIVEN);
     }
 
 }

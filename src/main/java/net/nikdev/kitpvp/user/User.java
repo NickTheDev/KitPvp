@@ -2,9 +2,9 @@ package net.nikdev.kitpvp.user;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.kit.Kit;
-import net.nikdev.kitpvp.stats.Statistics;
+import net.nikdev.kitpvp.user.stats.Statistics;
 import net.nikdev.kitpvp.util.Cache;
-import net.nikdev.kitpvp.util.ItemBuilder;
+import net.nikdev.kitpvp.menu.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -139,7 +139,7 @@ public final class User {
         toPlayer().setHealth(20);
         toPlayer().setFoodLevel(20);
         toPlayer().setLevel(0);
-        toPlayer().setExp(0F);
+        toPlayer().setExp(0);
         toPlayer().setGameMode(GameMode.SURVIVAL);
         toPlayer().getActivePotionEffects().forEach(potion -> toPlayer().removePotionEffect(potion.getType()));
         toPlayer().setAllowFlight(false);

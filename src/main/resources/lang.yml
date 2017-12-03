@@ -39,8 +39,8 @@ command:
   # Message sent to a command sender when they do not have a permission.
   no-permission: "&c&l(!) You do not have permission to use this command."
 
-  # Message sent to a command sender when an error occurs executing a command.
-  arg-error: "&c&l(!) An error occurred executing this command."
+  # Message sent to a command sender when an error occurs executing a command. Placeholders are %ERROR%.
+  arg-error: "&c&l(!) An error occurred executing; %ERROR%."
 
 # Messages pertaining to responses to the Location Wand usage.
 wand:
@@ -68,7 +68,10 @@ wand:
 # Messages pertaining to kit responses.
 kits:
   # Message sent to a player when they attempt to use a kit ability without waiting for its cooldown to reset.
-  cooldown:
+  cooldown: "&c&l(!) You must wait before using this ability."
+
+  # Message sent to a player when they attempt to select a kit without purchasing it beforehand.
+  not-purchased: "&c&l(!) You must purchase this kit before you can use it."
 
   # Messages sent by the fisherman kit.
   fisherman:

@@ -1,21 +1,41 @@
+# KitPvp properties.
 name: KitPvp
 main: net.nikdev.kitpvp.KitPvp
 version: 1.0-SNAPSHOT
 author: NickTheDev
 website: http://nikdev.net/
+
+# KitPvp commands.
 commands:
+  # KitPvp base command.
   kitpvp:
+    # Command alias.
     aliases: [kp, kits]
+
+    # Command description.
     description: KitPvp's base command.
+
+# KitPvp permissions.
 permissions:
+  # Wildcard permission.
   kitpvp.*:
+    # Wildcard children.
     children:
       kitpvp.wand: true
       kitpvp.setlocations: true
       kitpvp.edit-terrain: true
+
+  # Wand permission.
   kitpvp.wand:
+    # Permission description.
     description: Allows a player to use /kitpvp wand.
+
+  # Set Locations permission.
   kitpvp.setlocations:
+      # Permission description.
     description: Allows a player to use /kitpvp setlocations.
+
+  # Edit terrain permission.
   kitpvp.edit-terrain:
+      # Permission description.
     description: Allows a player to break and place blocks.

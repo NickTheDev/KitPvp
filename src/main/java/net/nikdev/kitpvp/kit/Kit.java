@@ -3,8 +3,7 @@ package net.nikdev.kitpvp.kit;
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.Material;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents {@link User} kits, which are the backbone of KitPvp.
@@ -14,13 +13,15 @@ import java.util.List;
  */
 public final class Kit {
 
-    private static List<Kit> kits = new ArrayList<>();
+    private static final Map<String, Kit> registry = new HashMap<>();
 
     private final String id, name, description;
 
+    // Stored as the wrapper and not primitive to support nullability.
+    private final Short iconData;
     private final Material icon;
     private final int cost;
-    private final KitAction action;
+    private final KitCallback callback;
 
     /**
      * Creates a new kit with the specified information.
@@ -29,16 +30,18 @@ public final class Kit {
      * @param name Name of this kit.
      * @param description Description of this kit.
      * @param icon Description of this kit.
+     * @param iconData Icon data of this kit.
      * @param cost Cost of this kit.
-     * @param action Action of this kit.
+     * @param callback Callback of this kit.
      */
-    Kit(String id, String name, String description, Material icon, int cost, KitAction action) {
+    public Kit(String id, String name, String description, Material icon, Short iconData, int cost, KitCallback callback) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.icon = icon;
+        this.iconData = iconData;
         this.cost = cost;
-        this.action = action;
+        this.callback = callback;
     }
 
     /**
@@ -58,6 +61,7 @@ public final class Kit {
     public String getName() {
         return name;
     }
+
     /**
      * Gets this description of this kit.
      *
@@ -77,6 +81,15 @@ public final class Kit {
     }
 
     /**
+     * Gets the optional data of the icon of this kit.
+     *
+     * @return This kit's icon data.
+     */
+    public Optional<Short> getIconData() {
+        return Optional.ofNullable(iconData);
+    }
+
+    /**
      * Gets this cost of this kit.
      *
      * @return This kit's cost.
@@ -86,12 +99,34 @@ public final class Kit {
     }
 
     /**
-     * Gets this action of this kit.
+     * Gets this callback of this kit.
      *
-     * @return This kit's action.
+     * @return This kit's callback.
      */
-    public KitAction getAction() {
-        return action;
+    public KitCallback getCallback() {
+        return callback;
+    }
+
+    /**
+     * Gives this kit to the specified user.
+     *
+     * @param user User to give to.
+     */
+    public void apply(User user) {
+        user.getCache().set("previous-kit", getId());
+        user.getCache().set("kit", this);
+
+        getCallback().give(user);
+    }
+
+    /**
+     * Gets the kit with the specified id.
+     *
+     * @param id Id of the kit.
+     * @return Kit with the id.
+     */
+    public static Optional<Kit> get(String id) {
+        return Optional.ofNullable(registry.get(id));
     }
 
     /**
@@ -99,8 +134,20 @@ public final class Kit {
      *
      * @return Loaded kits.
      */
-    public static List<Kit> getKits() {
-        return kits;
+    public static Collection<Kit> getKits() {
+        return registry.values();
+    }
+
+    /**
+     * Registers the specified kit if it is not already registered.
+     *
+     * @param kit Kit to register.
+     */
+    public static void register(Kit kit) {
+        if(kit != null && !registry.containsKey(kit.getId())) {
+            registry.put(kit.getId(), kit);
+        }
+
     }
 
 }

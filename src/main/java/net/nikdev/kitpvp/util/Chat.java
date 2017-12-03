@@ -30,6 +30,16 @@ public final class Chat {
     }
 
     /**
+     * Removes all color codes from the specified text.
+     *
+     * @param text Text to strip.
+     * @return Stripped text.
+     */
+    public static String strip(String text) {
+        return ChatColor.stripColor(text);
+    }
+
+    /**
      * Colors the specified texts using Bukkit's chat color codes.
      *
      * @param texts Texts to color.

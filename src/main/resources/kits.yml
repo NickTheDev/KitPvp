@@ -1,7 +1,7 @@
 #
 #                      <-- KitPvp Kit Config -->
 #     A mark down for all the kits in the plugin, the items and
-#    abilities given in each kit are defined by its action class.
+#    abilities given in each kit are defined by its callback class.
 #         Kit ids must be lowercase with no spaces or symbols.
 #      Kit icon materials must be in Bukkit format (goo.gl/rXYhh5).
 #  If kits pvp, archer, fisherman, tank, or medic are removed or have
@@ -28,8 +28,8 @@ kits:
     # Kit cost.
     cost: 0
 
-    # Kit action class.
-    action: "Pvp"
+    # Kit callback class.
+    callback: "Pvp"
 
   # Default archer kit.
   archer:
@@ -48,8 +48,8 @@ kits:
     # Kit cost.
     cost: 0
 
-    # Kit action class.
-    action: "Archer"
+    # Kit callback class.
+    callback: "Archer"
 
   # Default fisherman kit.
   fisherman:
@@ -68,8 +68,8 @@ kits:
     # Kit cost.
     cost: 0
 
-    # Kit action class.
-    action: "Fisherman"
+    # Kit callback class.
+    callback: "Fisherman"
 
   # Default tank kit.
   tank:
@@ -88,8 +88,8 @@ kits:
     # Kit cost.
     cost: 0
 
-    # Kit action class.
-    action: "Tank"
+    # Kit callback class.
+    callback: "Tank"
 
   # Default medic kit.
   medic:
@@ -108,8 +108,8 @@ kits:
     # Kit cost.
     cost: 0
 
-    # Kit action class.
-    action: "Medic"
+    # Kit callback class.
+    callback: "Medic"
 
   # Purchasable pyro kit.
   pyro:
@@ -128,8 +128,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Pyro"
+    # Kit callback class.
+    callback: "Pyro"
 
   # Purchasable assassin kit.
   assassin:
@@ -148,8 +148,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Assassin"
+    # Kit callback class.
+    callback: "Assassin"
 
   # Purchasable dragon born kit.
   dragonborn:
@@ -168,8 +168,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "DragonBorn"
+    # Kit callback class.
+    callback: "DragonBorn"
 
   # Purchasable shark kit.
   shark:
@@ -188,8 +188,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Shark"
+    # Kit callback class.
+    callback: "Shark"
 
   # Purchasable crossbow kit.
   crossbow:
@@ -208,8 +208,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Crossbow"
+    # Kit callback class.
+    callback: "Crossbow"
 
   # Purchasable eagle kit.
   eagle:
@@ -228,8 +228,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Eagle"
+    # Kit callback class.
+    callback: "Eagle"
 
   # Purchasable mario kit.
   mario:
@@ -243,13 +243,13 @@ kits:
     description: "Gain a boost with jumping Mama! Hoo-Hah-Hoo! Yahoo!"
 
     # Kit icon.
-    icon: "BROWN_MUSHROOM"
+    icon: "RED_MUSHROOM"
 
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Mario"
+    # Kit callback class.
+    callback: "Mario"
 
 
   # Purchasable link kit.
@@ -269,8 +269,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Link"
+    # Kit callback class.
+    callback: "Link"
 
   # Purchasable bowser kit.
   bowser:
@@ -289,8 +289,8 @@ kits:
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "Bowser"
+    # Kit callback class.
+    callback: "Bowser"
 
   # Purchasable donkey kong kit.
   donkeykong:
@@ -304,10 +304,117 @@ kits:
     description: "Throw Your enemies around!"
 
     # Kit icon.
-    icon: "GOLD_BLOCK"
+    icon: "INK_SACK"
+
+    # Kit icon data for dye color.
+    icon-data: 11
 
     # Kit cost.
     cost: 5
 
-    # Kit action class.
-    action: "DonkeyKong"
+    # Kit action callback.
+    callback: "DonkeyKong"
+
+  # Purchasable sonic kit.
+  sonic:
+    # Kit id.
+    id: "sonic"
+
+    # Kit name.
+    name: "Sonic"
+
+    # Kit description.
+    description: "Gotta go fast!"
+
+    # Kit icon.
+    icon: "INK_SACK"
+
+    # Kit icon data for dye color.
+    icon-data: 4
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "Sonic"
+
+  # Purchasable snowman kit.
+  snowman:
+    # Kit id.
+    id: "snowman"
+
+    # Kit name.
+    name: "Snowman"
+
+    # Kit description.
+    description: "Do you want to be a snowman?"
+
+    # Kit icon.
+    icon: "SNOW_BALL"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "Snowman"
+
+  # Purchasable spiderman kit.
+  spiderman:
+    # Kit id.
+    id: "spiderman"
+
+    # Kit name.
+    name: "Spiderman"
+
+    # Kit description.
+    description: "Does whatever a spider can!"
+
+    # Kit icon.
+    icon: "WEB"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "Spiderman"
+
+  # Purchasable vampire kit.
+  vampire:
+    # Kit id.
+    id: "vampire"
+
+    # Kit name.
+    name: "Vampire"
+
+    # Kit description.
+    description: "That creepy muppet from sesame street."
+
+    # Kit icon.
+    icon: "SPIDER_EYE"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "Vampire"
+
+
+  # Purchasable luigi kit.
+  luigi:
+    # Kit id.
+    id: "luigi"
+
+    # Kit name.
+    name: "Luigi"
+
+    # Kit description.
+    description: "Gain a boost with jumping Mama! Hoo-Hah-Hoo! Yahoo!"
+
+    # Kit icon.
+    icon: "RED_MUSHROOM"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "Luigi"

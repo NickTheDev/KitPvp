@@ -2,7 +2,9 @@ package net.nikdev.kitpvp.command;
 
 import net.nikdev.kitpvp.command.defaults.SetLocations;
 import net.nikdev.kitpvp.command.defaults.Wand;
-import net.nikdev.kitpvp.lang.LangKeys;
+import net.nikdev.kitpvp.config.lang.Keys;
+import net.nikdev.kitpvp.config.lang.Lang;
+import net.nikdev.kitpvp.config.lang.Placeholder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,8 +14,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import static net.nikdev.kitpvp.lang.LangKeys.*;
 
 /**
  * Manages command {@link Argument}s and executing them.
@@ -29,7 +29,7 @@ public class CommandManager implements CommandExecutor {
      * Creates a new command manager and registers all default arguments.
      */
     public CommandManager() {
-        registerAll();
+        Arrays.asList(new Help(), new Wand(), new SetLocations()).forEach(this::register);
     }
 
     /**
@@ -45,13 +45,13 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length == 0) {
-            LangKeys.sendTo(sender, NO_ARGS);
+            Lang.sendTo(sender, Keys.NO_ARGS);
 
             return false;
         }
 
         if(!getArgument(args[0]).isPresent()) {
-            LangKeys.sendTo(sender, UNKNOWN_ARGS);
+            Lang.sendTo(sender, Keys.UNKNOWN_ARGS);
 
             return false;
         }
@@ -59,13 +59,13 @@ public class CommandManager implements CommandExecutor {
         ArgInfo info = getArgument(args[0]).get();
 
         if(!info.permission().isEmpty() && !sender.hasPermission(info.permission())) {
-            LangKeys.sendTo(sender, NO_PERMISSION);
+            Lang.sendTo(sender, Keys.NO_PERMISSION);
 
             return false;
         }
 
         if(info.userOnly() && !(sender instanceof Player)) {
-            LangKeys.sendTo(sender, NOT_PLAYER);
+            Lang.sendTo(sender, Keys.NOT_PLAYER);
 
             return false;
         }
@@ -74,7 +74,7 @@ public class CommandManager implements CommandExecutor {
             arguments.get(info).execute(sender, args);
 
         } catch (CommandException e) {
-            LangKeys.sendTo(sender, ARG_ERROR);
+            Lang.sendTo(sender, Keys.ARG_ERROR, Placeholder.of("error", e.getMessage()));
             e.printStackTrace();
 
             return false;
@@ -98,14 +98,8 @@ public class CommandManager implements CommandExecutor {
     }
 
     /**
-     * Registers all default arguments.
-     */
-    private void registerAll() {
-        Arrays.asList(new Help(), new Wand(), new SetLocations()).forEach(this::register);
-    }
-
-    /**
-     * Help argument which tells a command sender how to use arguments.
+     * Help argument which tells a command sender how to use arguments. This is nested in the command manager
+     * class because it needs to take advantage of the argument map to access all argument help messages.
      *
      * @author NickTheDev
      * @since 1.0
@@ -115,9 +109,9 @@ public class CommandManager implements CommandExecutor {
 
         @Override
         public void execute(CommandSender sender, String[] args) throws CommandException {
-            LangKeys.sendTo(sender, HELP);
+            Lang.sendTo(sender, Keys.HELP);
 
-            arguments.keySet().forEach(info -> LangKeys.sendTo(sender, HELP_TEMPLATE, Placeholder.of("name", info.name()), Placeholder.of("help", info.help())));
+            arguments.keySet().forEach(info -> Lang.sendTo(sender, Keys.HELP_TEMPLATE, Placeholder.of("name", info.name()), Placeholder.of("help", info.help())));
         }
 
     }

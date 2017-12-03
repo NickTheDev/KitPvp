@@ -1,6 +1,7 @@
 package net.nikdev.kitpvp.util;
 
 import com.google.common.collect.ForwardingMultimap;
+import net.nikdev.kitpvp.menu.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
