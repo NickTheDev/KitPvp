@@ -4,7 +4,6 @@ import net.nikdev.kitpvp.command.defaults.SetLocations;
 import net.nikdev.kitpvp.command.defaults.Modify;
 import net.nikdev.kitpvp.command.defaults.Tokens;
 import net.nikdev.kitpvp.command.defaults.Wand;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import org.bukkit.command.Command;
@@ -47,13 +46,13 @@ public class CommandManager implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(args.length == 0) {
-            Lang.sendTo(sender, Keys.NO_ARGS);
+            Lang.sendTo(sender, Lang.NO_ARGS);
 
             return false;
         }
 
         if(!getArgument(args[0]).isPresent()) {
-            Lang.sendTo(sender, Keys.UNKNOWN_ARGS);
+            Lang.sendTo(sender, Lang.UNKNOWN_ARGS);
 
             return false;
         }
@@ -61,13 +60,13 @@ public class CommandManager implements CommandExecutor {
         ArgInfo info = getArgument(args[0]).get();
 
         if(!info.permission().isEmpty() && !sender.hasPermission(info.permission())) {
-            Lang.sendTo(sender, Keys.NO_PERMISSION);
+            Lang.sendTo(sender, Lang.NO_PERMISSION);
 
             return false;
         }
 
         if(info.userOnly() && !(sender instanceof Player)) {
-            Lang.sendTo(sender, Keys.NOT_PLAYER);
+            Lang.sendTo(sender, Lang.NOT_PLAYER);
 
             return false;
         }
@@ -76,7 +75,7 @@ public class CommandManager implements CommandExecutor {
             arguments.get(info).execute(sender, args);
 
         } catch (CommandException e) {
-            Lang.sendTo(sender, Keys.ARG_ERROR, Placeholder.of("error", e.getMessage()));
+            Lang.sendTo(sender, Lang.ARG_ERROR, Placeholder.of("error", e.getMessage()));
             e.printStackTrace();
 
             return false;
@@ -111,9 +110,9 @@ public class CommandManager implements CommandExecutor {
 
         @Override
         public void execute(CommandSender sender, String[] args) throws CommandException {
-            Lang.sendTo(sender, Keys.HELP);
+            Lang.sendTo(sender, Lang.HELP);
 
-            arguments.keySet().forEach(info -> Lang.sendTo(sender, Keys.HELP_TEMPLATE, Placeholder.of("name", info.name()), Placeholder.of("help", info.help())));
+            arguments.keySet().forEach(info -> Lang.sendTo(sender, Lang.HELP_TEMPLATE, Placeholder.of("name", info.name()), Placeholder.of("help", info.help())));
         }
 
     }

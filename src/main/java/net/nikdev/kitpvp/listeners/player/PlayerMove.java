@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.listeners.player;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.util.Cuboid;
 import net.nikdev.kitpvp.user.User;
@@ -40,7 +39,7 @@ public class PlayerMove implements Listener {
         if(!user.getKit().isPresent() && region.get().isInside(event.getFrom()) && !region.get().isInside(event.getTo())) {
             event.setCancelled(true);
 
-            Lang.sendTo(user, Keys.NO_KIT_SELECTED);
+            Lang.sendTo(user, Lang.NO_KIT_SELECTED);
         } else if(user.getKit().isPresent() && region.get().isInside(event.getTo()) && !region.get().isInside(event.getFrom())) {
             event.setCancelled(true);
         }

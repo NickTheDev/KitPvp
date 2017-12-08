@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.menu.kit;
 
 import net.nikdev.kitpvp.config.Config;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.kit.Kit;
@@ -37,7 +36,7 @@ public class KitShop implements MenuCallback {
 
         if(user.getStats().getKits().contains(id)) {
             user.toPlayer().closeInventory();
-            Lang.sendTo(user, Keys.ALREADY_PURCHASED);
+            Lang.sendTo(user, Lang.ALREADY_PURCHASED);
 
         } else {
             user.toPlayer().closeInventory();
@@ -47,10 +46,10 @@ public class KitShop implements MenuCallback {
                 user.getStats().getKits().add(id);
                 user.getStats().removeTokens(kit.getCost());
                 
-                Lang.sendTo(user, Keys.SUCCESSFUL_PURCHASE);
+                Lang.sendTo(user, Lang.SUCCESSFUL_PURCHASE);
 
             } else {
-                Lang.sendTo(user, Keys.INSUFFICIENT_TOKENS);
+                Lang.sendTo(user, Lang.INSUFFICIENT_TOKENS);
             }
 
         }

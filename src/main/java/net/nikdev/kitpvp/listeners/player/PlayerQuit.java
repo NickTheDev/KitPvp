@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.listeners.player;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.user.User;
@@ -27,8 +26,8 @@ public class PlayerQuit implements Listener {
         User user = User.get(event.getPlayer().getUniqueId()).get();
         KitPvp.get().getUserManager().save(user, true);
 
-        if(!Lang.get(Keys.PLAYER_QUIT).isEmpty()) {
-            event.setQuitMessage(Lang.get(Keys.PLAYER_QUIT, Placeholder.of("name", user.getName())));
+        if(!Lang.get(Lang.PLAYER_QUIT).isEmpty()) {
+            event.setQuitMessage(Lang.get(Lang.PLAYER_QUIT, Placeholder.of("name", user.getName())));
         }
 
     }

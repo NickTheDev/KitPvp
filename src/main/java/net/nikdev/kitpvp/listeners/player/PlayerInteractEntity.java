@@ -1,6 +1,5 @@
 package net.nikdev.kitpvp.listeners.player;
 
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.user.User;
@@ -32,7 +31,7 @@ public class PlayerInteractEntity implements Listener {
             ItemStack item = event.getPlayer().getItemInHand();
 
             if(item != null && item.getType().equals(Material.INK_SACK)) {
-                Lang.sendTo(user, Keys.DONKEY_KONG_PICKUP, Placeholder.of("name", event.getRightClicked().getName()));
+                Lang.sendTo(user, Lang.DONKEY_KONG_PICKUP, Placeholder.of("name", event.getRightClicked().getName()));
 
                 user.toPlayer().setPassenger(event.getRightClicked());
             }

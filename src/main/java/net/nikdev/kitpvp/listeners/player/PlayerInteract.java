@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.listeners.player;
 
 import net.nikdev.kitpvp.config.Config;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.menu.kit.KitSelector;
@@ -34,11 +33,11 @@ public class PlayerInteract implements Listener {
 
             if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 user.getCache().set("first-location", event.getClickedBlock().getLocation());
-                Lang.sendTo(user, Keys.FIRST_LOCATION_SET);
+                Lang.sendTo(user, Lang.FIRST_LOCATION_SET);
 
             } else if(event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
                 user.getCache().set("second-location", event.getClickedBlock().getLocation());
-                Lang.sendTo(user, Keys.SECOND_LOCATION_SET);
+                Lang.sendTo(user, Lang.SECOND_LOCATION_SET);
 
                 event.setCancelled(true);
             }

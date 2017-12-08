@@ -3,7 +3,6 @@ package net.nikdev.kitpvp.command.defaults;
 import net.nikdev.kitpvp.command.ArgInfo;
 import net.nikdev.kitpvp.command.Argument;
 import net.nikdev.kitpvp.command.CommandException;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
@@ -23,7 +22,7 @@ public class Wand implements Argument {
     public void execute(CommandSender sender, String[] args) throws CommandException {
         User.get(sender.getName()).get().give(ItemBuilder.builder(Material.WOOD_HOE).name("&e&lKitPvp Location Wand"));
 
-        Lang.sendTo(sender, Keys.WAND_GIVEN);
+        Lang.sendTo(sender, Lang.WAND_GIVEN);
     }
 
 }

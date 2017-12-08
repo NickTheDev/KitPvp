@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.user;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.stats.Statistics;
@@ -126,7 +125,7 @@ public final class User {
             toPlayer().teleport(spawn.get());
 
         } else {
-            Lang.sendTo(this, Keys.SPAWN_NOT_SET);
+            Lang.sendTo(this, Lang.SPAWN_NOT_SET);
         }
 
         clean();

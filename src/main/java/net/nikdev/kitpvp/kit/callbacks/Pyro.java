@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.user.User;
@@ -41,7 +40,7 @@ public class Pyro implements KitCallback {
     public void interact(User user, ItemStack item, boolean right) {
         if(checkName(item,"&e&lFire Cannon")) {
             if(user.getCache().contains("pyro-cannon-cooldown")) {
-                Lang.sendTo(user, Keys.COOLDOWN);
+                Lang.sendTo(user, Lang.COOLDOWN);
 
                 return;
             }

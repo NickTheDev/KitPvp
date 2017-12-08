@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.user.User;
@@ -40,12 +39,12 @@ public class Medic implements KitCallback {
         if(checkName(item, "Medkit")) {
             if(right) {
                 if(user.getCache().contains("medic-personal-cooldown")) {
-                    Lang.sendTo(user, Keys.COOLDOWN);
+                    Lang.sendTo(user, Lang.COOLDOWN);
 
                     return;
                 }
 
-                Lang.sendTo(user, Keys.MEDIC_PERSONAL_HEAL);
+                Lang.sendTo(user, Lang.MEDIC_PERSONAL_HEAL);
                 user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 100, 2));
 
                 user.getCache().set("medic-personal-cooldown", true);
@@ -53,12 +52,12 @@ public class Medic implements KitCallback {
 
             } else {
                 if(user.getCache().contains("medic-group-cooldown")) {
-                    Lang.sendTo(user, Keys.COOLDOWN);
+                    Lang.sendTo(user, Lang.COOLDOWN);
 
                     return;
                 }
 
-                Lang.sendTo(user, Keys.MEDIC_GROUP_HEAL);
+                Lang.sendTo(user, Lang.MEDIC_GROUP_HEAL);
                 user.toPlayer().getNearbyEntities(5, 5, 5).stream().filter(entity -> entity instanceof Player).forEach(entity ->
                         ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 100, 2)));
 

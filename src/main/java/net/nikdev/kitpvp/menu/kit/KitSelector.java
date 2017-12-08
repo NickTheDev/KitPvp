@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.menu.kit;
 
 import net.nikdev.kitpvp.config.Config;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
@@ -40,7 +39,7 @@ public class KitSelector implements MenuCallback {
 
         } else {
             user.toPlayer().closeInventory();
-            Lang.sendTo(user, Keys.NOT_PURCHASED);
+            Lang.sendTo(user, Lang.NOT_PURCHASED);
         }
 
     }

@@ -1,6 +1,5 @@
 package net.nikdev.kitpvp.listeners.player;
 
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.user.User;
@@ -31,7 +30,7 @@ public class PlayerFish implements Listener {
             Location location = user.toPlayer().getLocation();
 
             event.getCaught().teleport(location.add(location.getDirection()));
-            Lang.sendTo(event.getCaught(), Keys.FISHERMAN_HOOKED, Placeholder.of("name", user.getName()));
+            Lang.sendTo(event.getCaught(), Lang.FISHERMAN_HOOKED, Placeholder.of("name", user.getName()));
         }
 
     }

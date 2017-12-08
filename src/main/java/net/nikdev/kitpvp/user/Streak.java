@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.user;
 
 import net.nikdev.kitpvp.config.Config;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.util.packet.Title;
@@ -77,13 +76,13 @@ public final class Streak {
             if(kills >= streak.getKillsNeeded()) {
                 tokens += streak.getAward();
 
-                Lang.sendTo(user, Keys.PLAYER_STREAK, Placeholder.of("name", streak.getName()), Placeholder.of("amount", streak.getAward()));
+                Lang.sendTo(user, Lang.PLAYER_STREAK, Placeholder.of("name", streak.getName()), Placeholder.of("amount", streak.getAward()));
             }
 
         }
 
         user.getStats().addTokens(tokens);
-        Title.builder().title(Lang.get(Keys.DEATH_TOKEN_TITLE, Placeholder.of("amount", tokens))).fadeIn(1).fadeOut(1).stay(2).build().send(user);
+        Title.builder().title(Lang.get(Lang.DEATH_TOKEN_TITLE, Placeholder.of("amount", tokens))).fadeIn(1).fadeOut(1).stay(2).build().send(user);
     }
 
     /**

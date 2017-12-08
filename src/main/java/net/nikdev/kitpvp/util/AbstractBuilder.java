@@ -9,6 +9,11 @@ package net.nikdev.kitpvp.util;
  */
 public interface AbstractBuilder<T> {
 
+    /**
+     * Gets the result of this builder.
+     *
+     * @return This builder's result.
+     */
     T build();
 
     /**

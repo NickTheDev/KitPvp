@@ -51,19 +51,16 @@ command:
   # Message sent to a command sender when they do not have a permission.
   no-permission: "&c&l(!) You do not have permission to use this command."
 
-  # Message sent to a command sender when an error occurs executing a command. Placeholders are %ERROR%.
-  arg-error: "&c&l(!) An error occurred executing; %ERROR%."
-
 # Messages pertaining to responses to the usage of the modify argument.
 modify:
-  # Error specification sent to a player when they use the modify argument with an unknown target player. Placeholders are %TARGET%.
-  error-parse-target: "Unable to parse target player: %TARGET%."
+  # Message sent to a player when they use the modify argument with an unknown target player. Placeholders are %TARGET%.
+  unknown-parse-target: "&c&l(!) Unable to parse target player: %TARGET%."
 
-  # Error specification sent to a player when they use the modify argument with an invalid amount. Placeholders are %AMOUNT%.
-  error-parse-amount: "Unable to parse amount: %AMOUNT%."
+  # Message sent to a player when they use the modify argument with an invalid amount. Placeholders are %AMOUNT%.
+  invalid-amount: "&c&l(!) Unable to parse amount: %AMOUNT%."
 
-  # Error specification sent a player when they use the modify argument with an invalid operation. Placeholders are %OPERATION%.
-  error-unknown-modify: "Unknown operation: %OPERATION%."
+  # Message sent a player when they use the modify argument with an invalid operation. Placeholders are %OPERATION%.
+  unknown-modify: "&c&l(!) Unknown operation: %OPERATION%."
 
   # Message sent to a command sender when they use the Token argument without any sub-arguments.
   no-token-args: "&c&l(!) Incorrect command usage, please use /kitpvp token <add:remove:set> <user> <amount>."
@@ -73,8 +70,8 @@ modify:
 
 # Messages pertaining to responses to the usage of the tokens argument.
 tokens:
-  # Error specification sent to the console when it attempts to check its personal token balance.
-  error-console-personal: "Only players can check their personal balances."
+  # Message sent to the console when it attempts to check its personal token balance.
+  attempt-console-personal: "&c&l(!) Only players can check their personal balances."
 
   # Message sent to a player when they use the tokens argument without any sub-arguments, meaning they want to check their balance. Placeholders are %AMOUNT%.
   personal-token-check: "&a&l(!) You currently have %AMOUNT%."
@@ -84,11 +81,11 @@ tokens:
 
 # Messages pertaining to responses to the Location Wand usage.
 wand:
-  # Error specification sent to a player when they use the set locations argument without having the region locations set.
-  error-locations-not-set: "You must first set the spawn region locations with the location wand."
+  # Message sent to a player when they use the set locations argument without having the region locations set.
+  locations-not-set: "&c&l(!) You must first set the spawn region locations with the location wand."
 
-  # Error specification sent to a player when they use the set locations argument but their location is outside of the spawn region.
-  error-spawn-outside: "Your current location (the to-be spawn) must be inside the selected spawn region."
+  # Message sent to a player when they use the set locations argument but their location is outside of the spawn region.
+  cannot-spawn-outside: "&c&l(!) Your current location (the to-be spawn) must be inside the selected spawn region."
 
   # Message sent to a player when they use the wand argument.
   wand-given: "&a&l(!) Location wand given."

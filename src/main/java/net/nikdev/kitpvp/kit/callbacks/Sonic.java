@@ -1,7 +1,6 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.user.User;
@@ -45,7 +44,7 @@ public class Sonic implements KitCallback {
     public void interact(User user, ItemStack item, boolean right) {
         if(checkName(item, "Speed burst")) {
             if (user.getCache().contains("sonic-speed-cooldown")) {
-                Lang.sendTo(user, Keys.COOLDOWN);
+                Lang.sendTo(user, Lang.COOLDOWN);
 
                 return;
             }

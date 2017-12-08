@@ -2,7 +2,6 @@ package net.nikdev.kitpvp.listeners.player;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.Config;
-import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.user.Streak;
@@ -32,8 +31,8 @@ public class PlayerDeath implements Listener {
         User victim = User.get(event.getEntity().getUniqueId()).get();
         User killer = event.getEntity().getKiller() != null ? User.get(event.getEntity().getKiller().getUniqueId()).get() : null;
 
-        if(!Lang.get(Keys.PLAYER_DEATH).isEmpty()) {
-            event.setDeathMessage(Lang.get(Keys.PLAYER_DEATH, Placeholder.of("name", victim.getName()), Placeholder.of("cause", killer != null ? killer.getName() : "The World")));
+        if(!Lang.get(Lang.PLAYER_DEATH).isEmpty()) {
+            event.setDeathMessage(Lang.get(Lang.PLAYER_DEATH, Placeholder.of("name", victim.getName()), Placeholder.of("cause", killer != null ? killer.getName() : "The World")));
         }
 
         Streak.apply(killer);
