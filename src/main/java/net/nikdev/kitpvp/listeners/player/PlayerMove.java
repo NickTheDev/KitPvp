@@ -37,7 +37,7 @@ public class PlayerMove implements Listener {
             return;
         }
 
-        if(! user.getKit().isPresent() && region.get().isInside(event.getFrom()) && !region.get().isInside(event.getTo())) {
+        if(!user.getKit().isPresent() && region.get().isInside(event.getFrom()) && !region.get().isInside(event.getTo())) {
             event.setCancelled(true);
 
             Lang.sendTo(user, Keys.NO_KIT_SELECTED);

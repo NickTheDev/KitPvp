@@ -1,6 +1,8 @@
 package net.nikdev.kitpvp.command;
 
 import net.nikdev.kitpvp.command.defaults.SetLocations;
+import net.nikdev.kitpvp.command.defaults.Modify;
+import net.nikdev.kitpvp.command.defaults.Tokens;
 import net.nikdev.kitpvp.command.defaults.Wand;
 import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
@@ -29,7 +31,7 @@ public class CommandManager implements CommandExecutor {
      * Creates a new command manager and registers all default arguments.
      */
     public CommandManager() {
-        Arrays.asList(new Help(), new Wand(), new SetLocations()).forEach(this::register);
+        Arrays.asList(new Help(), new Wand(), new SetLocations(), new Modify(), new Tokens()).forEach(this::register);
     }
 
     /**

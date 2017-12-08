@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 
 /**
  * Listener implementation for the {@link PlayerFishEvent}.
- *;
+ *
  * @author NickTheDev
  * @since 1.0
  */

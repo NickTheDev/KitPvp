@@ -29,7 +29,7 @@ kits:
     cost: 0
 
     # Kit callback class.
-    callback: "Pvp"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Pvp"
 
   # Default archer kit.
   archer:
@@ -49,7 +49,7 @@ kits:
     cost: 0
 
     # Kit callback class.
-    callback: "Archer"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Archer"
 
   # Default fisherman kit.
   fisherman:
@@ -69,7 +69,7 @@ kits:
     cost: 0
 
     # Kit callback class.
-    callback: "Fisherman"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Fisherman"
 
   # Default tank kit.
   tank:
@@ -89,7 +89,7 @@ kits:
     cost: 0
 
     # Kit callback class.
-    callback: "Tank"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Tank"
 
   # Default medic kit.
   medic:
@@ -109,7 +109,7 @@ kits:
     cost: 0
 
     # Kit callback class.
-    callback: "Medic"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Medic"
 
   # Purchasable pyro kit.
   pyro:
@@ -129,7 +129,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Pyro"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Pyro"
 
   # Purchasable assassin kit.
   assassin:
@@ -149,7 +149,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Assassin"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Assassin"
 
   # Purchasable dragon born kit.
   dragonborn:
@@ -169,7 +169,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "DragonBorn"
+    callback: "net.nikdev.kitpvp.kit.callbacks.DragonBorn"
 
   # Purchasable shark kit.
   shark:
@@ -189,7 +189,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Shark"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Shark"
 
   # Purchasable crossbow kit.
   crossbow:
@@ -209,7 +209,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Crossbow"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Crossbow"
 
   # Purchasable eagle kit.
   eagle:
@@ -229,7 +229,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Eagle"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Eagle"
 
   # Purchasable mario kit.
   mario:
@@ -249,7 +249,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Mario"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Mario"
 
 
   # Purchasable link kit.
@@ -270,7 +270,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Link"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Link"
 
   # Purchasable bowser kit.
   bowser:
@@ -290,7 +290,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Bowser"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Bowser"
 
   # Purchasable donkey kong kit.
   donkeykong:
@@ -313,7 +313,7 @@ kits:
     cost: 5
 
     # Kit action callback.
-    callback: "DonkeyKong"
+    callback: "net.nikdev.kitpvp.kit.callbacks.DonkeyKong"
 
   # Purchasable sonic kit.
   sonic:
@@ -336,7 +336,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Sonic"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Sonic"
 
   # Purchasable snowman kit.
   snowman:
@@ -356,7 +356,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Snowman"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Snowman"
 
   # Purchasable spiderman kit.
   spiderman:
@@ -376,7 +376,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Spiderman"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Spiderman"
 
   # Purchasable vampire kit.
   vampire:
@@ -396,7 +396,7 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Vampire"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Vampire"
 
 
   # Purchasable luigi kit.
@@ -417,4 +417,4 @@ kits:
     cost: 5
 
     # Kit callback class.
-    callback: "Luigi"
+    callback: "net.nikdev.kitpvp.kit.callbacks.Luigi"

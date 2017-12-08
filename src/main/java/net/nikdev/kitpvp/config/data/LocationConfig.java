@@ -1,17 +1,12 @@
-package net.nikdev.kitpvp.config;
+package net.nikdev.kitpvp.config.data;
 
-import net.nikdev.kitpvp.KitPvp;
+import net.nikdev.kitpvp.config.Configs;
+import net.nikdev.kitpvp.config.StoreException;
 import net.nikdev.kitpvp.util.Cuboid;
-import net.nikdev.kitpvp.util.StoreException;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Optional;
 
 /**
@@ -21,7 +16,6 @@ import java.util.Optional;
  */
 public final class LocationConfig {
 
-    private final Path path = new File(KitPvp.get().getDataFolder(), "locations.yml").toPath();
     private final FileConfiguration config;
 
     private Cuboid region;
@@ -33,20 +27,10 @@ public final class LocationConfig {
      * @throws StoreException Thrown if an error occurs opening the store.
      */
     public LocationConfig() throws StoreException {
-        try {
-            ConfigurationSerialization.registerClass(Cuboid.class);
+        ConfigurationSerialization.registerClass(Cuboid.class);
 
-            if(Files.notExists(path)) {
-                Files.createFile(path);
-            }
-
-            config = YamlConfiguration.loadConfiguration(path.toFile());
-            populate();
-
-        } catch(IOException e) {
-            throw new StoreException("An error occurred opening the location storage.", e);
-        }
-
+        config = Configs.load("locations", false);
+        populate();
     }
 
     /**
@@ -106,15 +90,7 @@ public final class LocationConfig {
         getSpawn().ifPresent((spawn) -> config.set("spawn", spawn));
         getRegion().ifPresent((region) -> config.set("region", region));
 
-        try {
-            config.save(path.toFile());
-
-        } catch (IOException e) {
-            KitPvp.get().getLogger().severe("An error occurred saving the location store.");
-
-            e.printStackTrace();
-        }
-
+        Configs.save(config, "locations");
     }
 
 }

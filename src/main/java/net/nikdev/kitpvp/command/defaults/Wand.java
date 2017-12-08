@@ -6,7 +6,7 @@ import net.nikdev.kitpvp.command.CommandException;
 import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.menu.ItemBuilder;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 

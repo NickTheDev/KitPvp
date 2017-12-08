@@ -1,5 +1,6 @@
-package net.nikdev.kitpvp.menu;
+package net.nikdev.kitpvp.util.item;
 
+import net.nikdev.kitpvp.util.AbstractBuilder;
 import net.nikdev.kitpvp.util.Chat;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -10,13 +11,15 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.Collection;
 
+import static net.nikdev.kitpvp.util.AbstractBuilder.checkRequired;
+
 /**
  * Builder pattern implementation with a {@link ItemStack} result type.
  *
  * @author NickTheDev
  * @since 1.0
  */
-public final class ItemBuilder {
+public final class ItemBuilder implements AbstractBuilder<ItemStack> {
 
     private final ItemStack item;
 
@@ -113,11 +116,7 @@ public final class ItemBuilder {
         return this;
     }
 
-    /**
-     * Gets the underlying item stack of this builder.
-     *
-     * @return Built item stack.
-     */
+    @Override
     public ItemStack build() {
         return item.clone();
     }
@@ -146,6 +145,8 @@ public final class ItemBuilder {
      * @return New item builder with the specified base item.
      */
     public static ItemBuilder builder(ItemStack item) {
+        checkRequired(item);
+
         return new ItemBuilder(item);
     }
 

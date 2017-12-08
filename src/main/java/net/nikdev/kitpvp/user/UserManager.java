@@ -58,20 +58,22 @@ public class UserManager {
 
     /**
      * Saves the user's statistics asynchronously and removes the user from the online cache.
+     * See Data store for an in depth explanation of the asynchronous parameter.
      *
      * @param user User to save.
+     * @param async Whether or not to save the user's statistics asynchronously.
      */
-    public void save(User user) {
+    public void save(User user, boolean async) {
         online.remove(user);
 
-        KitPvp.get().getStore().update(user.getStats());
+        KitPvp.get().getStore().update(user.getStats(), async);
     }
 
     /**
      * Saves all users asynchronously after making a copy of the users to prevent a concurrent modification error.
      */
     public void saveAll() {
-        new ArrayList<>(getOnline()).forEach(this::save);
+        new ArrayList<>(getOnline()).forEach(user -> save(user, false));
     }
 
 }

@@ -3,18 +3,30 @@
 #     As standard with all plugins use '&' for
 #     color codes and set the value to "" if the
 #        message shouldn't be sent to players.
-#
+#   Error specifications do not require color codes.
 
 # Prefix of the plugin which can be referenced by every message by the placeholder %PREFIX%.
 prefix: ""
 
 # Messages pertaining to server events like player joining, etc.
 server:
+  # Component of the title sent to a player when they join.
+  join-title: "&e&lWelcome to KitPvp!"
+
   # Message sent to all players when a player joins the server. Placeholders are %NAME%.
   player-join: "&e&l-> &a&l%NAME% &f&lhas joined KitPvp."
 
   # Message sent to all players when a player quits the server. Placeholders are %NAME%.
   player-quit: ""
+
+  # Message sent to all players when a player is killed by something. Placeholders are %NAME% and %CAUSE%.
+  player-death: "&e&l-> &a&l%NAME% &f&lhas been killed by &a&l%CAUSE%."
+
+  # Component of the title sent to a player when they kill another player informing how many tokens they have received. Placeholders are %AMOUNT%.
+  death-token-title: "&a&l+%AMOUNT%"
+
+  # Message sent to a player when they achieve a streak. Placeholders are %STREAK% and %AMOUNT%.
+  player-streak: "&e&l-> &f&lYou have achieved streak &a&l%NAME% &f&land will be awarded &a&l%AMOUNT% &f&lextra tokens."
 
   # Message sent to a player when they attempt to leave spawn without selecting a kit.
   no-kit-selected: "&c&l(!) You must select a kit before leaving spawn."
@@ -42,8 +54,42 @@ command:
   # Message sent to a command sender when an error occurs executing a command. Placeholders are %ERROR%.
   arg-error: "&c&l(!) An error occurred executing; %ERROR%."
 
+# Messages pertaining to responses to the usage of the modify argument.
+modify:
+  # Error specification sent to a player when they use the modify argument with an unknown target player. Placeholders are %TARGET%.
+  error-parse-target: "Unable to parse target player: %TARGET%."
+
+  # Error specification sent to a player when they use the modify argument with an invalid amount. Placeholders are %AMOUNT%.
+  error-parse-amount: "Unable to parse amount: %AMOUNT%."
+
+  # Error specification sent a player when they use the modify argument with an invalid operation. Placeholders are %OPERATION%.
+  error-unknown-modify: "Unknown operation: %OPERATION%."
+
+  # Message sent to a command sender when they use the Token argument without any sub-arguments.
+  no-token-args: "&c&l(!) Incorrect command usage, please use /kitpvp token <add:remove:set> <user> <amount>."
+
+  # Message sent to a command sender when they successfully update a player's tokens. Placeholders are %TARGET% and %AMOUNT%.
+  tokens-updated: "&a&l(!) %TARGET%'s tokens have been updated. They currently have %AMOUNT% tokens."
+
+# Messages pertaining to responses to the usage of the tokens argument.
+tokens:
+  # Error specification sent to the console when it attempts to check its personal token balance.
+  error-console-personal: "Only players can check their personal balances."
+
+  # Message sent to a player when they use the tokens argument without any sub-arguments, meaning they want to check their balance. Placeholders are %AMOUNT%.
+  personal-token-check: "&a&l(!) You currently have %AMOUNT%."
+
+  # Message sent toa sender when they use the tokens argument to check another player's balance. Placeholders %TARGET% and %AMOUNT%.
+  token-check: "&a&l(!) %TARGET% currently has %AMOUNT%."
+
 # Messages pertaining to responses to the Location Wand usage.
 wand:
+  # Error specification sent to a player when they use the set locations argument without having the region locations set.
+  error-locations-not-set: "You must first set the spawn region locations with the location wand."
+
+  # Error specification sent to a player when they use the set locations argument but their location is outside of the spawn region.
+  error-spawn-outside: "Your current location (the to-be spawn) must be inside the selected spawn region."
+
   # Message sent to a player when they use the wand argument.
   wand-given: "&a&l(!) Location wand given."
 
@@ -53,14 +99,8 @@ wand:
   # Message sent to a player when they left click the Location Wand and set the second corner of the spawn region.
   second-location-set: "&a&l(!) Second corner of the spawn region set, please set the other and use /kitpvp setlocations to save them."
 
-  # Message sent to a player when they attempt to use the setlocations argument without first using the Location Wand.
-  must-set-locations: "&c&l(!) You must set the first and second spawn region corners using the Location Wand."
-
   # Message sent to a player when they successfully use the setlocations argument.
   locations-set: "&a&l(!) Spawn regions set to your Location Wand coordinates, spawn set to your current location."
-
-  # Message sent to a player when they use the setlocations argument but the spawn is outside of the region.
-  spawn-outside-error: "&c&l(!) Your current location (the to-be spawn) must be inside the selected spawn region."
 
   # Message sent to a player when they join the server but the spawn hasn't been set.
   spawn-not-set: "&c&l(!) You have not been teleported to spawn because one has not been set."
@@ -72,6 +112,15 @@ kits:
 
   # Message sent to a player when they attempt to select a kit without purchasing it beforehand.
   not-purchased: "&c&l(!) You must purchase this kit before you can use it."
+
+  # Message sent to a player when they attempt to purchase a kit they already own.
+  already-purchased: "&c&l(!) You have already purchased this kit."
+
+  # Message sent to a player when they attempt to purchase a kit without sufficient tokens.
+  insufficient-tokens: "&c&l(!) You do not have enough tokens to purchase this kit."
+
+  # Message sent to a player when they successfully purchase a kit. Placeholders are %KIT%.
+  successful-purchase: "&a&l(!) You have successfully purchased kit: %KIT%."
 
   # Messages sent by the fisherman kit.
   fisherman:

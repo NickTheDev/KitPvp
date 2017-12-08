@@ -1,11 +1,15 @@
 package net.nikdev.kitpvp.menu;
 
 import net.nikdev.kitpvp.user.User;
+import net.nikdev.kitpvp.util.AbstractBuilder;
 import net.nikdev.kitpvp.util.Chat;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
 import java.util.Optional;
+
+import static net.nikdev.kitpvp.util.AbstractBuilder.checkRequired;
 
 /**
  * Represents an inventory menu.
@@ -19,14 +23,13 @@ public final class Menu {
     private final MenuCallback callback;
 
     /**
-     * Creates a new menu with the specified information.
+     * Creates a new menu with the specified builder.
      *
-     * @param raw Raw inventory of this menu.
-     * @param callback Callback of this menu.
+     * @param builder Builder of this menu.
      */
-    private Menu(Inventory raw, MenuCallback callback) {
-        this.raw = raw;
-        this.callback = callback;
+    private Menu(Builder builder) {
+        raw = builder.inventory;
+        callback = builder.callback;
     }
 
     /**
@@ -66,6 +69,8 @@ public final class Menu {
      * @return New menu builder with the specified information.
      */
     public static Builder builder(String name, int slots) {
+        checkRequired(name, slots);
+
         return new Builder(name, slots);
     }
 
@@ -75,7 +80,7 @@ public final class Menu {
      * @author NickTheDev
      * @since 1.0
      */
-    public static final class Builder {
+    public static final class Builder implements AbstractBuilder<Menu> {
 
         private final Inventory inventory;
         private MenuCallback callback;
@@ -127,13 +132,9 @@ public final class Menu {
             return this;
         }
 
-        /**
-         * Gets the underlying inventory of this menu builder.
-         *
-         * @return Inventory of this builder.
-         */
+        @Override
         public Menu build() {
-            return new Menu(inventory, callback);
+            return new Menu(this);
         }
 
     }

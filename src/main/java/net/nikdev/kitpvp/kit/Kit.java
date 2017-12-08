@@ -113,6 +113,7 @@ public final class Kit {
      * @param user User to give to.
      */
     public void apply(User user) {
+        user.clean();
         user.getCache().set("previous-kit", getId());
         user.getCache().set("kit", this);
 

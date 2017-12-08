@@ -1,7 +1,7 @@
 package net.nikdev.kitpvp.user.stats;
 
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.util.StoreException;
+import net.nikdev.kitpvp.config.StoreException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,10 @@ import java.util.concurrent.Executors;
  */
 public class DataStore {
 
+    private static final List<String> DEFAULT_KITS = Arrays.asList("pvp", "archer", "fisherman", "tank", "medic");
+
     private static final Executor executor = Executors.newCachedThreadPool();
+
     private final DataBackend backend = new DataBackend();
 
     /**
@@ -54,21 +57,29 @@ public class DataStore {
             }
 
         } else {
-            backend.update("INSERT INTO `stats` (`uuid`, `tokens`, `kits`) VALUES ('" + id + "', default, 'pvp')");
+            backend.update("INSERT INTO `stats` (`uuid`, `tokens`, `kits`) VALUES ('" + id + "', default, '" + String.join(",", DEFAULT_KITS) + "')");
         }
 
         result.ifPresent(backend::close);
-        return stats != null ? stats : new Statistics(id, 0, Collections.singletonList("pvp"));
+        return stats != null ? stats : new Statistics(id, 0, DEFAULT_KITS);
     }
 
     /**
      * Updates the specified statistic store with new values. This will only be called when a {@link User} leaves the server
-     * or the server shuts down
+     * or the server shuts down. This should only be called with the async parameter false when the server is shutting down,
+     * as it must be run synchronously then to make sure that all statistics save before closing the database.
      *
      * @param stats Statistic store to update.
+     * @param async Whether or not the update should be executed asynchronously.
      */
-    public void update(Statistics stats) {
-        executor.execute(() -> backend.update("UPDATE `stats` SET " + stats.toString() + " WHERE `uuid` = '" + stats.getId() + "'"));
+    public void update(Statistics stats, boolean async) {
+        if(async) {
+            executor.execute(() -> backend.update("UPDATE `stats` SET " + stats.toString() + " WHERE `uuid` = '" + stats.getId() + "'"));
+
+        } else {
+            backend.update("UPDATE `stats` SET " + stats.toString() + " WHERE `uuid` = '" + stats.getId() + "'");
+        }
+
     }
 
     /**

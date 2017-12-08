@@ -2,6 +2,7 @@ package net.nikdev.kitpvp.user.stats;
 
 import net.nikdev.kitpvp.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public final class Statistics {
 
     private final UUID id;
     private int tokens;
-    private final List<String> kits;
+    private final List<String> kits = new ArrayList<>();
 
     /**
      * Creates a new statistic store with the specified information.
@@ -27,7 +28,9 @@ public final class Statistics {
     Statistics(UUID id, int tokens, List<String> kits) {
         this.id = id;
         this.tokens = tokens;
-        this.kits = kits;
+
+        // Add kits instead of setting the field to the parameter to make sure we are getting a copy of the default kits.
+        this.kits.addAll(kits);
     }
 
     /**
@@ -78,6 +81,15 @@ public final class Statistics {
      */
     public void removeTokens(int amount) {
         tokens -= amount;
+    }
+
+    /**
+     * Sets the token statistic to the specified amount.
+     *
+     * @param amount Amount of tokens.
+     */
+    public void setTokens(int amount) {
+        tokens = amount;
     }
 
 }

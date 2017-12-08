@@ -1,4 +1,4 @@
-package net.nikdev.kitpvp.util;
+package net.nikdev.kitpvp.config;
 
 /**
  * Represents an error that occurs interacting with the any type of data storage.

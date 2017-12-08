@@ -5,13 +5,12 @@ import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.menu.ItemBuilder;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Fireball;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collections;
@@ -23,8 +22,6 @@ import java.util.Collections;
  * @since 1.0
  */
 public class Spiderman implements KitCallback {
-
-    private static final String NET_MINECRAFT = "net.minecraft.server." + Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3] + ".";
 
     @Override
     public void give(User user) {
@@ -40,44 +37,20 @@ public class Spiderman implements KitCallback {
 
     @Override
     public void interact(User user, ItemStack item, boolean right) {
-        if(checkName(item,"&e&lShoot Web")) {
+        if(checkName(item,"Shoot Web")) {
             if(user.getCache().contains("spiderman-web-cooldown")) {
                 Lang.sendTo(user, Keys.COOLDOWN);
 
                 return;
             }
 
-            Fireball fake = user.toPlayer().launchProjectile(Fireball.class);
+            Arrow fake = user.toPlayer().launchProjectile(Arrow.class);
 
-            fake.setDirection(user.toPlayer().getEyeLocation().getDirection().multiply(2));
-            fake.setYield(0);
-            fake.setIsIncendiary(false);
-
-            injectInvisibility(fake);
+            fake.setVelocity(user.toPlayer().getEyeLocation().getDirection().multiply(1.1));
+            fake.setPassenger(user.toPlayer());
 
             user.getCache().set("spiderman-web-cooldown", true);
             Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("spiderman-web-cooldown"), 60);
-        }
-
-    }
-
-    /**
-     * Makes the specified fake fireball invisible to all players in its world.
-     *
-     * @param ball Ball to make invisible.
-     */
-    private void injectInvisibility(Fireball ball) {
-        try {
-            Object packet = Class.forName(NET_MINECRAFT + "PacketPlayOutEntityDestroy").getConstructor(Integer.TYPE).newInstance(ball.getEntityId());
-
-            for(Player player : ball.getWorld().getPlayers()) {
-                Object connection = player.getClass().getMethod("getHandle").invoke(player).getClass().getField("playerConnection").get(player);
-
-                connection.getClass().getMethod("sendPacket", Class.forName(NET_MINECRAFT + "Packet")).invoke(connection, packet);
-            }
-
-        } catch(ReflectiveOperationException e) {
-            e.printStackTrace();
         }
 
     }

@@ -1,4 +1,4 @@
-package net.nikdev.kitpvp.listeners.player;
+package net.nikdev.kitpvp.listeners.inventory;
 
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.event.EventHandler;

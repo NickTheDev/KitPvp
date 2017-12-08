@@ -25,7 +25,7 @@ public class PlayerQuit implements Listener {
     @EventHandler
     public void playerQuit(PlayerQuitEvent event) {
         User user = User.get(event.getPlayer().getUniqueId()).get();
-        KitPvp.get().getUserManager().save(user);
+        KitPvp.get().getUserManager().save(user, true);
 
         if(!Lang.get(Keys.PLAYER_QUIT).isEmpty()) {
             event.setQuitMessage(Lang.get(Keys.PLAYER_QUIT, Placeholder.of("name", user.getName())));

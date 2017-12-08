@@ -28,3 +28,52 @@ world:
 
   # Whether or not hunger is allowed on the server.
   allow-hunger: false
+
+# Options related to players.
+player:
+  # Amount of health restored by mushroom soup in kits.
+  mushroom-heal: 5
+
+  # Amount of time a player is kept in spectator mode before respawning. This must be positive. The time unit is in seconds.
+  respawn-time: 5
+
+  # Default award given to a player for killing another player.
+  default-award: 1
+
+# Options related to menus. You cannot specify custom menus, you can only configure the plugin's main ones: Kit Selector and Kit Shop.
+menu:
+  # Item in each menu which when clicked exits the menu.
+  exit-item:
+    # Name of the exit item.
+    name: "&c&lBack"
+
+    # Material of the exit item.
+    material: "ARROW"
+
+  # Kit Selector menu which allows players to select kits.
+  kit-selector:
+    # Title of the selector menu.
+    title: "&f&lKit Selector"
+
+    # Size of the selector menu, which must be bigger than the number of kits plus one (for the exit arrow). Must also be a multiple of 9.
+    size: 54
+
+    # Description of kit icons who are owned by players.
+    kit-owned-description: "&a&lYou own this kit."
+
+    # Description of kit icons who are not owned by players.
+    kit-wanted-description: "&c&lYou don't own this kit."
+
+  # Kit Shop menu which allows players to purchase kits.
+  kit-shop:
+    # Title of the shop menu.
+    title: "&f&lKit Shop"
+
+    # Size of the shop menu, which must be bigger than the number of kits plus one (for the exit arrow). Must also be a multiple of 9.
+    size: 54
+
+    # Description of kit icons who are not owned by players but can be purchased.
+    kit-purchase-description: "&c&lYou don't own this kit, click to purchase."
+
+    # Description of kit icons detailing their cost. Placeholders are %COST%.
+    kit-cost-description: "&e&lCost: %COST% Tokens"

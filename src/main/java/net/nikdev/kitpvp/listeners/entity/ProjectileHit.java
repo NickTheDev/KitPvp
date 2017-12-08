@@ -2,6 +2,8 @@ package net.nikdev.kitpvp.listeners.entity;
 
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +25,10 @@ public class ProjectileHit implements Listener {
      */
     @EventHandler
     public void arrowHit(ProjectileHitEvent event) {
+        if(event.getEntity() instanceof Arrow && !event.getEntity().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR) && event.getEntity().getPassenger() != null) {
+            event.getEntity().eject();
+        }
+
         if(event.getEntity() instanceof Arrow && event.getEntity().getShooter() instanceof Player) {
             User user = User.get(((Player) event.getEntity().getShooter()).getUniqueId()).get();
 

@@ -1,11 +1,9 @@
 package net.nikdev.kitpvp.listeners.player;
 
-import net.nikdev.kitpvp.config.ConfigKeys;
+import net.nikdev.kitpvp.config.Config;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-
-import static net.nikdev.kitpvp.config.ConfigKeys.ALLOW_HUNGER;
 
 /**
  * Listener implementation for the {@link FoodLevelChangeEvent}.
@@ -22,7 +20,7 @@ public class FoodLevelChange implements Listener {
      */
     @EventHandler
     public void foodLevelChange(FoodLevelChangeEvent event) {
-        if(!ConfigKeys.getBool(ALLOW_HUNGER)) {
+        if(!Config.getBool(Config.ALLOW_HUNGER)) {
             event.setCancelled(true);
         }
 

@@ -5,8 +5,8 @@ import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.menu.ItemBuilder;
-import net.nikdev.kitpvp.util.Skulls;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
+import net.nikdev.kitpvp.util.item.Skulls;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -43,25 +43,25 @@ public class Sonic implements KitCallback {
 
     @Override
     public void interact(User user, ItemStack item, boolean right) {
-        if(checkName(item, "&e&lSpeed burst")) {
-            if(user.getCache().contains("sonic-speed-cooldown")) {
+        if(checkName(item, "Speed burst")) {
+            if (user.getCache().contains("sonic-speed-cooldown")) {
                 Lang.sendTo(user, Keys.COOLDOWN);
 
                 return;
             }
 
             user.toPlayer().removePotionEffect(PotionEffectType.SPEED);
-            user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 6));
+            user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 69));
 
             user.getCache().set("sonic-speed-cooldown", true);
 
             Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> {
-                user.getCache().remove("sonic-speed-cooldown");
-
                 user.toPlayer().removePotionEffect(PotionEffectType.SPEED);
-                user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
-            }, 400);
 
+                user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+            }, 60);
+
+            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("sonic-speed-cooldown"), 400);
         }
 
     }

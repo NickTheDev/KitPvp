@@ -2,7 +2,7 @@ package net.nikdev.kitpvp.kit;
 
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
-import net.nikdev.kitpvp.menu.ItemBuilder;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 

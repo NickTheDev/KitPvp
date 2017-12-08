@@ -1,18 +1,21 @@
 package net.nikdev.kitpvp;
 
 import net.nikdev.kitpvp.command.CommandManager;
-import net.nikdev.kitpvp.config.KitConfig;
-import net.nikdev.kitpvp.config.LangConfig;
-import net.nikdev.kitpvp.config.LocationConfig;
+import net.nikdev.kitpvp.config.*;
+import net.nikdev.kitpvp.config.data.KitConfig;
+import net.nikdev.kitpvp.config.data.LocationConfig;
+import net.nikdev.kitpvp.config.data.StreakConfig;
+import net.nikdev.kitpvp.config.lang.LangConfig;
 import net.nikdev.kitpvp.listeners.entity.EntityDamage;
 import net.nikdev.kitpvp.listeners.entity.ProjectileHit;
+import net.nikdev.kitpvp.listeners.inventory.InventoryClick;
+import net.nikdev.kitpvp.listeners.inventory.InventoryClose;
 import net.nikdev.kitpvp.listeners.player.*;
 import net.nikdev.kitpvp.listeners.world.BlockBreak;
 import net.nikdev.kitpvp.listeners.world.BlockPlace;
 import net.nikdev.kitpvp.listeners.world.WeatherChange;
 import net.nikdev.kitpvp.user.stats.DataStore;
 import net.nikdev.kitpvp.user.UserManager;
-import net.nikdev.kitpvp.util.StoreException;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +35,6 @@ public class KitPvp extends JavaPlugin {
     private DataStore store;
     private LocationConfig locations;
     private LangConfig lang;
-    private KitConfig kits;
 
     private UserManager userManager;
 
@@ -41,26 +43,28 @@ public class KitPvp extends JavaPlugin {
         kitpvp = this;
 
         saveDefaultConfig();
+        Configs.checkLicense();
 
         try {
+            new KitConfig();
+            new StreakConfig();
+
             locations = new LocationConfig();
             lang = new LangConfig();
-            kits = new KitConfig();
             store = new DataStore();
 
         } catch (StoreException e) {
-            getLogger().severe("An error occurred opening the stats store, disabling.");
+            getLogger().severe(e.getMessage());
             e.printStackTrace();
 
-            Bukkit.getPluginManager().disablePlugin(this);
             failed = true;
+            Bukkit.getPluginManager().disablePlugin(this);
 
             return;
         }
 
         userManager = new UserManager();
 
-        getKits().readKits();
         registerListeners();
         getCommand("kitpvp").setExecutor(new CommandManager());
     }
@@ -113,15 +117,6 @@ public class KitPvp extends JavaPlugin {
     }
 
     /**
-     * Gets the kit config of KitPvp.
-     *
-     * @return KitPvp's kit config.
-     */
-    public KitConfig getKits() {
-        return kits;
-    }
-
-    /**
      * Gets the user manager of KitPvp.
      *
      * @return KitPvp's user manager.
@@ -136,7 +131,8 @@ public class KitPvp extends JavaPlugin {
     private void registerListeners() {
         Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit(), new PlayerInteract(), new PlayerJoin(), new BlockBreak(), new BlockPlace(),
                 new FoodLevelChange(), new EntityDamage(), new WeatherChange(), new PlayerFish(), new PlayerMove(), new ProjectileHit(),
-                new PlayerInteractEntity(), new InventoryClose()).forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
+                new PlayerInteractEntity(), new InventoryClose(), new InventoryClick(), new PlayerDeath())
+                .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
 }

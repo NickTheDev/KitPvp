@@ -1,12 +1,10 @@
 package net.nikdev.kitpvp.user.stats;
 
 import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.ConfigKeys;
+import net.nikdev.kitpvp.config.Config;
 
 import java.sql.*;
 import java.util.Optional;
-
-import static net.nikdev.kitpvp.config.ConfigKeys.*;
 
 /**
  * Wrapper for a MySQL connection.
@@ -77,8 +75,8 @@ public final class DataBackend {
         if(!isConnected()) {
             Class.forName("com.mysql.jdbc.Driver");
 
-            connection = DriverManager.getConnection("jdbc:mysql://" + ConfigKeys.get(DATABASE_ADDRESS) + ":" + ConfigKeys.getInt(DATABASE_PORT) + "/" +
-                    ConfigKeys.get(DATABASE_NAME) + "?autoReconnect=true", ConfigKeys.get(DATABASE_USER), ConfigKeys.get(DATABASE_PASSWORD));
+            connection = DriverManager.getConnection("jdbc:mysql://" + Config.get(Config.DATABASE_ADDRESS) + ":" + Config.getInt(Config.DATABASE_PORT) + "/" +
+                    Config.get(Config.DATABASE_NAME) + "?autoReconnect=true", Config.get(Config.DATABASE_USER), Config.get(Config.DATABASE_PASSWORD));
         }
 
     }

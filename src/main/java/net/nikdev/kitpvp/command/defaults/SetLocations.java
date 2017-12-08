@@ -8,7 +8,6 @@ import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.util.Cuboid;
 import net.nikdev.kitpvp.user.User;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 
 /**
@@ -25,17 +24,13 @@ public class SetLocations implements Argument {
         User user = User.get(sender.getName()).get();
 
         if(!user.getCache().contains("first-location") || !user.getCache().contains("second-location")) {
-            Lang.sendTo(user, Keys.MUST_SET_LOCATIONS);
-
-            return;
+            throw new CommandException(Lang.get(Keys.ERROR_LOCATIONS_NOT_SET));
         }
 
-        Cuboid region = new Cuboid((Location) user.getCache().get("first-location").get(), (Location) user.getCache().get("second-location").get());
+        Cuboid region = new Cuboid(user.getCache().get("first-location"), user.getCache().get("second-location"));
 
         if(!region.isInside(user.toPlayer().getLocation())) {
-            Lang.sendTo(user, Keys.SPAWN_OUTSIDE_ERROR);
-
-            return;
+            throw new CommandException(Lang.get(Keys.ERROR_SPAWN_OUTSIDE));
         }
 
         KitPvp.get().getLocations().setRegion(region);

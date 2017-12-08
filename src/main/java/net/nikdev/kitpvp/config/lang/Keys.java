@@ -9,6 +9,11 @@ package net.nikdev.kitpvp.config.lang;
 public enum Keys {
 
     /**
+     * Component of the title sent to a player when they join.
+     */
+    JOIN_TITLE("server.join-title"),
+
+    /**
      * Message sent to all players when a player joins the server. Placeholders are %NAME%.
      */
     PLAYER_JOIN("server.player-join"),
@@ -17,6 +22,21 @@ public enum Keys {
      * Message sent to all players when a player quits the server. Placeholders are %NAME%.
      */
     PLAYER_QUIT("server.player-quit"),
+
+    /**
+     * Message sent to all players when a player is killed by something. Placeholders are %NAME% and %CAUSE%.
+     */
+    PLAYER_DEATH("server.player-death"),
+
+    /**
+     * Component of the title sent to a player when they kill another player informing how many tokens they have received. Placeholders are %AMOUNT%.
+     */
+    DEATH_TOKEN_TITLE("server.death-token-title"),
+
+    /**
+     * Message sent to a player when they achieve a streak. Placeholders are %STREAK% and %AMOUNT%.
+     */
+    PLAYER_STREAK("server.player-streak"),
 
     /**
      * Message sent to a player when they attempt to leave spawn without selecting a kit.
@@ -59,6 +79,56 @@ public enum Keys {
     ARG_ERROR("command.arg-error"),
 
     /**
+     * Error specification sent to a player when they use the modify argument with an unknown target player. Placeholders are %TARGET%.
+     */
+    ERROR_PARSE_TARGET("modify.error-parse-target"),
+
+    /**
+     * Error specification sent to a player when they use the modify argument with an invalid amount. Placeholders are %AMOUNT%.
+     */
+    ERROR_PARSE_AMOUNT("modify.error-parse-amount"),
+
+    /**
+     * Error specification sent a player when they use the modify argument with an invalid operation. Placeholders are %OPERATION%.
+     */
+    ERROR_UNKNOWN_MODIFY("modify.error-unknown-modify"),
+
+    /**
+     * Message sent to a command sender when they use the Token argument without any sub-arguments.
+     */
+    NO_TOKEN_ARGS("modify.no-token-args"),
+
+    /**
+     * Message sent to a command sender when they successfully update a player's tokens. Placeholders are %TARGET% and %AMOUNT%.
+     */
+    TOKENS_UPDATED("modify.tokens-updated"),
+
+    /**
+     * Error specification sent to the console when it attempts to check its personal token balance.
+     */
+    ERROR_CONSOLE_PERSONAL("tokens.error-console-personal-check"),
+
+    /**
+     * Message sent to a player when they use the tokens argument without any sub-arguments, meaning they want to check their balance. Placeholders are %AMOUNT%.
+     */
+    PERSONAL_TOKEN_CHECK("tokens.personal-token-check"),
+
+    /**
+     * Message sent toa sender when they use the tokens argument to check another player's balance. Placeholders %TARGET% and %AMOUNT%.
+     */
+    TOKEN_CHECK("tokens.token-check"),
+
+    /**
+     * Error specification sent to a player when they use the set locations argument without having the region locations set.
+     */
+    ERROR_LOCATIONS_NOT_SET("wand.error-locations-not-set"),
+
+    /**
+     * Error specification sent to a player when they use the set locations argument but their location is outside of the spawn region.s
+     */
+    ERROR_SPAWN_OUTSIDE("wand.error-spawn-outside"),
+
+    /**
      * Message sent to a player when they use the wand argument.
      */
     WAND_GIVEN("wand.wand-given"),
@@ -74,19 +144,9 @@ public enum Keys {
     SECOND_LOCATION_SET("wand.second-location-set"),
 
     /**
-     * Message sent to a player when they attempt to use the setlocations argument without first using the Location Wand.
-     */
-    MUST_SET_LOCATIONS("wand.must-set-locations"),
-
-    /**
      * Message sent to a player when they successfully use the setlocations argument.
      */
     LOCATIONS_SET("wand.locations-set"),
-
-    /**
-     * Message sent to a player when they use the setlocations argument but the spawn is outside of the region.
-     */
-    SPAWN_OUTSIDE_ERROR("wand.spawn-outside-error"),
 
     /**
      * Message sent to a player when they join the server but the spawn hasn't been set.
@@ -96,12 +156,27 @@ public enum Keys {
     /**
      * Message sent to a player when they attempt to use a kit ability without waiting for its cooldown to reset.
      */
-    COOLDOWN("kit.cooldown"),
+    COOLDOWN("kits.cooldown"),
 
     /**
      * Message sent to a player when they attempt to select a kit without purchasing it beforehand.
      */
-    NOT_PURCHASED("kit.not-purchased"),
+    NOT_PURCHASED("kits.not-purchased"),
+
+    /**
+     * Message sent to a player when they attempt to purchase a kit they already own.
+     */
+    ALREADY_PURCHASED("kits.already-purchased"),
+
+    /**
+     * Message sent to a player when they attempt to purchase a kit without sufficient tokens.
+     */
+    INSUFFICIENT_TOKENS("kits.insufficient-tokens"),
+
+    /**
+     * Message sent to a player when they successfully purchase a kit. Placeholders are %KIT%.
+     */
+    SUCCESSFUL_PURCHASE("kits.successful-purchase"),
 
     /**
      * Message sent to a player when they have been hooked by someone with the fisherman kit. Placeholders are %NAME%.

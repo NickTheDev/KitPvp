@@ -5,7 +5,7 @@ import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.menu.ItemBuilder;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -37,7 +37,7 @@ public class Medic implements KitCallback {
 
     @Override
     public void interact(User user, ItemStack item, boolean right) {
-        if(checkName(item, "&e&lMedkit")) {
+        if(checkName(item, "Medkit")) {
             if(right) {
                 if(user.getCache().contains("medic-personal-cooldown")) {
                     Lang.sendTo(user, Keys.COOLDOWN);

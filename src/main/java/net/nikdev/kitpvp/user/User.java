@@ -1,14 +1,17 @@
 package net.nikdev.kitpvp.user;
 
 import net.nikdev.kitpvp.KitPvp;
+import net.nikdev.kitpvp.config.lang.Keys;
+import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.stats.Statistics;
 import net.nikdev.kitpvp.util.Cache;
-import net.nikdev.kitpvp.menu.ItemBuilder;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -82,7 +85,7 @@ public final class User {
      * @return This user's kit.
      */
     public Optional<Kit> getKit() {
-        return getCache().get("kit");
+        return Optional.ofNullable(getCache().get("kit", null));
     }
 
     /**
@@ -114,19 +117,45 @@ public final class User {
     }
 
     /**
+     * Prepares this player to spawn on the server. This is a shorthand utility as this will be reused.
+     */
+    public void spawn() {
+        Optional<Location> spawn = KitPvp.get().getLocations().getSpawn();
+
+        if(spawn.isPresent()) {
+            toPlayer().teleport(spawn.get());
+
+        } else {
+            Lang.sendTo(this, Keys.SPAWN_NOT_SET);
+        }
+
+        clean();
+
+        give(ItemBuilder.builder(Material.CHEST).name("&f&lKit Selector"));
+        give(ItemBuilder.builder(Material.ENDER_CHEST).name("&f&lKit Shop"), 4);
+        give(ItemBuilder.builder(Material.NETHER_STAR).name("&f&lPrevious Kit"), 8);
+    }
+
+    /**
      * Sets the armor of this user to the specified optional items.
      *
      * @param armor Armor of this user.
      */
     public void setArmor(ItemBuilder... armor) {
-        if(armor.length > 0 && armor.length < 5) {
-            ItemStack[] items = new ItemStack[4];
+        if(armor.length > 3) {
+            toPlayer().getInventory().setBoots(armor[3].build());
+        }
 
-            for(int i = 0; i < armor.length; i++) {
-                items[i] = armor[i].build();
-            }
+        if(armor.length > 2) {
+            toPlayer().getInventory().setLeggings(armor[2].build());
+        }
 
-            toPlayer().getInventory().setArmorContents(items);
+        if (armor.length > 1) {
+            toPlayer().getInventory().setChestplate(armor[1].build());
+        }
+
+        if (armor.length > 0) {
+            toPlayer().getInventory().setHelmet(armor[0].build());
         }
 
     }

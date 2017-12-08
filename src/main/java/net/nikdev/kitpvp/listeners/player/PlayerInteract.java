@@ -1,10 +1,14 @@
 package net.nikdev.kitpvp.listeners.player;
 
+import net.nikdev.kitpvp.config.Config;
 import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.menu.kit.KitSelector;
+import net.nikdev.kitpvp.menu.kit.KitShop;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -52,10 +56,22 @@ public class PlayerInteract implements Listener {
     public void spawnInteract(PlayerInteractEvent event) {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
-        if(!user.getKit().isPresent() && event.getItem() != null) {
+        if(!user.getKit().isPresent() && event.getItem() != null && event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasDisplayName()) {
             switch(Chat.strip(event.getItem().getItemMeta().getDisplayName())) {
                 case "Kit Selector":
                     KitSelector.create(user).open(user);
+
+                    break;
+
+                case "Kit Shop":
+                    KitShop.create(user).open(user);
+
+                    break;
+
+                case "Previous Kit":
+                    Kit.get(user.getCache().get("previous-kit", "pvp")).get().apply(user);
+
+                    break;
             }
 
         }
@@ -72,7 +88,17 @@ public class PlayerInteract implements Listener {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
         if(event.getItem() != null && user.getKit().isPresent()) {
-            user.getKit().get().getCallback().interact(user, event.getItem(), event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK));
+            if(event.getItem().getType().equals(Material.MUSHROOM_SOUP)) {
+                double possible = user.toPlayer().getHealth() + Config.getInt(Config.MUSHROOM_HEAL);
+                double max = user.toPlayer().getMaxHealth();
+
+                user.toPlayer().setHealth(possible <= max ? possible : max);
+                event.getItem().setType(Material.BOWL);
+
+            } else {
+                user.getKit().get().getCallback().interact(user, event.getItem(), event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK));
+            }
+
         }
 
     }

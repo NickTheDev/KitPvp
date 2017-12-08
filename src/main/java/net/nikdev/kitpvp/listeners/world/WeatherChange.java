@@ -1,11 +1,9 @@
 package net.nikdev.kitpvp.listeners.world;
 
-import net.nikdev.kitpvp.config.ConfigKeys;
+import net.nikdev.kitpvp.config.Config;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
-
-import static net.nikdev.kitpvp.config.ConfigKeys.ALLOW_RAIN;
 
 /**
  * Listener implementation for the {@link WeatherChangeEvent}.
@@ -22,7 +20,7 @@ public class WeatherChange implements Listener {
      */
     @EventHandler
     public void weatherChange(WeatherChangeEvent event) {
-        if(!ConfigKeys.getBool(ALLOW_RAIN)) {
+        if(!Config.getBool(Config.ALLOW_RAIN)) {
             if(event.toWeatherState()) {
                 event.setCancelled(true);
             }

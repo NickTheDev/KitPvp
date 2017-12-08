@@ -1,0 +1,41 @@
+#
+#                      <-- KitPvp Streak Config -->
+#     A mark down for all the kill streaks used in this plugin.
+#     Upon killing a player all applicable streaks will be awarded
+#                             to the user.
+#
+
+# Kill streak declarations.
+kill-streaks:
+  # First kill streak.
+  first-kill:
+    # Streak name.
+    name: "First Kill"
+
+    # Kills needed for this streak to take effect.
+    kills-needed: 1
+
+    # Amount of tokens awarded.
+    award: 2
+
+  # Hat trick streak.
+  hat-trick:
+    # Streak name.
+    name: "Hat Trick"
+
+    # Kills needed for this streak to take effect.
+    kills-needed: 3
+
+    # Amount of tokens awarded.
+    award: 3
+
+  # Blood thirsty streak.
+  blood-thristy:
+    # Streak name.
+    name: "Blood Thirsty"
+
+    # Kills needed for this streak to take effect.
+    kills-needed: 10
+
+    # Amount of tokens awarded.
+    award: 4

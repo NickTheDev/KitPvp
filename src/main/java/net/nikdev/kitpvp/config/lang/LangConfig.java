@@ -1,14 +1,8 @@
-package net.nikdev.kitpvp.config;
+package net.nikdev.kitpvp.config.lang;
 
-import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.util.StoreException;
+import net.nikdev.kitpvp.config.Configs;
+import net.nikdev.kitpvp.config.StoreException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Config that holds message (language) values used in KitPvp.
@@ -26,19 +20,7 @@ public final class LangConfig {
      * @throws StoreException Thrown if an error occurs loading the values.
      */
     public LangConfig() throws StoreException {
-        try {
-            Path path = new File(KitPvp.get().getDataFolder(), "lang.yml").toPath();
-
-            if(Files.notExists(path)) {
-                Files.copy(getClass().getResourceAsStream("/lang.yml"), path);
-            }
-
-            config = YamlConfiguration.loadConfiguration(path.toFile());
-
-        } catch(IOException e) {
-            throw new StoreException("An error occurred opening the location storage.", e);
-        }
-
+        config = Configs.load("lang", true);
     }
 
     /**

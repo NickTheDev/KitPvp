@@ -1,7 +1,7 @@
-package net.nikdev.kitpvp.util;
+package net.nikdev.kitpvp.util.item;
 
 import com.google.common.collect.ForwardingMultimap;
-import net.nikdev.kitpvp.menu.ItemBuilder;
+import net.nikdev.kitpvp.KitPvp;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -89,6 +89,8 @@ public final class Skulls {
             return ItemBuilder.builder(injectSkull(profile));
 
         } catch(ReflectiveOperationException e) {
+            KitPvp.get().getLogger().severe("An error occurred creating custom skull for url: " + url);
+
             e.printStackTrace();
         }
 

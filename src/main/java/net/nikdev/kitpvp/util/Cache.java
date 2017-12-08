@@ -2,7 +2,7 @@ package net.nikdev.kitpvp.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 /**
  * A utility for storing object data in runtime.
@@ -25,23 +25,47 @@ public final class Cache {
     }
 
     /**
-     * Gets the value associated with the specified key if it is present. Otherwise, Optional.empty() will be returned.
+     * Gets the value associated with the specified key. If there is no value associated with the key an
+     * exception will be thrown.
+     *
+     * @param key Key associated with the value.
+     * @param <T> Type of value.
+     * @throws NoSuchElementException Thrown if there is no value with the key.
+     * @return Value associated with the key.
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T get(String key) {
+        if(!data.containsKey(key)) {
+            throw new NoSuchElementException("No value associated with specified key: " + key);
+        }
+
+        try {
+            return (T) data.get(key);
+
+        } catch (ClassCastException e) {
+            throw new NoSuchElementException("No value with associated type and key: " + key);
+        }
+
+    }
+
+    /**
+     * Gets the value associated with the specified key if it is present or the default value.
      *
      * @param key Key associated with the value.
      * @param <T> Type of value.
      * @return Value associated with the key.
      */
     @SuppressWarnings("unchecked")
-    public <T> Optional<T> get(String key) {
+    public <T> T get(String key, T other) {
         if (contains(key)) {
             try {
-                return Optional.of((T) data.get(key));
+                return data.get(key) != null ? (T) data.get(key) : other;
 
             } catch (ClassCastException ignored) {}
 
         }
 
-        return Optional.empty();
+        return other;
     }
 
     /**
@@ -54,19 +78,6 @@ public final class Cache {
     public void set(String key, Object value) {
         if(key != null && value != null) {
             data.put(key, value);
-        }
-
-    }
-
-    /**
-     * Puts the specified keys and values into this cache if they not null. If this cache already contains
-     * mappings with the keys, the current values will be overwritten.
-     *
-     * @param values Values to be put into the cache.
-     */
-    public void set(Map<String, Object> values) {
-        if(values != null) {
-            data.putAll(values);
         }
 
     }

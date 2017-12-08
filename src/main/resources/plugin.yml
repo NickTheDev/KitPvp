@@ -23,6 +23,7 @@ permissions:
     children:
       kitpvp.wand: true
       kitpvp.setlocations: true
+      kitpvp.modify: true
       kitpvp.edit-terrain: true
 
   # Wand permission.
@@ -32,8 +33,13 @@ permissions:
 
   # Set Locations permission.
   kitpvp.setlocations:
-      # Permission description.
+    # Permission description.
     description: Allows a player to use /kitpvp setlocations.
+
+  # Modify permission.
+  kitpvp.modify:
+    # Permission description.
+    description: Allows a player to use /kitpvp modify.
 
   # Edit terrain permission.
   kitpvp.edit-terrain:

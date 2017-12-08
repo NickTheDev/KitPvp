@@ -19,5 +19,5 @@ from the developer.
 1. The package may be used by the buyer on any server of the their choice that is
 owned by the buyer.
 
-2. The buyer may not edit, or redistribute the underlying source code provided in
+2. The buyer may not redistribute the underlying source code provided in
 the package.

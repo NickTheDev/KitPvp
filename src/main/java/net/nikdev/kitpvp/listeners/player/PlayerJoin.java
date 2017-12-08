@@ -1,18 +1,13 @@
 package net.nikdev.kitpvp.listeners.player;
 
-import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.lang.Keys;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.menu.ItemBuilder;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import net.nikdev.kitpvp.util.packet.Title;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import java.util.Optional;
 
 /**
  * Listener implementation for the {@link PlayerJoinEvent}.
@@ -21,6 +16,8 @@ import java.util.Optional;
  * @since 1.0
  */
 public class PlayerJoin implements Listener {
+
+    private static final Title title = Title.builder().title(Lang.get(Keys.JOIN_TITLE)).fadeIn(2).fadeOut(2).stay(3).build();
 
     /**
      * Listens for the specified event.
@@ -35,20 +32,8 @@ public class PlayerJoin implements Listener {
             event.setJoinMessage(Lang.get(Keys.PLAYER_JOIN, Placeholder.of("name", user.getName())));
         }
 
-        Optional<Location> spawn = KitPvp.get().getLocations().getSpawn();
-
-        if(spawn.isPresent()) {
-            user.toPlayer().teleport(spawn.get());
-
-        } else {
-            Lang.sendTo(user, Keys.SPAWN_NOT_SET);
-        }
-
-        user.clean();
-
-        user.give(ItemBuilder.builder(Material.CHEST).name("&f&lKit Selector"));
-        user.give(ItemBuilder.builder(Material.CHEST).name("&f&lKit Shop"), 4);
-        user.give(ItemBuilder.builder(Material.CHEST).name("&f&lPrevious Kit"), 9);
+        title.send(user);
+        user.spawn();
     }
 
 }
