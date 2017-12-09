@@ -9,7 +9,6 @@ import net.nikdev.kitpvp.menu.Menu;
 import net.nikdev.kitpvp.menu.MenuCallback;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -46,7 +45,7 @@ public class KitShop implements MenuCallback {
                 user.getStats().getKits().add(id);
                 user.getStats().removeTokens(kit.getCost());
                 
-                Lang.sendTo(user, Lang.SUCCESSFUL_PURCHASE);
+                Lang.sendTo(user, Lang.SUCCESSFUL_PURCHASE, Placeholder.of("kit", kit.getName()));
 
             } else {
                 Lang.sendTo(user, Lang.INSUFFICIENT_TOKENS);
@@ -65,7 +64,7 @@ public class KitShop implements MenuCallback {
     public static Menu create(User user) {
         Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SHOP_TITLE), Config.getInt(Config.KIT_SHOP_SIZE)).callback(CALLBACK);
 
-        builder.item(ItemBuilder.builder(Material.matchMaterial(Config.get(Config.EXIT_ITEM_MATERIAL))).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SHOP_SIZE) - 1);
+        builder.item(ItemBuilder.builder(Config.getMaterial(Config.EXIT_ITEM_MATERIAL)).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SHOP_SIZE) - 1);
 
         Kit.getKits().forEach(kit -> {
             if(user.getStats().getKits().contains(kit.getId())) {

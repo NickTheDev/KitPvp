@@ -53,7 +53,7 @@ public class KitSelector implements MenuCallback {
     public static Menu create(User user) {
         Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SELECTOR_TITLE), Config.getInt(Config.KIT_SELECTOR_SIZE)).callback(CALLBACK);
 
-        builder.item(ItemBuilder.builder(Material.matchMaterial(Config.get(Config.EXIT_ITEM_MATERIAL))).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SELECTOR_SIZE) - 1);
+        builder.item(ItemBuilder.builder(Config.getMaterial(Config.EXIT_ITEM_MATERIAL)).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SELECTOR_SIZE) - 1);
 
         Kit.getKits().forEach(kit -> {
             if(user.getStats().getKits().contains(kit.getId())) {

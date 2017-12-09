@@ -1,6 +1,7 @@
 package net.nikdev.kitpvp.user;
 
 import net.nikdev.kitpvp.KitPvp;
+import net.nikdev.kitpvp.config.Config;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.stats.Statistics;
@@ -130,9 +131,9 @@ public final class User {
 
         clean();
 
-        give(ItemBuilder.builder(Material.CHEST).name("&f&lKit Selector"));
-        give(ItemBuilder.builder(Material.ENDER_CHEST).name("&f&lKit Shop"), 4);
-        give(ItemBuilder.builder(Material.NETHER_STAR).name("&f&lPrevious Kit"), 8);
+        give(ItemBuilder.builder(Config.getMaterial(Config.KIT_SELECTOR_MATERIAL)).name(Config.get(Config.KIT_SELECTOR_NAME)));
+        give(ItemBuilder.builder(Config.getMaterial(Config.KIT_SHOP_MATERIAL)).name(Config.get(Config.KIT_SHOP_NAME)), 4);
+        give(ItemBuilder.builder(Config.getMaterial(Config.PREVIOUS_KIT_MATERIAL)).name(Config.get(Config.PREVIOUS_KIT_NAME)), 8);
     }
 
     /**

@@ -1,6 +1,7 @@
 package net.nikdev.kitpvp.config;
 
 import net.nikdev.kitpvp.KitPvp;
+import org.bukkit.Material;
 
 /**
  * Utility for accessing plugin config preferences.
@@ -71,6 +72,36 @@ public enum Config {
     DEFAULT_AWARD("player.default-award"),
 
     /**
+     * Name of the kit selector item.
+     */
+    KIT_SELECTOR_NAME("spawn-item.kit-selector.name"),
+
+    /**
+     * Material of the kit selector item.
+     */
+    KIT_SELECTOR_MATERIAL("spawn-item.kit-selector.material"),
+
+    /**
+     * Name of the kit shop item.
+     */
+    KIT_SHOP_NAME("spawn-item.kit-shop.name"),
+
+    /**
+     * Material of the kit shop item.
+     */
+    KIT_SHOP_MATERIAL("spawn-item.kit-shop.material"),
+
+    /**
+     * Name of the previous kit item.
+     */
+    PREVIOUS_KIT_NAME("spawn-item.previous-kit.name"),
+
+    /**
+     * Material of the previous kit item.
+     */
+    PREVIOUS_KIT_MATERIAL("spawn-item.previous-kit.material"),
+
+    /**
      * Title of the selector menu.
      */
     KIT_SELECTOR_TITLE("menu.kit-selector.title"),
@@ -134,6 +165,18 @@ public enum Config {
      */
     public static String get(Config key) {
         return KitPvp.get().getConfig().getString(key.toString(), "");
+    }
+
+    /**
+     * Gets the material from {@link KitPvp}'s config which is mapped to the specified key.
+     *
+     * @param key Key associated with the value.
+     * @return Value from the config.
+     */
+    public static Material getMaterial(Config key) {
+        Material material = Material.matchMaterial(get(key));
+
+        return material != null ? material : Material.AIR;
     }
 
     /**

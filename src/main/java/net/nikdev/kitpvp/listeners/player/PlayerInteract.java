@@ -8,6 +8,7 @@ import net.nikdev.kitpvp.menu.kit.KitShop;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -56,21 +57,16 @@ public class PlayerInteract implements Listener {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
         if(!user.getKit().isPresent() && event.getItem() != null && event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasDisplayName()) {
-            switch(Chat.strip(event.getItem().getItemMeta().getDisplayName())) {
-                case "Kit Selector":
-                    KitSelector.create(user).open(user);
+            String name = event.getItem().getItemMeta().getDisplayName();
 
-                    break;
+            if(Chat.color(Config.get(Config.KIT_SELECTOR_NAME)).equals(name)) {
+                KitSelector.create(user).open(user);
 
-                case "Kit Shop":
-                    KitShop.create(user).open(user);
+            } else if(Chat.color(Config.get(Config.KIT_SHOP_NAME)).equals(name)) {
+                KitShop.create(user).open(user);
 
-                    break;
-
-                case "Previous Kit":
-                    Kit.get(user.getCache().get("previous-kit", "pvp")).get().apply(user);
-
-                    break;
+            } else if(Chat.color(Config.get(Config.PREVIOUS_KIT_NAME)).equals(name)) {
+                Kit.get(user.getCache().get("previous-kit", "pvp")).get().apply(user);
             }
 
         }
@@ -88,10 +84,15 @@ public class PlayerInteract implements Listener {
 
         if(event.getItem() != null && user.getKit().isPresent()) {
             if(event.getItem().getType().equals(Material.MUSHROOM_SOUP)) {
-                double possible = user.toPlayer().getHealth() + Config.getInt(Config.MUSHROOM_HEAL);
-                double max = user.toPlayer().getMaxHealth();
+                Player player = user.toPlayer();
 
-                user.toPlayer().setHealth(possible <= max ? possible : max);
+                if(player.getHealth() == player.getMaxHealth()) {
+                    return;
+                }
+
+                double possible = player.getHealth() + Config.getInt(Config.MUSHROOM_HEAL);
+
+                user.toPlayer().setHealth(possible <= player.getMaxHealth() ? possible : player.getMaxHealth());
                 event.getItem().setType(Material.BOWL);
 
             } else {

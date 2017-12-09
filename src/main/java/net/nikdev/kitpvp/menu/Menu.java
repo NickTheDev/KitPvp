@@ -1,15 +1,12 @@
 package net.nikdev.kitpvp.menu;
 
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.util.AbstractBuilder;
 import net.nikdev.kitpvp.util.Chat;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
 import java.util.Optional;
-
-import static net.nikdev.kitpvp.util.AbstractBuilder.checkRequired;
 
 /**
  * Represents an inventory menu.
@@ -69,7 +66,9 @@ public final class Menu {
      * @return New menu builder with the specified information.
      */
     public static Builder builder(String name, int slots) {
-        checkRequired(name, slots);
+        if(name == null || slots % 9 != 0) {
+            throw new IllegalArgumentException("Invalid arguments for a menu builder.");
+        }
 
         return new Builder(name, slots);
     }
@@ -80,7 +79,7 @@ public final class Menu {
      * @author NickTheDev
      * @since 1.0
      */
-    public static final class Builder implements AbstractBuilder<Menu> {
+    public static final class Builder {
 
         private final Inventory inventory;
         private MenuCallback callback;
@@ -132,7 +131,11 @@ public final class Menu {
             return this;
         }
 
-        @Override
+        /**
+         * Gets the menu result of this builder.
+         *
+         * @return This builder's result.
+         */
         public Menu build() {
             return new Menu(this);
         }

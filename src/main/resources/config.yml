@@ -40,7 +40,33 @@ player:
   # Default award given to a player for killing another player.
   default-award: 1
 
-# Options related to menus. You cannot specify custom menus, you can only configure the plugin's main ones: Kit Selector and Kit Shop.
+# Options related to the spawn items give to a player upon joining. You cannot specify custom items, you can only configure the plugin's implemented ones.
+spawn-item:
+  # Item given to a player which opens the kit selector menu.
+  kit-selector:
+    # Name of the kit selector item.
+    name: "&f&lKit Selector"
+
+    # Material of the kit selector item.
+    material: "CHEST"
+
+  # Item given to a player which opens the kit shop menu.
+  kit-shop:
+    # Name of the kit selector item.
+    name: "&f&lKit Shop"
+
+    # Material of the kit shop item.
+    material: "ENDER_CHEST"
+
+  # Item given to a player which gives them their previous kit.
+  previous-kit:
+    # Name of the previous kit item.
+    name: "&f&lPrevious Kit"
+
+    # Material of the previous kit item.
+    material: "NETHER_STAR"
+
+# Options related to menus. You cannot specify custom menus, you can only configure the plugin's implemented ones.
 menu:
   # Item in each menu which when clicked exits the menu.
   exit-item:

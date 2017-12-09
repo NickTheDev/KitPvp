@@ -2,7 +2,6 @@ package net.nikdev.kitpvp.util.packet;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.user.User;
-import net.nikdev.kitpvp.util.AbstractBuilder;
 import net.nikdev.kitpvp.util.Chat;
 import org.bukkit.Bukkit;
 
@@ -93,7 +92,7 @@ public final class Title {
      * @author NickTheDev
      * @since 1.0
      */
-    public static final class Builder implements AbstractBuilder<Title> {
+    public static final class Builder {
 
         private String title;
         private int fadeIn, fadeOut, stay;
@@ -151,7 +150,11 @@ public final class Title {
             return this;
         }
 
-        @Override
+        /**
+         * Gets the title result of this builder.
+         *
+         * @return This builder's result.
+         */
         public Title build() {
             return new Title(this);
         }
