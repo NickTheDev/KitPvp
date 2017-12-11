@@ -5,6 +5,7 @@ import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 
 /**
  * Action implementation for the Dragon Born kit.
@@ -16,8 +17,9 @@ public class DragonBorn implements KitCallback {
 
     @Override
     public void give(User user) {
-        user.setArmor(ItemBuilder.builder(Material.LEATHER_HELMET).armorColor(Color.BLACK), ItemBuilder.builder(Material.IRON_CHESTPLATE),
-                ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.LEATHER_BOOTS).armorColor(Color.BLACK));
+        user.setArmor(ItemBuilder.builder(Material.LEATHER_HELMET).armorColor(Color.BLACK).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1),
+                ItemBuilder.builder(Material.IRON_CHESTPLATE), ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.LEATHER_BOOTS)
+                        .armorColor(Color.BLACK).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1));
 
         user.give(ItemBuilder.builder(Material.DIAMOND_SWORD));
 

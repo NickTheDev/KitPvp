@@ -54,7 +54,7 @@ command:
 # Messages pertaining to responses to the usage of the modify argument.
 modify:
   # Message sent to a player when they use the modify argument with an unknown target player. Placeholders are %TARGET%.
-  unknown-parse-target: "&c&l(!) Unable to parse target player: %TARGET%."
+  unknown-target: "&c&l(!) Unable to parse target player: %TARGET%."
 
   # Message sent to a player when they use the modify argument with an invalid amount. Placeholders are %AMOUNT%.
   invalid-amount: "&c&l(!) Unable to parse amount: %AMOUNT%."
@@ -135,4 +135,4 @@ kits:
   # Messages sent by the donkey kong kit.
   donkeykong:
     # Message sent to a player with the donkey kong kit when they pickup another player. Placeholders are %NAME%.
-    pickup: "&e&l(!) You picked up &a&l%NAME%&e&l, left click again to throw them!"
+    pickup: "&e&l(!) You picked up &a&l%NAME%&e&l, click again to throw them!"

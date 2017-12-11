@@ -18,14 +18,12 @@ public class Crossbow implements KitCallback {
     @Override
     public void give(User user) {
         user.setArmor(ItemBuilder.builder(Material.LEATHER_HELMET).armorColor(Color.RED).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1)
-                .enchant(Enchantment.DURABILITY, 5), ItemBuilder.builder(Material.LEATHER_CHESTPLATE).armorColor(Color.RED)
-                .enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).enchant(Enchantment.DURABILITY, 5), ItemBuilder.builder(Material.LEATHER_LEGGINGS)
+                .enchant(Enchantment.DURABILITY, 5), ItemBuilder.builder(Material.CHAINMAIL_CHESTPLATE), ItemBuilder.builder(Material.LEATHER_LEGGINGS)
                 .armorColor(Color.RED).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).enchant(Enchantment.DURABILITY, 5), ItemBuilder.builder(Material.LEATHER_BOOTS)
                 .armorColor(Color.RED).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).enchant(Enchantment.DURABILITY, 5));
 
-        user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 1));
-        user.give(ItemBuilder.builder(Material.BOW).enchant(Enchantment.ARROW_KNOCKBACK, 1).enchant(Enchantment.ARROW_DAMAGE, 5));
-        user.give(ItemBuilder.builder(Material.ARROW).amount(48));
+        user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 1), ItemBuilder.builder(Material.BOW).enchant(Enchantment.ARROW_KNOCKBACK, 1)
+                .enchant(Enchantment.ARROW_DAMAGE, 5), ItemBuilder.builder(Material.ARROW).amount(48));
 
         fillSoup(user);
     }

@@ -1,5 +1,6 @@
 package net.nikdev.kitpvp.menu.kit;
 
+import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.Config;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.kit.Kit;
@@ -8,7 +9,6 @@ import net.nikdev.kitpvp.menu.Menu;
 import net.nikdev.kitpvp.menu.MenuCallback;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -21,21 +21,21 @@ import java.util.Arrays;
  */
 public class KitSelector implements MenuCallback {
 
-    private static final MenuCallback CALLBACK = new KitSelector();
+    private static final MenuCallback callback = new KitSelector();
 
     @Override
     public void interact(User user, ItemStack item) {
-        String id = Chat.strip(item.getItemMeta().getDisplayName().toLowerCase());
-
         if(shouldExit(item)) {
             user.toPlayer().closeInventory();
 
             return;
         }
 
-        if(user.getStats().getKits().contains(id)) {
+        Kit kit = Kit.getByName(Chat.plain(item.getItemMeta().getDisplayName())).get();
+
+        if(user.getStats().getKits().stream().anyMatch(id -> kit.getId().equals(id))) {
             user.toPlayer().closeInventory();
-            Kit.get(id).get().apply(user);
+            kit.apply(user);
 
         } else {
             user.toPlayer().closeInventory();
@@ -51,11 +51,11 @@ public class KitSelector implements MenuCallback {
      * @return New menu.
      */
     public static Menu create(User user) {
-        Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SELECTOR_TITLE), Config.getInt(Config.KIT_SELECTOR_SIZE)).callback(CALLBACK);
+        Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SELECTOR_TITLE), Config.getInt(Config.KIT_SELECTOR_SIZE)).callback(callback);
 
         builder.item(ItemBuilder.builder(Config.getMaterial(Config.EXIT_ITEM_MATERIAL)).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SELECTOR_SIZE) - 1);
 
-        Kit.getKits().forEach(kit -> {
+        KitPvp.get().getKitManager().getKits().forEach(kit -> {
             if(user.getStats().getKits().contains(kit.getId())) {
                 builder.item(ItemBuilder.builder(kit.getIcon(), kit.getIconData().orElse((short) 0)).name("&a&l" + kit.getName())
                         .lore(Arrays.asList("&8" + kit.getDescription(), " ", Config.get(Config.KIT_OWNED_DESCRIPTION))));

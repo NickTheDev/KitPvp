@@ -1,5 +1,6 @@
 package net.nikdev.kitpvp.config.data;
 
+import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.Configs;
 import net.nikdev.kitpvp.config.StoreException;
 import net.nikdev.kitpvp.kit.Kit;
@@ -48,7 +49,7 @@ public final class KitConfig {
                 action = new Pvp();
             }
 
-            Kit.register(new Kit(section.getString("id"), section.getString("name"), section.getString("description"),
+            KitPvp.get().getKitManager().register(new Kit(section.getString("id"), section.getString("name"), section.getString("description"),
                     Material.matchMaterial(section.getString("icon")), section.contains("icon-data") ? (short) section.getInt("icon-data") : null,
                     section.getInt("cost"), action));
         });

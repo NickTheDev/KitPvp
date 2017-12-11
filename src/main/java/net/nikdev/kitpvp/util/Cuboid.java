@@ -106,15 +106,6 @@ public final class Cuboid implements ConfigurationSerializable {
     }
 
     /**
-     * Gets the volume of this cuboid.
-     *
-     * @return This cuboid's volume.
-     */
-    public int getVolume() {
-        return getWidth() * getHeight() * getLength();
-    }
-
-    /**
      * Gets the world this cuboid is located in.
      *
      * @return This cuboid's world.

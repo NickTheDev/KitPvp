@@ -55,8 +55,8 @@ public class PlayerMove implements Listener {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
         if(user.getKit().isPresent() && user.getKit().get().getId().equals("shark")) {
-            if(event.getFrom().getBlock().getType().equals(Material.AIR) && event.getTo().getBlock().getType().equals(Material.WATER) ||
-                    event.getTo().getBlock().getType().equals(Material.STATIONARY_WATER)) {
+            if(event.getFrom().getBlock().getType().equals(Material.AIR) && user.toPlayer().getEyeLocation().getBlock().getType().equals(Material.WATER) ||
+                    user.toPlayer().getEyeLocation().getBlock().getType().equals(Material.STATIONARY_WATER)) {
                 user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 1));
 
                 user.toPlayer().setAllowFlight(true);

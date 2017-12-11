@@ -6,8 +6,6 @@ import net.nikdev.kitpvp.util.item.ItemBuilder;
 import net.nikdev.kitpvp.util.item.Skulls;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -31,22 +29,10 @@ public class DonkeyKong implements KitCallback {
 
         user.give(ItemBuilder.builder(Material.INK_SACK, (short) 11).name("&e&lPickup Player").lore(Collections.singleton("&f&lRight click a player to activate.")));
 
-        user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.HARM, Integer.MAX_VALUE, 2));
+        user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 2));
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 1));
 
         fillSoup(user);
-    }
-
-    @Override
-    public void interact(User user, ItemStack item, boolean right) {
-        if(checkName(item, "&e&lPickup Player") && user.toPlayer().getPassenger() != null) {
-            Player player = (Player) user.toPlayer().getPassenger();
-
-            user.toPlayer().eject();
-            player.setVelocity(user.toPlayer().getEyeLocation().getDirection());
-            player.damage(5, user.toPlayer());
-        }
-
     }
 
 }

@@ -25,17 +25,13 @@ public class ProjectileHit implements Listener {
      */
     @EventHandler
     public void arrowHit(ProjectileHitEvent event) {
-        if(event.getEntity() instanceof Arrow && !event.getEntity().getLocation().getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR) && event.getEntity().getPassenger() != null) {
-            event.getEntity().eject();
-        }
-
         if(event.getEntity() instanceof Arrow && event.getEntity().getShooter() instanceof Player) {
             User user = User.get(((Player) event.getEntity().getShooter()).getUniqueId()).get();
 
             if(user.getKit().isPresent() && user.getKit().get().getId().equals("crossbow")) {
                 Location location = event.getEntity().getLocation();
 
-                location.getWorld().createExplosion(location, 0, false);
+                location.getWorld().createExplosion(location.getX(), location.getY(), location.getZ(), 3, false, false);
             }
 
         }

@@ -13,7 +13,12 @@ repositories {
 
     // Spigot.
     maven {
-        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+
+    // Bungee Cord.
+    maven {
+        url 'https://oss.sonatype.org/content/groups/public/'
     }
 
 }
@@ -43,6 +48,9 @@ dependencies {
     // Testing.
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    // Bukkit.
-    provided group: 'org.bukkit', name: 'bukkit', version: '1.8-R0.1-SNAPSHOT'
+    // Spigot.
+    provided group: 'org.spigotmc', name: 'spigot-api', version: '1.8-R0.1-SNAPSHOT'
+
+    // Chat.
+    provided group: 'net.md-5', name: 'bungeecord-chat', version: '1.8-SNAPSHOT'
 }

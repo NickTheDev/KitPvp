@@ -21,9 +21,9 @@ public class Archer implements KitCallback {
         user.setArmor(ItemBuilder.builder(Material.LEATHER_HELMET), ItemBuilder.builder(Material.CHAINMAIL_CHESTPLATE),
                 ItemBuilder.builder(Material.CHAINMAIL_LEGGINGS), ItemBuilder.builder(Material.LEATHER_BOOTS));
 
-        user.give(ItemBuilder.builder(Material.STONE_SWORD).enchant(Enchantment.DAMAGE_ALL, 1));
-        user.give(ItemBuilder.builder(Material.BOW).enchant(Enchantment.ARROW_INFINITE, 1).enchant(Enchantment.ARROW_DAMAGE, 3)
-              .enchant(Enchantment.ARROW_KNOCKBACK, 1));
+        user.give(ItemBuilder.builder(Material.STONE_SWORD).enchant(Enchantment.DAMAGE_ALL, 1), ItemBuilder.builder(Material.BOW)
+                .enchant(Enchantment.ARROW_INFINITE, 1).enchant(Enchantment.ARROW_DAMAGE, 3).enchant(Enchantment.ARROW_KNOCKBACK, 1),
+                ItemBuilder.builder(Material.ARROW));
 
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
 

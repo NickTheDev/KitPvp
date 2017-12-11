@@ -29,29 +29,14 @@ public class Spiderman implements KitCallback {
                 ItemBuilder.builder(Material.LEATHER_BOOTS).armorColor(Color.RED).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2));
 
         user.give(ItemBuilder.builder(Material.DIAMOND_SWORD));
-        user.give(ItemBuilder.builder(Material.WEB).name("&e&lShoot Web").lore(Collections.singleton("&f&lRight click to activate.")));
+        user.give(ItemBuilder.builder(Material.WEB).name("&e&lShoot Web").lore(Collections.singleton("&f&lClick to activate.")));
 
         fillSoup(user);
     }
 
     @Override
     public void interact(User user, ItemStack item, boolean right) {
-        if(checkName(item,"Shoot Web")) {
-            if(user.getCache().contains("spiderman-web-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
-                return;
-            }
-
-            Arrow fake = user.toPlayer().launchProjectile(Arrow.class);
-
-            fake.setVelocity(user.toPlayer().getEyeLocation().getDirection().multiply(1.1));
-            fake.setPassenger(user.toPlayer());
-
-            user.getCache().set("spiderman-web-cooldown", true);
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("spiderman-web-cooldown"), 60);
-        }
-
+        // TODO Ability doesn't make any sense so gotta figure that out.
     }
 
 }

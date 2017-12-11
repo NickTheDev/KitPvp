@@ -10,8 +10,8 @@ import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -98,12 +98,15 @@ public final class User {
     }
 
     /**
-     * Gives this user the specified item in the next available slot.
+     * Gives this user the specified items in the next available slot.
      *
-     * @param item Item to give.
+     * @param items Items to give.
      */
-    public void give(ItemBuilder item) {
-        toPlayer().getInventory().addItem(item.build());
+    public void give(ItemBuilder... items) {
+        for(ItemBuilder item : items) {
+            toPlayer().getInventory().addItem(item.build());
+        }
+
     }
 
     /**
@@ -165,6 +168,7 @@ public final class User {
      */
     public void clean() {
         toPlayer().getInventory().clear();
+        toPlayer().getInventory().setArmorContents(new ItemStack[4]);
         toPlayer().setHealth(20);
         toPlayer().setFoodLevel(20);
         toPlayer().setLevel(0);

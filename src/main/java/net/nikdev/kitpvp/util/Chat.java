@@ -32,10 +32,10 @@ public final class Chat {
     /**
      * Removes all color codes from the specified text.
      *
-     * @param text Text to strip.
+     * @param text Text to plain.
      * @return Stripped text.
      */
-    public static String strip(String text) {
+    public static String plain(String text) {
         return ChatColor.stripColor(text);
     }
 

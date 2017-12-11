@@ -7,19 +7,14 @@ import java.sql.*;
 import java.util.Optional;
 
 /**
- * Wrapper for a MySQL connection.
+ * Wrapper for a MySQL database connection.
  *
  * @author NickTheDev
  * @since 1.0
  */
-public final class DataBackend {
+final class Database {
 
     private Connection connection;
-
-    /**
-     * Utility class, not to be instantiated by other classes outside of this package.
-     */
-    DataBackend() {}
 
     /**
      * Gets if this database's connection is alive.

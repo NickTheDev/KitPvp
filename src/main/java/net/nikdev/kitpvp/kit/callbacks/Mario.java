@@ -26,8 +26,7 @@ public class Mario implements KitCallback {
                 .enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1), ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.IRON_BOOTS)
                 .enchant(Enchantment.PROTECTION_FALL, 1));
 
-        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 2));
-        user.give(ItemBuilder.builder(Material.BROWN_MUSHROOM).name("&e&lJump Boost"));
+        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 2), ItemBuilder.builder(Material.BROWN_MUSHROOM).name("&e&lJump Boost"));
 
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 1));
 

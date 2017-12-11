@@ -29,7 +29,7 @@ public class PlayerInteract implements Listener {
      */
     @EventHandler
     public void wandInteract(PlayerInteractEvent event) {
-        if(event.getItem() != null && event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasDisplayName() && Chat.strip(event.getItem().getItemMeta().getDisplayName()).equals("KitPvp Location Wand")) {
+        if(event.getItem() != null && event.getItem().hasItemMeta() && event.getItem().getItemMeta().hasDisplayName() && Chat.plain(event.getItem().getItemMeta().getDisplayName()).equals("KitPvp Location Wand")) {
             User user = User.get(event.getPlayer().getUniqueId()).get();
 
             if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {

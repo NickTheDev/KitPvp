@@ -1,5 +1,6 @@
 package net.nikdev.kitpvp.kit;
 
+import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.Material;
 
@@ -12,8 +13,6 @@ import java.util.*;
  * @since 1.0
  */
 public final class Kit {
-
-    private static final Map<String, Kit> registry = new HashMap<>();
 
     private final String id, name, description;
 
@@ -121,34 +120,23 @@ public final class Kit {
     }
 
     /**
-     * Gets the kit with the specified id.
+     * Shorthand for KitManager#get().
      *
      * @param id Id of the kit.
      * @return Kit with the id.
      */
     public static Optional<Kit> get(String id) {
-        return Optional.ofNullable(registry.get(id));
+        return KitPvp.get().getKitManager().get(id);
     }
 
     /**
-     * Gets all loaded kits.
+     * Shorthand for KitManager#getByName().
      *
-     * @return Loaded kits.
+     * @param name Name of the kit.
+     * @return Kit with the name.
      */
-    public static Collection<Kit> getKits() {
-        return registry.values();
-    }
-
-    /**
-     * Registers the specified kit if it is not already registered.
-     *
-     * @param kit Kit to register.
-     */
-    public static void register(Kit kit) {
-        if(kit != null && !registry.containsKey(kit.getId())) {
-            registry.put(kit.getId(), kit);
-        }
-
+    public static Optional<Kit> getByName(String name) {
+        return KitPvp.get().getKitManager().getByName(name);
     }
 
 }

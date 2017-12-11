@@ -1,5 +1,6 @@
 package net.nikdev.kitpvp.menu.kit;
 
+import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.Config;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
@@ -21,28 +22,27 @@ import java.util.Arrays;
  */
 public class KitShop implements MenuCallback {
 
-    private static final MenuCallback CALLBACK = new KitShop();
+    private static final MenuCallback callback = new KitShop();
 
     @Override
     public void interact(User user, ItemStack item) {
-        String id = Chat.strip(item.getItemMeta().getDisplayName().toLowerCase());
-
         if(shouldExit(item)) {
             user.toPlayer().closeInventory();
 
             return;
         }
 
-        if(user.getStats().getKits().contains(id)) {
+        Kit kit = Kit.getByName(Chat.plain(item.getItemMeta().getDisplayName())).get();
+
+        if(user.getStats().getKits().stream().anyMatch(id -> kit.getId().equals(id))) {
             user.toPlayer().closeInventory();
             Lang.sendTo(user, Lang.ALREADY_PURCHASED);
 
         } else {
             user.toPlayer().closeInventory();
-            Kit kit = Kit.get(id).get();
 
             if(user.getStats().getTokens() >= kit.getCost()) {
-                user.getStats().getKits().add(id);
+                user.getStats().getKits().add(kit.getId());
                 user.getStats().removeTokens(kit.getCost());
                 
                 Lang.sendTo(user, Lang.SUCCESSFUL_PURCHASE, Placeholder.of("kit", kit.getName()));
@@ -62,11 +62,11 @@ public class KitShop implements MenuCallback {
      * @return New menu.
      */
     public static Menu create(User user) {
-        Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SHOP_TITLE), Config.getInt(Config.KIT_SHOP_SIZE)).callback(CALLBACK);
+        Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SHOP_TITLE), Config.getInt(Config.KIT_SHOP_SIZE)).callback(callback);
 
         builder.item(ItemBuilder.builder(Config.getMaterial(Config.EXIT_ITEM_MATERIAL)).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SHOP_SIZE) - 1);
 
-        Kit.getKits().forEach(kit -> {
+        KitPvp.get().getKitManager().getKits().forEach(kit -> {
             if(user.getStats().getKits().contains(kit.getId())) {
                 builder.item(ItemBuilder.builder(kit.getIcon(), kit.getIconData().orElse((short) 0)).name("&a&l" + kit.getName())
                         .lore(Arrays.asList("&8" + kit.getDescription(), " ", Placeholder.of("cost", kit.getCost()).apply(Config.get(Config.KIT_COST_DESCRIPTION)), Config.get(Config.KIT_OWNED_DESCRIPTION))));

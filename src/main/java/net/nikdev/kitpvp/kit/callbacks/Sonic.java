@@ -32,10 +32,11 @@ public class Sonic implements KitCallback {
                 ItemBuilder.builder(Material.LEATHER_BOOTS).armorColor(Color.RED).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2)
                 .enchant(Enchantment.DURABILITY, 3));
 
-        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 1));
-        user.give(ItemBuilder.builder(Material.INK_SACK, (short) 12).name("&e&lSpeed burst").lore(Collections.singleton("&f&lClick to activate.")));
+        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 1), ItemBuilder.builder(Material.INK_SACK, (short) 12).name("&e&lSpeed burst")
+                .lore(Collections.singleton("&f&lClick to activate.")));
 
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+        user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
 
         fillSoup(user);
     }

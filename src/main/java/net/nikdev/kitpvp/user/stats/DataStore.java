@@ -17,11 +17,10 @@ import java.util.concurrent.Executors;
  */
 public class DataStore {
 
-    private static final List<String> DEFAULT_KITS = Arrays.asList("pvp", "archer", "fisherman", "tank", "medic");
-
+    private static final List<String> defaults = Arrays.asList("pvp", "archer", "fisherman", "tank", "medic");
     private static final Executor executor = Executors.newCachedThreadPool();
 
-    private final DataBackend backend = new DataBackend();
+    private final Database backend = new Database();
 
     /**
      * Creates a new stats store with the specified nitrite backend.
@@ -57,11 +56,11 @@ public class DataStore {
             }
 
         } else {
-            backend.update("INSERT INTO `stats` (`uuid`, `tokens`, `kits`) VALUES ('" + id + "', default, '" + String.join(",", DEFAULT_KITS) + "')");
+            backend.update("INSERT INTO `stats` (`uuid`, `tokens`, `kits`) VALUES ('" + id + "', default, '" + String.join(",", defaults) + "')");
         }
 
         result.ifPresent(backend::close);
-        return stats != null ? stats : new Statistics(id, 0, DEFAULT_KITS);
+        return stats != null ? stats : new Statistics(id, 0, defaults);
     }
 
     /**
@@ -83,7 +82,7 @@ public class DataStore {
     }
 
     /**
-     * Closes this data store.
+     * Closes the underlying backend.
      */
     public void close() {
         backend.close();

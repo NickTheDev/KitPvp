@@ -29,8 +29,8 @@ public class Snowman implements KitCallback {
                 ItemBuilder.builder(Material.LEATHER_BOOTS).armorColor(Color.WHITE).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1)
                 .enchant(Enchantment.DURABILITY, 3));
 
-        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD));
-        user.give(ItemBuilder.builder(Material.IRON_HOE).name("&e&lShoot Snowballs").lore(Collections.singleton("&f&lRight click to activate.")));
+        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD), ItemBuilder.builder(Material.IRON_HOE).name("&e&lShoot Snowballs")
+                .lore(Collections.singleton("&f&lRight click to activate.")));
 
         fillSoup(user);
     }

@@ -13,6 +13,7 @@ import java.util.*;
 public class UserManager {
 
     private final List<User> online = new ArrayList<>();
+    private final List<UserStreak> streaks = new ArrayList<>();
 
     /**
      * Gets a copy of all online users.
@@ -43,6 +44,27 @@ public class UserManager {
      */
     public Optional<User> get(UUID id) {
         return getOnline().stream().filter(user -> user.getId().equals(id)).findFirst();
+    }
+
+    /**
+     * Gets the all currently registered streaks.
+     *
+     * @return Registered streaks.
+     */
+    public Collection<UserStreak> getStreaks() {
+        return streaks;
+    }
+
+    /**
+     * Registers the specified streak if it is not null and it has not already been registered.
+     *
+     * @param streak Streak to register.
+     */
+    public void registerStreak(UserStreak streak) {
+        if(streak != null && !streaks.contains(streak)) {
+            streaks.add(streak);
+        }
+
     }
 
     /**

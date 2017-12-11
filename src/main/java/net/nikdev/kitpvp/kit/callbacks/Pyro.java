@@ -28,8 +28,8 @@ public class Pyro implements KitCallback {
         user.setArmor(ItemBuilder.builder(Material.CHAINMAIL_HELMET).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1), ItemBuilder.builder(Material.CHAINMAIL_CHESTPLATE),
                 ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.CHAINMAIL_BOOTS));
 
-        user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.FIRE_ASPECT, 2));
-        user.give(ItemBuilder.builder(Material.IRON_HOE).name("&e&lFire Cannon").lore(Collections.singleton("&f&lClick to activate.")));
+        user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.FIRE_ASPECT, 2), ItemBuilder.builder(Material.IRON_HOE).name("&e&lFire Cannon")
+                .lore(Collections.singleton("&f&lClick to activate.")));
 
         user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 3));
 
@@ -38,7 +38,7 @@ public class Pyro implements KitCallback {
 
     @Override
     public void interact(User user, ItemStack item, boolean right) {
-        if(checkName(item,"&e&lFire Cannon")) {
+        if(checkName(item,"Fire Cannon")) {
             if(user.getCache().contains("pyro-cannon-cooldown")) {
                 Lang.sendTo(user, Lang.COOLDOWN);
 

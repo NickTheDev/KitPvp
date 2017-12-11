@@ -61,7 +61,9 @@ public final class Cache {
             try {
                 return data.get(key) != null ? (T) data.get(key) : other;
 
-            } catch (ClassCastException ignored) {}
+            } catch (ClassCastException ignored) {
+                return other;
+            }
 
         }
 

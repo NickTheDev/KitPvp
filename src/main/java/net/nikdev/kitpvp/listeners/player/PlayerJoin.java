@@ -27,10 +27,7 @@ public class PlayerJoin implements Listener {
     public void playerJoin(PlayerJoinEvent event) {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
-        if(!Lang.get(Lang.PLAYER_JOIN).isEmpty()) {
-            event.setJoinMessage(Lang.get(Lang.PLAYER_JOIN, Placeholder.of("name", user.getName())));
-        }
-
+        event.setJoinMessage(Lang.get(Lang.PLAYER_JOIN, Placeholder.of("name", user.getName())));
         title.send(user);
         user.spawn();
     }

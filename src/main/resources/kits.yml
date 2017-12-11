@@ -60,7 +60,7 @@ kits:
     name: "Fisherman"
 
     # Kit description.
-    description: "Hook players using your fishing rod then reel them in!"
+    description: "Hook players and then reel them in!"
 
     # Kit icon.
     icon: "FISHING_ROD"
@@ -80,7 +80,7 @@ kits:
     name: "Tank"
 
     # Kit description.
-    description: "Consuming Damage from those who dare pvp you!"
+    description: "Consume damage from those who dare pvp you!"
 
     # Kit icon.
     icon: "DIAMOND_CHESTPLATE"
@@ -160,7 +160,7 @@ kits:
     name: "Dragon Born"
 
     # Kit description.
-    description: "Become the Dragon Born, Use the Shout Fus Ro Dah to push back your foes!"
+    description: "Use the Shout Fus Ro Dah to push back your foes!"
 
     # Kit icon.
     icon: "DRAGON_EGG"
@@ -200,7 +200,7 @@ kits:
     name: "Crossbow"
 
     # Kit description.
-    description: "Fire Arrows that explode on impact!"
+    description: "Fire arrows that explode on impact!"
 
     # Kit icon.
     icon: "ARROW"
@@ -411,7 +411,7 @@ kits:
     description: "Gain a boost with jumping Mama! Hoo-Hah-Hoo! Yahoo!"
 
     # Kit icon.
-    icon: "RED_MUSHROOM"
+    icon: "BROWN_MUSHROOM"
 
     # Kit cost.
     cost: 5

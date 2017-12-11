@@ -57,18 +57,6 @@ public final class ItemBuilder {
     }
 
     /**
-     * Sets the material of the item in this builder to the specified material, and returns this builder.
-     *
-     * @param material Material of the item in this builder.
-     * @return This builder.
-     */
-    public ItemBuilder material(Material material) {
-        item.setType(material);
-
-        return this;
-    }
-
-    /**
      * Adds the specified enchantment to the item in this builder, and returns this builder.
      *
      * @param enchantment Enchantment to add to the item in this builder.

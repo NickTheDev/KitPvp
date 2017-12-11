@@ -28,8 +28,8 @@ public class Medic implements KitCallback {
         user.setArmor(ItemBuilder.builder(Material.LEATHER_HELMET).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).enchant(Enchantment.DURABILITY, 3),
                 ItemBuilder.builder(Material.IRON_CHESTPLATE), ItemBuilder.builder(Material.IRON_LEGGINGS), ItemBuilder.builder(Material.LEATHER_BOOTS).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1).enchant(Enchantment.DURABILITY, 3));
 
-        user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 1));
-        user.give(ItemBuilder.builder(Material.REDSTONE).name("&e&lMedkit").lore(Collections.singleton("&f&lRight click to activate personal heal, left click to heal nearby players.")));
+        user.give(ItemBuilder.builder(Material.IRON_SWORD).enchant(Enchantment.DAMAGE_ALL, 1), ItemBuilder.builder(Material.REDSTONE).name("&e&lMedkit")
+                .lore(Collections.singleton("&f&lRight click to activate personal heal, left click to heal nearby players.")));
 
         fillSoup(user);
     }
@@ -63,7 +63,6 @@ public class Medic implements KitCallback {
 
                 user.getCache().set("medic-group-cooldown", true);
                 Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("medic-group-cooldown"), 400);
-
             }
 
         }

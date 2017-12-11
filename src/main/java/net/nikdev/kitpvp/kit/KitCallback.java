@@ -22,7 +22,7 @@ public interface KitCallback {
      * @return If both names match.
      */
     default boolean checkName(ItemStack item, String name) {
-        return item.hasItemMeta() && item.getItemMeta().hasDisplayName() && Chat.strip(item.getItemMeta().getDisplayName()).equals(name);
+        return item.hasItemMeta() && item.getItemMeta().hasDisplayName() && Chat.plain(item.getItemMeta().getDisplayName()).equals(name);
     }
 
     /**

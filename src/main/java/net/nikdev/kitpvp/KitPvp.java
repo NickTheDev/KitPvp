@@ -6,7 +6,9 @@ import net.nikdev.kitpvp.config.data.KitConfig;
 import net.nikdev.kitpvp.config.data.LocationConfig;
 import net.nikdev.kitpvp.config.data.StreakConfig;
 import net.nikdev.kitpvp.config.lang.LangConfig;
+import net.nikdev.kitpvp.kit.KitManager;
 import net.nikdev.kitpvp.listeners.entity.EntityDamage;
+import net.nikdev.kitpvp.listeners.entity.EntityDismount;
 import net.nikdev.kitpvp.listeners.entity.ProjectileHit;
 import net.nikdev.kitpvp.listeners.inventory.InventoryClick;
 import net.nikdev.kitpvp.listeners.inventory.InventoryClose;
@@ -37,6 +39,7 @@ public class KitPvp extends JavaPlugin {
     private LangConfig lang;
 
     private UserManager userManager;
+    private KitManager kitManager;
 
     @Override
     public void onEnable() {
@@ -44,6 +47,9 @@ public class KitPvp extends JavaPlugin {
 
         saveDefaultConfig();
         Configs.checkLicense();
+
+        userManager = new UserManager();
+        kitManager = new KitManager();
 
         try {
             new KitConfig();
@@ -62,8 +68,6 @@ public class KitPvp extends JavaPlugin {
 
             return;
         }
-
-        userManager = new UserManager();
 
         registerListeners();
         getCommand("kitpvp").setExecutor(new CommandManager());
@@ -126,12 +130,21 @@ public class KitPvp extends JavaPlugin {
     }
 
     /**
+     * Gets the kit manager of KitPvp.
+     *
+     * @return KitPvp's kit manager.
+     */
+    public KitManager getKitManager() {
+        return kitManager;
+    }
+
+    /**
      * Registers KitPvp's listeners.
      */
     private void registerListeners() {
         Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit(), new PlayerInteract(), new PlayerJoin(), new BlockBreak(), new BlockPlace(),
                 new FoodLevelChange(), new EntityDamage(), new WeatherChange(), new PlayerFish(), new PlayerMove(), new ProjectileHit(),
-                new PlayerInteractEntity(), new InventoryClose(), new InventoryClick(), new PlayerDeath())
+                new PlayerInteractEntity(), new InventoryClose(), new InventoryClick(), new PlayerDeath(), new EntityDismount())
                 .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 
