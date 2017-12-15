@@ -57,17 +57,7 @@ public final class Cache {
      */
     @SuppressWarnings("unchecked")
     public <T> T get(String key, T other) {
-        if (contains(key)) {
-            try {
-                return data.get(key) != null ? (T) data.get(key) : other;
-
-            } catch (ClassCastException ignored) {
-                return other;
-            }
-
-        }
-
-        return other;
+        return (T) data.getOrDefault(key, other);
     }
 
     /**

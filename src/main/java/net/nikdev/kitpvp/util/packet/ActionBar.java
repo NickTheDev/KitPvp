@@ -24,14 +24,14 @@ public final class ActionBar {
     }
 
     /**
-     * Sends this title packet to the specified target user.
+     * Sends this action bar packet to the specified target user.
      *
      * @param user User to send the title to.
      */
     public void send(User user) {
         try {
             Object message = Packets.getNative("ChatComponentText").getConstructor(String.class).newInstance(Chat.color(text));
-            Object packet = Packets.getNative("PacketPlayOutChat").getConstructor(Packets.getNative("IChatBaseComponent"), byte.class).newInstance(message, (byte) 2);
+            Object packet = Packets.getNative("PacketPlayOutChat").getConstructor(Packets.getNative("IChatBaseComponent"), Byte.TYPE).newInstance(message, (byte) 2);
 
             Packets.send(user, packet);
 
@@ -68,7 +68,7 @@ public final class ActionBar {
         private Builder() {}
 
         /**
-         * Sets the title of the title in this builder to the specified title.
+         * Sets the title of the action bar in this builder to the specified title.
          *
          * @param text Title to set.
          * @return This builder.
@@ -80,7 +80,7 @@ public final class ActionBar {
         }
 
         /**
-         * Gets the title result of this builder.
+         * Gets the action bar result of this builder.
          *
          * @return This builder's result.
          */

@@ -211,26 +211,6 @@ kits:
     # Kit callback class.
     callback: "net.nikdev.kitpvp.kit.callbacks.Crossbow"
 
-  # Purchasable eagle kit.
-  eagle:
-    # Kit id.
-    id: "eagle"
-
-    # Kit name.
-    name: "Eagle"
-
-    # Kit description.
-    description: "Soar through the sky!"
-
-    # Kit icon.
-    icon: "FEATHER"
-
-    # Kit cost.
-    cost: 5
-
-    # Kit callback class.
-    callback: "net.nikdev.kitpvp.kit.callbacks.Eagle"
-
   # Purchasable mario kit.
   mario:
     # Kit id.
@@ -398,7 +378,6 @@ kits:
     # Kit callback class.
     callback: "net.nikdev.kitpvp.kit.callbacks.Vampire"
 
-
   # Purchasable luigi kit.
   luigi:
     # Kit id.
@@ -418,3 +397,43 @@ kits:
 
     # Kit callback class.
     callback: "net.nikdev.kitpvp.kit.callbacks.Luigi"
+
+  # Purchasable warper kit.
+  warper:
+    # Kit id.
+    id: "warper"
+
+    # Kit name.
+    name: "Warper"
+
+    # Kit description.
+    description: "Switch with players!"
+
+    # Kit icon.
+    icon: "ENDER_PEARL"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "net.nikdev.kitpvp.kit.callbacks.Warper"
+
+  # Purchasable wizard kit.
+  wizard:
+    # Kit id.
+    id: "wizard"
+
+    # Kit name.
+    name: "Wizard"
+
+    # Kit description.
+    description: "You're a wizard Harry!"
+
+    # Kit icon.
+    icon: "STICK"
+
+    # Kit cost.
+    cost: 5
+
+    # Kit callback class.
+    callback: "net.nikdev.kitpvp.kit.callbacks.Wizard"

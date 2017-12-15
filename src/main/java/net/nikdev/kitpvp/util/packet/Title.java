@@ -38,8 +38,8 @@ public final class Title {
         try {
             Object chat = Packets.getNative("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", String.class).invoke(null, "{\"text\": \"" + Chat.color(title) + "\"}");
 
-            Constructor<?> constructor = Packets.getNative("PacketPlayOutTitle").getConstructor(Packets.getNative("PacketPlayOutTitle").getDeclaredClasses()[0], Packets.getNative("IChatBaseComponent"), Integer.TYPE, Integer.TYPE, Integer.TYPE);
-            Object packet = constructor.newInstance(Packets.getNative("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TITLE").get(null), chat, fadeIn, stay, fadeOut);
+            Object packet = Packets.getNative("PacketPlayOutTitle").getConstructor(Packets.getNative("PacketPlayOutTitle").getDeclaredClasses()[0], Packets.getNative("IChatBaseComponent"),
+                    Integer.TYPE, Integer.TYPE, Integer.TYPE).newInstance(Packets.getNative("PacketPlayOutTitle").getDeclaredClasses()[0].getField("TITLE").get(null), chat, fadeIn, stay, fadeOut);
 
             Packets.send(user, packet);
 

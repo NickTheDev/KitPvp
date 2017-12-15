@@ -1,7 +1,10 @@
 package net.nikdev.kitpvp.listeners.entity;
 
 import net.nikdev.kitpvp.user.User;
+import org.bukkit.Location;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +25,7 @@ public class EntityDamageByEntity implements Listener {
      */
     @EventHandler
     public void snowballDamage(EntityDamageByEntityEvent event) {
-        if(event.getEntity() instanceof Player && event.getDamager() instanceof Snowball && ((Snowball) event.getDamager()).getShooter() instanceof Player) {
+        if(event.getEntity() instanceof Player && event.getDamager() instanceof Projectile && event.getDamager() instanceof Snowball) {
             User user = User.get(((Player) ((Snowball) event.getDamager()).getShooter()).getUniqueId()).get();
 
             if(user.getKit().isPresent() && user.getKit().get().getId().equals("snowman")) {

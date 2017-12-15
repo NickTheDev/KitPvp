@@ -144,7 +144,8 @@ public class KitPvp extends JavaPlugin {
     private void registerListeners() {
         Arrays.asList(new AsyncPlayerPreLogin(), new PlayerQuit(), new PlayerInteract(), new PlayerJoin(), new BlockBreak(), new BlockPlace(),
                 new FoodLevelChange(), new EntityDamage(), new WeatherChange(), new PlayerFish(), new PlayerMove(), new ProjectileHit(),
-                new PlayerInteractEntity(), new InventoryClose(), new InventoryClick(), new PlayerDeath(), new EntityDismount())
+                new PlayerInteractEntity(), new InventoryClose(), new InventoryClick(), new PlayerDeath(), new EntityDismount(), new PlayerTeleport(),
+                new PlayerPickupItem(), new PlayerDropItem())
                 .forEach(listener -> Bukkit.getPluginManager().registerEvents(listener, this));
     }
 

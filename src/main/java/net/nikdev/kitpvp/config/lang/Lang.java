@@ -201,7 +201,17 @@ public enum Lang {
     /**
      * Message sent to a player with the donkey kong kit when they pickup another player. Placeholders are %NAME%.
      */
-    DONKEY_KONG_PICKUP("kits.donkeykong.pickup");
+    DONKEY_KONG_PICKUP("kits.donkeykong.pickup"),
+
+    /**
+     * Message sent to a player when they use the heal spell.
+     */
+    WIZARD_HEAL("kits.wizard.heal"),
+
+    /**
+     * Message sent to a player when they use the poison spell.
+     */
+    WIZARD_POISON("kits.wizard.poison");
 
     private static final Placeholder prefix = Placeholder.of("prefix", KitPvp.get().getLang().get("prefix"));
     private final String key;

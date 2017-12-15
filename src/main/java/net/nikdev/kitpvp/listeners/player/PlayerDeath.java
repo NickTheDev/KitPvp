@@ -6,8 +6,10 @@ import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.user.UserStreak;
 import net.nikdev.kitpvp.user.User;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import net.nikdev.kitpvp.util.packet.Title;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -97,6 +99,12 @@ public class PlayerDeath implements Listener {
         user.getCache().set("achieved-streaks", achieved);
         user.getStats().addTokens(tokens);
         Title.builder().title(Lang.get(Lang.DEATH_TOKEN_TITLE, Placeholder.of("amount", tokens))).fadeIn(1).fadeOut(1).stay(2).build().send(user);
+
+        // Putting this code here because we know there is a killer.
+        if(user.getKit().get().getId().equals("warper")) {
+            user.give(ItemBuilder.builder(Material.ENDER_PEARL));
+        }
+
     }
 
 }

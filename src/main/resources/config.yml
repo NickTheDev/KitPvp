@@ -103,3 +103,11 @@ menu:
 
     # Description of kit icons detailing their cost. Placeholders are %COST%.
     kit-cost-description: "&e&lCost: %COST% Tokens"
+
+  # Wizard kit spell selector menu.
+  spell-selector:
+    # Title of the spell menu.
+    title: "&f&lSpell Selector"
+
+    # Size of the spell menu.
+    size: 9

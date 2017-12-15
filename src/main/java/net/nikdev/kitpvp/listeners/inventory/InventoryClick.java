@@ -23,6 +23,10 @@ public class InventoryClick implements Listener {
     public void inventoryClick(InventoryClickEvent event) {
         User user = User.get(event.getWhoClicked().getUniqueId()).get();
 
+        if(!user.getKit().isPresent()) {
+            event.setCancelled(true);
+        }
+
         if(user.getCache().contains("menu")) {
             event.setCancelled(true);
 

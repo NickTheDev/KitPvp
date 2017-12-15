@@ -62,9 +62,8 @@ public class KitShop implements MenuCallback {
      * @return New menu.
      */
     public static Menu create(User user) {
-        Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SHOP_TITLE), Config.getInt(Config.KIT_SHOP_SIZE)).callback(callback);
-
-        builder.item(ItemBuilder.builder(Config.getMaterial(Config.EXIT_ITEM_MATERIAL)).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SHOP_SIZE) - 1);
+        Menu.Builder builder = Menu.builder(Config.get(Config.KIT_SHOP_TITLE), Config.getInt(Config.KIT_SHOP_SIZE)).callback(callback)
+                .item(ItemBuilder.builder(Config.getMaterial(Config.EXIT_ITEM_MATERIAL)).name(Config.get(Config.EXIT_ITEM_NAME)), Config.getInt(Config.KIT_SHOP_SIZE) - 1);;
 
         KitPvp.get().getKitManager().getKits().forEach(kit -> {
             if(user.getStats().getKits().contains(kit.getId())) {

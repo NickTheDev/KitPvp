@@ -139,7 +139,17 @@ public enum Config {
     /**
      * Description of kit icons detailing their cost. Placeholders are %COST%.
      */
-    KIT_COST_DESCRIPTION("menu.kit-shop.kit-cost-description");
+    KIT_COST_DESCRIPTION("menu.kit-shop.kit-cost-description"),
+
+    /**
+     * Title of the spell selector menu.
+     */
+    SPELL_SELECTOR_TITLE("menu.spell-selector.title"),
+
+    /**
+     * Size of the spell selector menu.
+     */
+    SPELL_SELECTOR_SIZE("menu.spell-selector.size");
 
     private final String key;
 

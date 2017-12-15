@@ -136,3 +136,11 @@ kits:
   donkeykong:
     # Message sent to a player with the donkey kong kit when they pickup another player. Placeholders are %NAME%.
     pickup: "&e&l(!) You picked up &a&l%NAME%&e&l, click again to throw them!"
+
+  # Messages sent by the wizard kit.
+  wizard:
+    # Message sent to a player when they use the heal spell.
+    heal: "&e&l(!) You used the &c&lHeal &e&lspell."
+
+    # Message sent to player when they use the poison spell.
+    poison: "&e&l(!) You used the &2&lPoison &e&lspell."
