@@ -71,7 +71,7 @@ final class Database {
             Class.forName("com.mysql.jdbc.Driver");
 
             connection = DriverManager.getConnection("jdbc:mysql://" + Config.get(Config.DATABASE_ADDRESS) + ":" + Config.getInt(Config.DATABASE_PORT) + "/" +
-                    Config.get(Config.DATABASE_NAME) + "?autoReconnect=true", Config.get(Config.DATABASE_USER), Config.get(Config.DATABASE_PASSWORD));
+                    Config.get(Config.DATABASE_NAME) + "?autoReconnect=true&useSSL=false", Config.get(Config.DATABASE_USER), Config.get(Config.DATABASE_PASSWORD));
         }
 
     }
