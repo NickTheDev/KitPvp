@@ -169,6 +169,7 @@ public final class User {
     public void clean() {
         toPlayer().getInventory().clear();
         toPlayer().getInventory().setArmorContents(new ItemStack[4]);
+        toPlayer().setMaxHealth(20);
         toPlayer().setHealth(20);
         toPlayer().setFoodLevel(20);
         toPlayer().setLevel(0);
