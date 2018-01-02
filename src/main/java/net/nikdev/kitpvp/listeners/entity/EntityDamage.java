@@ -1,6 +1,7 @@
 package net.nikdev.kitpvp.listeners.entity;
 
 import net.nikdev.kitpvp.KitPvp;
+import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Cuboid;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,16 +19,36 @@ import java.util.Optional;
 public class EntityDamage implements Listener {
 
     /**
-     * Listens for the specified event.
+     * Listens for the specified event for handling spawn damage.
      *
      * @param event Event instance.
      */
     @EventHandler
-    public void entityDamage(EntityDamageEvent event) {
+    public void spawnDamage(EntityDamageEvent event) {
         Optional<Cuboid> region = KitPvp.get().getLocations().getRegion();
 
         if(event.getEntity() instanceof Player && region.isPresent() && region.get().isInside(event.getEntity().getLocation())) {
             event.setCancelled(true);
+        }
+
+    }
+
+    /**
+     * Listens for the specified event for the Mario and Luigi kits.
+     *
+     * @param event Event instance.
+     */
+    @EventHandler
+    public void jumpDamage(EntityDamageEvent event) {
+        if(event.getEntity() instanceof Player) {
+            User user = User.get(event.getEntity().getUniqueId()).get();
+
+            if(user.getKit().isPresent() && user.getCache().contains("no-fall")) {
+                event.setCancelled(true);
+
+                user.getCache().remove("no-fall");
+            }
+
         }
 
     }
