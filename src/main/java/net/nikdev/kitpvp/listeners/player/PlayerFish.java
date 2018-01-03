@@ -1,10 +1,9 @@
 package net.nikdev.kitpvp.listeners.player;
 
-import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
+import net.nikdev.kitpvp.kit.Cooldowns;
 import net.nikdev.kitpvp.user.User;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,9 +28,7 @@ public class PlayerFish implements Listener {
         User user = User.get(event.getPlayer().getUniqueId()).get();
 
         if(user.getKit().isPresent() && user.getKit().get().getId().equals("fisherman") && event.getCaught() != null && event.getCaught() instanceof Player) {
-            if(user.getCache().contains("fisherman-fish-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
+            if(Cooldowns.check(user, "fisherman-fish")) {
                 return;
             }
 
@@ -40,8 +37,7 @@ public class PlayerFish implements Listener {
             event.getCaught().teleport(location.add(location.getDirection()));
             Lang.sendTo(event.getCaught(), Lang.FISHERMAN_HOOKED, Placeholder.of("name", user.getName()));
 
-            user.getCache().set("fisherman-fish-cooldown", true);
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("fisherman-fish-cooldown"), 120);
+            Cooldowns.start(user, "fisherman-fish", 120);
         }
 
     }

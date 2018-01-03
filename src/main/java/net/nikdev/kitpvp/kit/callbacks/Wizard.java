@@ -2,7 +2,7 @@ package net.nikdev.kitpvp.kit.callbacks;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.lang.Lang;
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.menu.kit.SpellSelector;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
@@ -23,7 +23,7 @@ import java.util.Collections;
  * @author NickTheDev
  * @since 1.0
  */
-public class Wizard implements KitCallback {
+public class Wizard implements Kit.Callback {
 
     @Override
     public void give(User user) {

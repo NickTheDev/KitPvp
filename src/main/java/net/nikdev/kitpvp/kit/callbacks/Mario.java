@@ -1,12 +1,10 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
-import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Lang;
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Cooldowns;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import net.nikdev.kitpvp.util.item.Skulls;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -20,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
  * @author NickTheDev
  * @since 1.0
  */
-public class Mario implements KitCallback {
+public class Mario implements Kit.Callback {
 
     @Override
     public void give(User user) {
@@ -39,17 +37,14 @@ public class Mario implements KitCallback {
     @Override
     public void interact(User user, ItemStack item, boolean right) {
         if(checkName(item, "Jump Boost")) {
-            if(user.getCache().contains("mario-jump-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
+            if(Cooldowns.check(user, "mario-jump")) {
                 return;
             }
 
             user.toPlayer().setVelocity(user.toPlayer().getLocation().add(0,1.5,0).toVector().subtract(user.toPlayer().getLocation().toVector()));
-
             user.getCache().set("no-fall", true);
-            user.getCache().set("mario-jump-cooldown", true);
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("mario-jump-cooldown"), 200);
+
+            Cooldowns.start(user, "mario-jump", 200);
         }
 
     }

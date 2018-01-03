@@ -1,11 +1,9 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
-import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Lang;
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Cooldowns;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Fireball;
@@ -21,7 +19,7 @@ import java.util.Collections;
  * @author NickTheDev
  * @since 1.0
  */
-public class Pyro implements KitCallback {
+public class Pyro implements Kit.Callback {
 
     @Override
     public void give(User user) {
@@ -39,9 +37,7 @@ public class Pyro implements KitCallback {
     @Override
     public void interact(User user, ItemStack item, boolean right) {
         if(checkName(item,"Fire Cannon")) {
-            if(user.getCache().contains("pyro-cannon-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
+            if(Cooldowns.check(user, "pyro-cannon")) {
                 return;
             }
 
@@ -52,8 +48,7 @@ public class Pyro implements KitCallback {
             ball.setIsIncendiary(false);
             ball.setShooter(user.toPlayer());
 
-            user.getCache().set("pyro-cannon-cooldown", true);
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("pyro-cannon-cooldown"), 160);
+            Cooldowns.start(user, "pyro-cannon", 160);
         }
 
     }

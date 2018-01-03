@@ -1,10 +1,12 @@
 package net.nikdev.kitpvp.menu;
 
+import net.nikdev.kitpvp.config.Config;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ import java.util.Optional;
 public final class Menu {
 
     private final Inventory raw;
-    private final MenuCallback callback;
+    private final Callback callback;
 
     /**
      * Creates a new menu with the specified builder.
@@ -43,7 +45,7 @@ public final class Menu {
      *
      * @return This menu's callback.
      */
-    public Optional<MenuCallback> getCallback() {
+    public Optional<Callback> getCallback() {
         return Optional.ofNullable(callback);
     }
 
@@ -82,7 +84,7 @@ public final class Menu {
     public static final class Builder {
 
         private final Inventory inventory;
-        private MenuCallback callback;
+        private Callback callback;
 
         /**
          * Creates a new menu builder with the specified information.
@@ -125,7 +127,7 @@ public final class Menu {
          * @param callback Callback to set.
          * @return This builder.
          */
-        public Builder callback(MenuCallback callback) {
+        public Builder callback(Callback callback) {
             this.callback = callback;
 
             return this;
@@ -139,6 +141,34 @@ public final class Menu {
         public Menu build() {
             return new Menu(this);
         }
+
+    }
+
+    /**
+     * Represents a callback that will be notified when a {@link User} interacts with a {@link Menu}.
+     *
+     * @author NickTheDev
+     * @since 1.0
+     */
+    public interface Callback {
+
+        /**
+         * Gets the if the item is the exit item and the callback should exit the menu.
+         *
+         * @param item Item to check.
+         * @return If the callback should exit.
+         */
+        default boolean shouldExit(ItemStack item) {
+            return item.getItemMeta().getDisplayName().equals(Chat.color(Config.get(Config.EXIT_ITEM_NAME)));
+        }
+
+        /**
+         * Called when a user interacts with the menu this callback has been registered to.
+         *
+         * @param user User that interacted.
+         * @param item Item that was interacted with.
+         */
+        void interact(User user, ItemStack item);
 
     }
 

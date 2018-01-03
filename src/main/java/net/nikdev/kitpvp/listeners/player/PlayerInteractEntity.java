@@ -3,6 +3,7 @@ package net.nikdev.kitpvp.listeners.player;
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.lang.Lang;
 import net.nikdev.kitpvp.config.lang.Placeholder;
+import net.nikdev.kitpvp.kit.Cooldowns;
 import net.nikdev.kitpvp.user.User;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -47,6 +48,32 @@ public class PlayerInteractEntity implements Listener {
                     victim.toPlayer().damage(5.5);
                 }, 25);
 
+            }
+
+        }
+
+    }
+
+    /**
+     * Listens for the specified event for handling Dragon Born's ability.
+     *
+     * @param event Event instance.
+     */
+    @EventHandler
+    public void dragonBornInteract(PlayerInteractEntityEvent event) {
+        User user = User.get(event.getPlayer().getUniqueId()).get();
+
+        if(user.getKit().isPresent() && user.getKit().get().getId().equals("dragon-born")) {
+            ItemStack item = event.getPlayer().getItemInHand();
+
+            if(item != null && item.getType().equals(Material.SKULL_ITEM)) {
+                if(Cooldowns.check(user, "dragon-push")) {
+                    return;
+                }
+
+                event.getRightClicked().setVelocity(event.getRightClicked().getLocation().toVector().subtract(user.toPlayer().getLocation().toVector()).normalize().multiply(2.6));
+
+                Cooldowns.start(user, "dragon-push", 200);
             }
 
         }

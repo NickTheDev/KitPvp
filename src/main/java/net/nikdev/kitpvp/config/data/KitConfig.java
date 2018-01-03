@@ -4,7 +4,6 @@ import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.Configs;
 import net.nikdev.kitpvp.config.StoreException;
 import net.nikdev.kitpvp.kit.Kit;
-import net.nikdev.kitpvp.kit.KitCallback;
 import net.nikdev.kitpvp.kit.callbacks.Pvp;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -38,10 +37,10 @@ public final class KitConfig {
         config.getConfigurationSection("kits").getKeys(false).forEach(key -> {
             ConfigurationSection section = config.getConfigurationSection("kits." + key);
 
-            KitCallback action;
+            Kit.Callback action;
 
             try {
-                action = (KitCallback) Class.forName(section.getString("callback")).newInstance();
+                action = (Kit.Callback) Class.forName(section.getString("callback")).newInstance();
 
             } catch (ReflectiveOperationException e) {
                 e.printStackTrace();

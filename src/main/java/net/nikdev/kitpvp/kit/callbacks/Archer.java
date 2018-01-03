@@ -1,6 +1,6 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
  * @author NickTheDev
  * @since 1.0
  */
-public class Archer implements KitCallback {
+public class Archer implements Kit.Callback {
 
     @Override
     public void give(User user) {

@@ -1,8 +1,7 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
-import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Lang;
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Cooldowns;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import net.nikdev.kitpvp.util.item.Skulls;
@@ -20,7 +19,7 @@ import org.bukkit.util.Vector;
  * @author NickTheDev
  * @since 1.0
  */
-public class Bowser implements KitCallback {
+public class Bowser implements Kit.Callback {
 
     @Override
     public void give(User user) {
@@ -39,16 +38,12 @@ public class Bowser implements KitCallback {
     @Override
     public void interact(User user, ItemStack item, boolean right) {
         if (checkName(item, "Breathe Fire")) {
-            if (user.getCache().contains("bowser-fire-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
+            if(Cooldowns.check(user, "bowser-fire")) {
                 return;
             }
 
             createBeam(user);
-
-            user.getCache().set("bowser-fire-cooldown", true);
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("bowser-fire-cooldown"), 40);
+            Cooldowns.start(user, "bowser-fire", 40);
         }
 
     }

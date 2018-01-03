@@ -2,7 +2,8 @@ package net.nikdev.kitpvp.kit.callbacks;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.config.lang.Lang;
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Cooldowns;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import net.nikdev.kitpvp.util.item.Skulls;
@@ -22,7 +23,7 @@ import java.util.Collections;
  * @author NickTheDev
  * @since 1.0
  */
-public class Sonic implements KitCallback {
+public class Sonic implements Kit.Callback {
 
     @Override
     public void give(User user) {
@@ -44,16 +45,14 @@ public class Sonic implements KitCallback {
     @Override
     public void interact(User user, ItemStack item, boolean right) {
         if(checkName(item, "Speed burst")) {
-            if (user.getCache().contains("sonic-speed-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
+            if(Cooldowns.check(user, "sonic-speed")) {
                 return;
             }
 
             user.toPlayer().removePotionEffect(PotionEffectType.SPEED);
             user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 69));
 
-            user.getCache().set("sonic-speed-cooldown", true);
+            Cooldowns.start(user, "sonic-speed", 400);
 
             Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> {
                 user.toPlayer().removePotionEffect(PotionEffectType.SPEED);
@@ -61,7 +60,6 @@ public class Sonic implements KitCallback {
                 user.toPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
             }, 60);
 
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("sonic-speed-cooldown"), 400);
         }
 
     }

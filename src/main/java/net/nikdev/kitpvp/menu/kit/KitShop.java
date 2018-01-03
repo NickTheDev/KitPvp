@@ -7,7 +7,6 @@ import net.nikdev.kitpvp.config.lang.Placeholder;
 import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
 import net.nikdev.kitpvp.menu.Menu;
-import net.nikdev.kitpvp.menu.MenuCallback;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
 import org.bukkit.inventory.ItemStack;
@@ -20,9 +19,9 @@ import java.util.Arrays;
  * @author NickTheDev
  * @since 1.0
  */
-public class KitShop implements MenuCallback {
+public class KitShop implements Menu.Callback {
 
-    private static final MenuCallback callback = new KitShop();
+    private static final Menu.Callback callback = new KitShop();
 
     @Override
     public void interact(User user, ItemStack item) {

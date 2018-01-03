@@ -1,11 +1,9 @@
 package net.nikdev.kitpvp.kit.callbacks;
 
-import net.nikdev.kitpvp.KitPvp;
-import net.nikdev.kitpvp.config.lang.Lang;
-import net.nikdev.kitpvp.kit.KitCallback;
+import net.nikdev.kitpvp.kit.Cooldowns;
+import net.nikdev.kitpvp.kit.Kit;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -20,7 +18,7 @@ import java.util.Collections;
  * @author NickTheDev
  * @since 1.0
  */
-public class Snowman implements KitCallback {
+public class Snowman implements Kit.Callback {
 
     @Override
     public void give(User user) {
@@ -38,9 +36,7 @@ public class Snowman implements KitCallback {
     @Override
     public void interact(User user, ItemStack item, boolean right) {
         if(checkName(item,"&e&lShoot Snowballs")) {
-            if(user.getCache().contains("snowman-shoot-cooldown")) {
-                Lang.sendTo(user, Lang.COOLDOWN);
-
+            if(Cooldowns.check(user, "snowman-shoot")) {
                 return;
             }
 
@@ -49,8 +45,7 @@ public class Snowman implements KitCallback {
             snowball.setVelocity(user.toPlayer().getLocation().getDirection().multiply(2));
             snowball.setShooter(user.toPlayer());
 
-            user.getCache().set("snowman-shoot-cooldown", true);
-            Bukkit.getScheduler().runTaskLater(KitPvp.get(), () -> user.getCache().remove("snowman-shoot-cooldown"), 40);
+            Cooldowns.start(user, "snowman-shoot", 40);
         }
 
     }

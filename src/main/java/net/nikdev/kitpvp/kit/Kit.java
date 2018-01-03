@@ -2,7 +2,10 @@ package net.nikdev.kitpvp.kit;
 
 import net.nikdev.kitpvp.KitPvp;
 import net.nikdev.kitpvp.user.User;
+import net.nikdev.kitpvp.util.Chat;
+import net.nikdev.kitpvp.util.item.ItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -20,7 +23,7 @@ public final class Kit {
     private final Short iconData;
     private final Material icon;
     private final int cost;
-    private final KitCallback callback;
+    private final Callback callback;
 
     /**
      * Creates a new kit with the specified information.
@@ -33,7 +36,7 @@ public final class Kit {
      * @param cost Cost of this kit.
      * @param callback Callback of this kit.
      */
-    public Kit(String id, String name, String description, Material icon, Short iconData, int cost, KitCallback callback) {
+    public Kit(String id, String name, String description, Material icon, Short iconData, int cost, Callback callback) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -102,7 +105,7 @@ public final class Kit {
      *
      * @return This kit's callback.
      */
-    public KitCallback getCallback() {
+    public Callback getCallback() {
         return callback;
     }
 
@@ -137,6 +140,59 @@ public final class Kit {
      */
     public static Optional<Kit> getByName(String name) {
         return KitPvp.get().getKitManager().getByName(name);
+    }
+
+    /**
+     * Callback for various kit related callbacks.
+     *
+     * @author NickTheDev
+     * @since 1.0
+     */
+    public interface Callback {
+
+        /**
+         * Checks that the item's name matches the specified name.
+         *
+         * @param item Item to check.
+         * @param name Name to check against.
+         * @return If both names match.
+         */
+        default boolean checkName(ItemStack item, String name) {
+            return item.hasItemMeta() && item.getItemMeta().hasDisplayName() && Chat.plain(item.getItemMeta().getDisplayName()).equals(name);
+        }
+
+        /**
+         * Fills the specified user's inventory to the brim with soups.
+         *
+         * @param user User to fill.
+         */
+        default void fillSoup(User user) {
+            for(int i = 0; i < user.toPlayer().getInventory().getSize(); i++) {
+                if(user.toPlayer().getInventory().getItem(i) == null) {
+                    user.give(ItemBuilder.builder(Material.MUSHROOM_SOUP), i);
+                }
+
+            }
+
+        }
+
+        /**
+         * Called when the user selects this kit. The implementation should give the user this kit's initial items and effects.
+         *
+         * @param user User to give the kit to.
+         */
+        void give(User user);
+
+        /**
+         * Called when a user interacts with an item in the kit which may be a trigger for an ability. Not required to be
+         * implemented as certain kits do not contain abilities.
+         *
+         * @param user User who interacted with the item.
+         * @param item Item interacted with.
+         * @param right If the interaction was a right click.
+         */
+        default void interact(User user, ItemStack item, boolean right) {}
+
     }
 
 }

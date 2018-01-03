@@ -3,7 +3,6 @@ package net.nikdev.kitpvp.menu.kit;
 import net.nikdev.kitpvp.config.Config;
 import net.nikdev.kitpvp.kit.callbacks.Wizard;
 import net.nikdev.kitpvp.menu.Menu;
-import net.nikdev.kitpvp.menu.MenuCallback;
 import net.nikdev.kitpvp.user.User;
 import net.nikdev.kitpvp.util.Chat;
 import net.nikdev.kitpvp.util.item.ItemBuilder;
@@ -16,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
  * @author NickTheDev
  * @since 1.0
  */
-public class SpellSelector implements MenuCallback {
+public class SpellSelector implements Menu.Callback {
 
     private static final Menu menu = Menu.builder(Config.get(Config.SPELL_SELECTOR_TITLE), Config.getInt(Config.SPELL_SELECTOR_SIZE)).item(ItemBuilder.builder(Material.BOOK_AND_QUILL)
                 .name("&c&lHeal")).item(ItemBuilder.builder(Material.BOOK_AND_QUILL).name("&2&lPoison")).callback(new SpellSelector()).build();
