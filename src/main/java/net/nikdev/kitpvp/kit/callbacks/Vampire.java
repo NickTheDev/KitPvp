@@ -24,15 +24,10 @@ public class Vampire implements Kit.Callback {
                 ItemBuilder.builder(Material.LEATHER_LEGGINGS).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2).enchant(Enchantment.DURABILITY, 3),
                 ItemBuilder.builder(Material.LEATHER_BOOTS).enchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2).enchant(Enchantment.DURABILITY, 3));
 
-        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 2));
-        user.give(ItemBuilder.builder(Material.SPIDER_EYE).name("&e&lLeech").lore(Collections.singleton("&f&lRight click player to activate.")));
+        user.give(ItemBuilder.builder(Material.DIAMOND_SWORD).enchant(Enchantment.DAMAGE_ALL, 2), ItemBuilder.builder(Material.SPIDER_EYE).name("&e&lLeech")
+                .lore(Collections.singleton("&f&lRight click player to activate.")));
 
         fillSoup(user);
-    }
-
-    @Override
-    public void interact(User user, ItemStack item, boolean right) {
-        // TODO Ability doesn't make any sense so gotta figure that out.
     }
 
 }
